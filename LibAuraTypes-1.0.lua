@@ -443,7 +443,7 @@ elseif isClassic then
 lib.data = lib.data or {}
 data = lib.data
 
-local function A( id, opts ))
+local function A( id, opts )
 	if type(id) == "table" then
 		for i, spellID in ipairs(id) do
 			data[spellID] = opts
@@ -584,7 +584,7 @@ A({ 16488, 16490, 16491 }, { type = TRASH }) -- Blood Craze
 end
 
 
-function lib:GetDebuffInfo(spellID)
+function lib.GetDebuffInfo(spellID)
     if data[spellID] then
         local spellData = data[spellID]
         local spellType = spellData.type
@@ -592,4 +592,8 @@ function lib:GetDebuffInfo(spellID)
         local prio = priority[spellType]
         return spellID, spellType, prio
     end
+end
+
+function lib.GetDebuffTypePriority(dType)
+    return priority[dType]
 end
