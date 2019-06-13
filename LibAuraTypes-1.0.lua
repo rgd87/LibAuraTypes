@@ -1,11 +1,11 @@
 --[================[
-LibAuraTypes-1.0 
+LibAuraTypes-1.0
 Author: d87
 Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes-1.0", 1.4
+local MAJOR, MINOR = "LibAuraTypes-1.0", 1.0
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -23,7 +23,7 @@ local DAMAGE_REDUCTION = "DAMAGE_REDUCTION"
 local DAMAGE_ABSORB = "DAMAGE_ABSORB"
 local DAMAGE_VULNERABILITY = "DAMAGE_VULNERABILITY"
 local DAMAGE_INCREASE = "DAMAGE_INCREASE"
-local DAMAGE_DECREASE = "DAMAGE_INCREASE"
+local DAMAGE_DECREASE = "DAMAGE_DECREASE"
 local TRASH = "TRASH"
 local EFFECT_IMMUNITY = "EFFECT_IMMUNITY"
 local HEALING_REDUCTION = "HEALING_REDUCTION"
@@ -32,20 +32,21 @@ local ATTENTION = "ATTENTION"
 lib.priority = lib.priority or {
     ATTENTION = 21,
     IMMUNITY = 20,
-    EFFECT_IMMUNITY = 17,
-    CROWD_CONTROL = 15,
-    STUN = 14,
+	EFFECT_IMMUNITY = 17,
+	STUN = 15,
+    CROWD_CONTROL = 14,
     INCAP = 13,
     FROZEN = 13,
     SILENCE = 10,
     ROOT = 9,
-    
-    DAMAGE_REDUCTION = 7,
-    DAMAGE_ABSORB = 6.7,
-    DAMAGE_VULNERABILITY = 6.5,
+
+	SLOW = 8,
+    DAMAGE_REDUCTION = 6,
+    DAMAGE_ABSORB = 5.7,
+    DAMAGE_VULNERABILITY = 5.5,
 
     DAMAGE_INCREASE = 6,
-    DAMAGE_INCREASE = 5.5,
+    DAMAGE_DECREASE = 5.5,
 
     SLOW = 3,
     SPEED_BOOST = 2.8,
@@ -63,6 +64,8 @@ local isClassic = select(4,GetBuildInfo()) <= 19999
 if not isClassic then
 
 lib.data = lib.data or {
+	-- [25163] = { type = ATTENTION }, -- Oozeling's Aura
+
     [115804] = { type = HEALING_REDUCTION }, -- Mortal Wounds
     [8680] = { type = HEALING_REDUCTION }, -- Wound Poison
     [197046] = { type = HEALING_REDUCTION }, -- Minor Wound Poison
@@ -157,7 +160,7 @@ lib.data = lib.data or {
 	[22570] = { type = STUN }, -- Maim
     [236696] = { type = DAMAGE_REDUCTION }, -- Thorns (PvP Talent)
     [232559] = { type = SLOW }, -- Thorns Slow (PvP Talent)
-    
+
 
 	-- Hunter
 
@@ -341,7 +344,7 @@ lib.data = lib.data or {
     [206760] = { type = SLOW }, -- Shadow's Grasp
     -- [277953] = { type = SLOW }, -- Night Terrors
     [199027] = { type = EFFECT_IMMUNITY }, -- Veil of Midnight (100% dodge)
-    
+
 
 	-- Shaman
 
@@ -428,7 +431,7 @@ lib.data = lib.data or {
 		-- [152277] = { type = IMMUNITY, originalID = 227847 }, -- Ravager
 	[228920] = { type = DAMAGE_REDUCTION }, -- Ravager
     [236077] = { type = DAMAGE_DECREASE }, -- Disarm
-    [1715] = { type = SLOW }, -- Hamstring    
+    [1715] = { type = SLOW }, -- Hamstring
 }
 data = lib.data
 
@@ -456,7 +459,16 @@ local function A( id, opts )
 	end
 end
 
-	-- WARLOCK
+-- RACIALS
+A( 23230 ,{ type = HEALING_REDUCTION }) -- Blood Fury Debuff
+A( 20594 ,{ type = EFFECT_IMMUNITY }) -- Stoneform, Immune to Bleed, Poison, and Disease.
+A( 20549 ,{ type = STUN }) -- War Stomp
+A( 7744 ,{ type = EFFECT_IMMUNITY }) -- Will of the Forsaken, Immune to Charm, Fear, and Sleep.
+A({ 9035, 19281, 19282, 19283, 19284, 19285 }, { type = HEALING_REDUCTION }) -- Hex of Weakness
+
+
+
+-- WARLOCK
 
 A( 24259 ,{ type = SILENCE }) -- Spell Lock Silence
 A( 6358, { type = CROWD_CONTROL }) -- Seduction
@@ -529,6 +541,8 @@ A( 12355 ,{ type = STUN }) -- Impact
 A( 22959 ,{ type = TRASH }) -- Fire Vulnerability
 A({ 11113, 13018, 13019, 13020, 13021 }, { type = SLOW }) -- Blast Wave
 A({ 120, 8492, 10159, 10160, 10161 }, { type = SLOW }) -- Cone of Cold
+A({ 12484, 12485, 12486 }, { type = SLOW }) -- Improved Blizzard
+A( 6136 , { type = SLOW }) -- Frost Armor Chill
 A({ 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304 }, { type = SLOW }) -- Frostbolt
 A( 12494 ,{ type = FROZEN }) -- Frostbite
 A({ 122, 865, 6131, 10230 }, { type = FROZEN }) -- Frost Nova
@@ -561,6 +575,7 @@ A( 2094 , { type = CROWD_CONTROL }) -- Blind
 A({ 2983, 8696, 11305 }, { type = SPEED_BOOST }) -- Sprint
 A( 5277 ,{ type = DAMAGE_REDUCTION }) -- Evasion
 A({ 1776, 1777, 8629, 11285, 11286 }, { type = INCAP }) -- Gouge
+A({ 3409, 11201 }, { type = SLOW }) -- Crippling Poison
 
 -- WARRIOR
 
