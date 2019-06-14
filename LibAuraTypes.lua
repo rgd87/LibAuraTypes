@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes-1.0", 1.0
+local MAJOR, MINOR = "LibAuraTypes", 1.0
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 

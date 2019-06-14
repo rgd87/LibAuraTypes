@@ -1,4 +1,4 @@
-package-as: LibAuraTypes-1.0
+package-as: LibAuraTypes
 enable-nolib-creation: no
 
 externals:
