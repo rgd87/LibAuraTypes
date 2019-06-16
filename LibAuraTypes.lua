@@ -404,6 +404,11 @@ lib.data = lib.data or {
 	[171017] = { type = CROWD_CONTROL }, -- Meteor Strike
 	[196098] = { type = DAMAGE_INCREASE }, -- Soul Harvest
 	[196364] = { type = SILENCE }, -- Unstable Affliction (Silence)
+	[233490] = { type = ATTENTION }, -- Unstable Affliction applications
+    [233496] = { type = ATTENTION, originalID = 233490 }, -- Unstable Affliction applications
+    [233497] = { type = ATTENTION, originalID = 233490 }, -- Unstable Affliction applications
+    [233498] = { type = ATTENTION, originalID = 233490 }, -- Unstable Affliction applications
+    [233499] = { type = ATTENTION, originalID = 233490 }, -- Unstable Affliction applications
 	[212284] = { type = DAMAGE_INCREASE }, -- Firestone
 	[212295] = { type = IMMUNITY }, -- Nether Ward
 
