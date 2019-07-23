@@ -30,14 +30,16 @@ local HEALING_REDUCTION = "HEALING_REDUCTION"
 local ATTENTION = "ATTENTION"
 
 lib.priority = lib.priority or {
-    ATTENTION = 21,
-    IMMUNITY = 20,
+	ATTENTION = 21,
+	IMMUNITY = 20,
+	STUN = 18,
+	ANTI_DISPEL = 17,
 	EFFECT_IMMUNITY = 17,
-	STUN = 15,
+
     CROWD_CONTROL = 14,
     INCAP = 13,
-    FROZEN = 13,
-    SILENCE = 10,
+	SILENCE = 10,
+	FROZEN = 9.1,
     ROOT = 9,
 
 	SLOW = 8,
@@ -288,6 +290,7 @@ lib.data = lib.data or {
 
 	-- Priest / unchecked, no slow
 
+	[34914] = { type = ANTI_DISPEL }, -- Vampiric Touch
 	[586] = { type = DAMAGE_REDUCTION }, -- Fade
 		[213602] = { type = DAMAGE_REDUCTION }, -- Greater Fade
 	[605] = { type = CROWD_CONTROL }, -- Mind Control
@@ -404,11 +407,11 @@ lib.data = lib.data or {
 	[171017] = { type = CROWD_CONTROL }, -- Meteor Strike
 	[196098] = { type = DAMAGE_INCREASE }, -- Soul Harvest
 	[196364] = { type = SILENCE }, -- Unstable Affliction (Silence)
-	[233490] = { type = ATTENTION }, -- Unstable Affliction applications
-    [233496] = { type = ATTENTION, originalID = 233490 }, -- Unstable Affliction applications
-    [233497] = { type = ATTENTION, originalID = 233490 }, -- Unstable Affliction applications
-    [233498] = { type = ATTENTION, originalID = 233490 }, -- Unstable Affliction applications
-    [233499] = { type = ATTENTION, originalID = 233490 }, -- Unstable Affliction applications
+	[233490] = { type = ANTI_DISPEL }, -- Unstable Affliction applications
+    [233496] = { type = ANTI_DISPEL, originalID = 233490 }, -- Unstable Affliction applications
+    [233497] = { type = ANTI_DISPEL, originalID = 233490 }, -- Unstable Affliction applications
+    [233498] = { type = ANTI_DISPEL, originalID = 233490 }, -- Unstable Affliction applications
+    [233499] = { type = ANTI_DISPEL, originalID = 233490 }, -- Unstable Affliction applications
 	[212284] = { type = DAMAGE_INCREASE }, -- Firestone
 	[212295] = { type = IMMUNITY }, -- Nether Ward
 
@@ -479,7 +482,7 @@ A( 24259 ,{ type = SILENCE }) -- Spell Lock Silence
 A( 6358, { type = CROWD_CONTROL }) -- Seduction
 A({ 5782, 6213, 6215 }, { type = CROWD_CONTROL }) -- Fear
 A({ 5484, 17928 }, { type = CROWD_CONTROL }) -- Howl of Terror
--- A({ 710, 18647 }, { name = "Banish"
+A({ 710, 18647 }, { type = CROWD_CONTROL }) -- Banish
 A({ 6789, 17925, 17926 }, { type = CROWD_CONTROL }) -- Death Coil
 A( 18223 ,{ type = SLOW }) -- Curse of Exhaustion
 A( 18118 ,{ type = SLOW }) -- Aftermath (Destruction Talent)
@@ -518,7 +521,7 @@ A( 3045 ,{ type = DAMAGE_INCREASE }) -- Rapid Fire
 -- A( 19574 ,{ type = DAMAGE_INCREASE }) -- Bestial Wrath
 A( 19263 ,{ type = DAMAGE_REDUCTION }) -- Deterrence
 A( 13810 ,{ type = SLOW }) -- Frost Trap Aura
-A({ 3355, 14308, 14309 }, { type = FROZEN }) -- Freezing Trap
+A({ 3355, 14308, 14309 }, { type = CROWD_CONTROL }) -- Freezing Trap
 A({ 2974, 14267, 14268 }, { type = SLOW }) -- Wing Clip
 A( 19229, { type = ROOT }) -- Wing Clip Root
 A({ 19306, 20909, 20910 }, { type = ROOT }) -- Counterattack Root
@@ -593,7 +596,7 @@ A({ 1715, 7372, 7373 }, { type = SLOW }) -- Hamstring
 A( 23694 , { type = ROOT }) -- Improved Hamstring
 A( 12323, { type = SLOW }) -- Piercing Howl
 -- Thunder Clap?
-A( 18499, { type = IMMUNITY }) -- Berserker Rage
+A( 18499, { type = EFFECT_IMMUNITY }) -- Berserker Rage
 A({ 20253, 20614, 20615 }, { type = STUN }) -- Intercept Stun
 A( 5246 ,{ type = CROWD_CONTROL }) -- Intimidating Shout
 A( 676 ,{ type = DAMAGE_DECREASE }) -- Disarm
