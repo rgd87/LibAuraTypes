@@ -42,7 +42,6 @@ lib.priority = lib.priority or {
     FROZEN = 9.1,
     ROOT = 9,
 
-    SLOW = 8,
     DAMAGE_REDUCTION = 6,
     DAMAGE_ABSORB = 5.7,
     DAMAGE_VULNERABILITY = 5.5,
