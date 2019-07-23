@@ -489,6 +489,8 @@ A( 23131 ,{ type = ATTENTION }) -- Frost Reflector
 A( 23132 ,{ type = ATTENTION }) -- Shadow Reflector
 A( 19769 ,{ type = INCAP }) -- Thorium Grenade
 A( 4068 ,{ type = INCAP }) -- Iron Grenade
+A( 1604 ,{ type = SLOW }) -- Common Daze
+
 
 
 -- RACIALS
