@@ -467,12 +467,38 @@ local function A( id, opts )
     end
 end
 
+
+--MISC
+
+A( 6615 ,{ type = EFFECT_IMMUNITY }) -- Free Action Potion
+A( 24364 ,{ type = EFFECT_IMMUNITY }) -- Living Action Potion
+A( 3169 ,{ type = IMMUNITY }) -- Limited Invulnerability Potion
+A( 16621 ,{ type = IMMUNITY }) -- Invulnerable Mail
+A( 1090 ,{ type = CROWD_CONTROL }) -- Magic Dust
+A( 13327 ,{ type = INCAP }) -- Reckless Charge
+A({ 26740, 13181 }, { type = CROWD_CONTROL }) -- Mind Control Cap + Backfire
+A( 835 ,{ type = STUN }) -- Tidal Charm
+A( 11359 ,{ type = EFFECT_IMMUNITY }) -- Restorative Potion, Removes 1 magic, curse, poison or disease effect on you every 5 seconds for 30 seconds.
+A( 6727 ,{ type = EFFECT_IMMUNITY }) -- Violet Tragan -- probably wrong id
+A( 5024 ,{ type = EFFECT_IMMUNITY }) -- Skull of Impending Doom
+A( 2379 ,{ type = SPEED_BOOST }) -- Swiftness Potion
+A({ 13099, 13138, 16566 }, { type = CROWD_CONTROL }) -- Net-o-matic + Backfire
+A( 5134 ,{ type = CROWD_CONTROL }) -- Flash Bomb
+A( 23097 ,{ type = ATTENTION }) -- Fire Reflector
+A( 23131 ,{ type = ATTENTION }) -- Frost Reflector
+A( 23132 ,{ type = ATTENTION }) -- Shadow Reflector
+A( 19769 ,{ type = INCAP }) -- Thorium Grenade
+A( 4068 ,{ type = INCAP }) -- Iron Grenade
+
+
 -- RACIALS
+
 A( 23230 ,{ type = HEALING_REDUCTION }) -- Blood Fury Debuff
 A( 20594 ,{ type = EFFECT_IMMUNITY }) -- Stoneform, Immune to Bleed, Poison, and Disease.
 A( 20549 ,{ type = STUN }) -- War Stomp
 A( 7744 ,{ type = EFFECT_IMMUNITY }) -- Will of the Forsaken, Immune to Charm, Fear, and Sleep.
 A({ 9035, 19281, 19282, 19283, 19284, 19285 }, { type = HEALING_REDUCTION }) -- Hex of Weakness
+A( 20600 ,{ type = EFFECT_IMMUNITY }) -- Perception
 
 
 
@@ -487,8 +513,9 @@ A({ 6789, 17925, 17926 }, { type = CROWD_CONTROL }) -- Death Coil
 A( 18223 ,{ type = SLOW }) -- Curse of Exhaustion
 A( 18118 ,{ type = SLOW }) -- Aftermath (Destruction Talent)
 A({ 1714, 11719 }, { type = DAMAGE_DECREASE }) -- Curse of Tongues
--- A({ 6229, 11739, 11740, 28610 } ,{ type = DAMAGE_ABSORB }) -- Shadow Ward
+A({ 6229, 11739, 11740, 28610 } ,{ type = DAMAGE_ABSORB }) -- Shadow Ward
 A({ 7812, 19438, 19440, 19441, 19442, 19443 } ,{ type = DAMAGE_ABSORB }) -- Sacrifice
+A( 18093 ,{ type = STUN }) -- Pyroclasm
 
 
 -- SHAMAN
@@ -497,6 +524,7 @@ A({ 8056, 8058, 10472, 10473 }, { type = SLOW }) -- Frost Shock
 A( 3600 ,{ type = SLOW }) -- Earthbind
 A({ 8034, 8037, 10458, 16352, 16353  }, { type = SLOW }) -- Frostbrand Attack
 -- Lightning shield??
+A( 8178 ,{ type = IMMUNITY }) -- Grounding Totem Effect
 
 -- PALADIN
 
@@ -526,31 +554,41 @@ A({ 2974, 14267, 14268 }, { type = SLOW }) -- Wing Clip
 A( 19229, { type = ROOT }) -- Wing Clip Root
 A({ 19306, 20909, 20910 }, { type = ROOT }) -- Counterattack Root
 A( 24394 ,{ type = STUN }) -- Intimidation
+A({ 19386, 24132, 24133 }, { type = CROWD_CONTROL }) --Wyvern Sting
+A( 19185 ,{ type = ROOT }) -- Entrapment
+-- A({ 3034, 14279, 14280}, { type = TRASH }) -- Viper Sting
+A( 19503 ,{ type = CROWD_CONTROL }) -- Scatter Shot
+A( 25999 ,{ type = ROOT }) -- Boar Charge
 
 -- DRUID
 
 A( 22812 ,{ type = DAMAGE_REDUCTION }) -- Barkskin
-A({ 339, 1062, 5195, 5196, 9852, 9853 }, { type = ROOT })-- Entangling Roots
+A( 19975 ,{ type = ROOT }) -- Nature's Grasp
+A({ 339, 1062, 5195, 5196, 9852, 9853 }, { type = ROOT }) -- Entangling Roots
 A({ 770, 778, 9749, 9907, 17390, 17391, 17392 }, { type = DAMAGE_VULNERABILITY }) -- Faerie Fire
-A({ 2637, 18657, 18658 }, { type = CROWD_CONTROL })-- Hibernate
--- thorns?
--- innervate?
+A({ 2637, 18657, 18658 }, { type = CROWD_CONTROL }) -- Hibernate
+A( 29166, { type = TRASH }) -- Innervate
 A({ 9005, 9823, 9827 }, { type = STUN }) -- Pounce Stun
 A( 16922, { type = STUN }) -- Starfire Stun
--- A({ 5217, 6793, 9845, 9846 }, { type = DAMAGE_INCREASE })-- Tiger's Fury
+-- A({ 5217, 6793, 9845, 9846 }, { type = DAMAGE_INCREASE }) -- Tiger's Fury
+A({ 5211, 6798, 8983 }, { type = STUN }) -- Bash
+A( 16979 ,{ type = ROOT }) -- Feral Charge
+-- A( 2893 ,{ type = TRASH }) -- Abolish Poison
+A({ 1850, 9821 }, { type = SPEED_BOOST }) -- Dash
 
 -- MAGE
 
 A( 18469 ,{ type = SILENCE }) -- Improved Counterspell
 A({ 118, 12824, 12825, 12826, 28270, 28271, 28272 }, { type = CROWD_CONTROL }) -- Polymorph
 A({ 11426, 13031, 13032, 13033 }, { type = DAMAGE_ABSORB }) -- Ice Barrier
--- Frost/Fire Ward?
+A({ 543, 8457, 8458, 10223, 10225 }, { type = DAMAGE_ABSORB}) -- Fire Ward
+A({ 6143, 8461, 8462, 10177, 28609 }, { type = DAMAGE_ABSORB}) -- Frost Ward
 A( 12355 ,{ type = STUN }) -- Impact
 A( 22959 ,{ type = TRASH }) -- Fire Vulnerability
 A({ 11113, 13018, 13019, 13020, 13021 }, { type = SLOW }) -- Blast Wave
 A({ 120, 8492, 10159, 10160, 10161 }, { type = SLOW }) -- Cone of Cold
 A({ 12484, 12485, 12486 }, { type = SLOW }) -- Improved Blizzard
-A( 6136 , { type = SLOW }) -- Frost Armor Chill
+A({ 6136, 7321 }, { type = SLOW }) -- Frost Armor Chill
 A({ 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304 }, { type = SLOW }) -- Frostbolt
 A( 12494 ,{ type = FROZEN }) -- Frostbite
 A({ 122, 865, 6131, 10230 }, { type = FROZEN }) -- Frost Nova
@@ -559,6 +597,7 @@ A( 11958 ,{ type = IMMUNITY }) -- Ice Block
 A( 12579 ,{ type = TRASH }) -- Winter's Chill
 A({ 133, 143, 145, 3140, 8400, 8401, 8402, 10148, 10149, 10150, 10151, 25306 }, { type = TRASH }) -- Fireball dot
 A({ 11366, 12505, 12522, 12523, 12524, 12525, 12526, 18809 }, { type = TRASH }) -- Pyroblast dot
+A( 12051 ,{ type = ATTENTION }) -- Evocation
 
 -- PRIEST
 
@@ -569,6 +608,7 @@ A({ 8122, 8124, 10888, 10890 }, { type = CROWD_CONTROL }) -- Psychic Scream
 A( 15269 ,{ type = STUN }) -- Blackout
 A({ 15407, 17311, 17312, 17313, 17314, 18807 }, { type = SLOW }) -- Mind Flay
 A( 15258 ,{ type = TRASH }) -- Shadow Vulnerability
+A({ 605, 10911, 10912 }, { type = CROWD_CONTROL }) -- Mind Control
 
 -- ROGUE
 
@@ -583,26 +623,31 @@ A( 2094 , { type = CROWD_CONTROL }) -- Blind
 A({ 2983, 8696, 11305 }, { type = SPEED_BOOST }) -- Sprint
 A( 5277 ,{ type = DAMAGE_REDUCTION }) -- Evasion
 A({ 1776, 1777, 8629, 11285, 11286 }, { type = INCAP }) -- Gouge
-A({ 3409, 11201 }, { type = SLOW }) -- Crippling Poison
+A({ 3409, 11201 }, { type = ROOT }) -- Crippling Poison NOTE: it's a slow but we prio it as root because its 70% and better than all other slows
+A( 14251 ,{ type = DAMAGE_DECREASE }) -- Riposte (Disarm)
+A( 14278 ,{ type = DAMAGE_REDUCTION }) -- Ghostly Strike
 
 -- WARRIOR
 
 A( 18498 ,{ type = SILENCE }) -- Improved Shield Bash
 A( 20230 ,{ type = IMMUNITY }) -- Retaliation
-A( 1719 ,{ type = DAMAGE_INCREASE }) -- Recklessness
+A( 1719 ,{ type = EFFECT_IMMUNITY }) -- Recklessness, Fear immunity
 A( 871, { type = DAMAGE_REDUCTION }) -- Shield Wall
-A( 12328, { type = DAMAGE_INCREASE }) -- Death Wish
+A( 12328, { type = EFFECT_IMMUNITY }) -- Death Wish, Fear immunity
 A({ 1715, 7372, 7373 }, { type = SLOW }) -- Hamstring
 A( 23694 , { type = ROOT }) -- Improved Hamstring
 A( 12323, { type = SLOW }) -- Piercing Howl
 -- Thunder Clap?
 A( 18499, { type = EFFECT_IMMUNITY }) -- Berserker Rage
 A({ 20253, 20614, 20615 }, { type = STUN }) -- Intercept Stun
-A( 5246 ,{ type = CROWD_CONTROL }) -- Intimidating Shout
+A({ 5246, 20511 }, { type = CROWD_CONTROL }) -- Intimidating Shout
 A( 676 ,{ type = DAMAGE_DECREASE }) -- Disarm
 A( 12798 , { type = STUN }) -- Revenge Stun
 A( 12809 ,{ type = STUN }) -- Concussion Blow
 A({ 16488, 16490, 16491 }, { type = TRASH }) -- Blood Craze
+A({ 12294, 21551, 21552, 21553 }, { type = HEALING_REDUCTION }) -- Mortal Strike
+A( 7922 ,{ type = STUN }) -- Charge Stun
+A( 5530 ,{ type = STUN }) -- Mace Spec. Stun (Warrior & Rogue)
 
 end
 
