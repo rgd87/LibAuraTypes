@@ -489,6 +489,21 @@ A( 23132 ,{ type = ATTENTION }) -- Shadow Reflector
 A( 19769 ,{ type = INCAP }) -- Thorium Grenade
 A( 4068 ,{ type = INCAP }) -- Iron Grenade
 A( 1604 ,{ type = SLOW }) -- Common Daze
+A({ 23333, 23335 }, { type = ATTENTION }) -- Warsong Flag
+A({ 25750, 25747, 25746, 23991 }, { type = DAMAGE_ABSORB }) -- AB Trinkets
+A( 23506 ,{ type = DAMAGE_ABSORB }) -- Arena Grand Master trinket
+A( 29506 ,{ type = DAMAGE_ABSORB }) -- Burrower's Shell trinket
+A( 12733 ,{ type = EFFECT_IMMUNITY }) -- Blacksmith trinket, Fear immunity
+A( 15753 ,{ type = STUN }) -- Linken's Boomerang stun
+A( 15752 ,{ type = DAMAGE_DECREASE }) -- Linken's Boomerang disarm
+A( 14530 ,{ type = SPEED_BOOST }) -- Nifty Stopwatch
+A( 13237 ,{ type = STUN }) -- Goblin Mortar trinket
+A( 14253 ,{ type = EFFECT_IMMUNITY }) -- Black Husk Shield
+A( 9175 ,{ type = SPEED_BOOST }) -- Swift Boots
+A( 13141 ,{ type = SPEED_BOOST }) -- Gnomish Rocket Boots
+A( 8892 ,{ type = SPEED_BOOST }) -- Goblin Rocket Boots
+A( 9774 ,{ type = EFFECT_IMMUNITY }) -- Spider Belt & Ornate Mithril Boots
+
 
 
 
@@ -526,6 +541,7 @@ A( 3600 ,{ type = SLOW }) -- Earthbind
 A({ 8034, 8037, 10458, 16352, 16353  }, { type = SLOW }) -- Frostbrand Attack
 -- Lightning shield??
 A( 8178 ,{ type = IMMUNITY }) -- Grounding Totem Effect
+-- A( 2645 ,{ type = SPEED_BOOST }) -- Ghost Wolf
 
 -- PALADIN
 
@@ -576,6 +592,8 @@ A({ 5211, 6798, 8983 }, { type = STUN }) -- Bash
 A( 16979 ,{ type = ROOT }) -- Feral Charge
 -- A( 2893 ,{ type = TRASH }) -- Abolish Poison
 A({ 1850, 9821 }, { type = SPEED_BOOST }) -- Dash
+A({ 16689, 16810, 16811, 16812, 16813, 17329}, { type = ATTENTION }) -- Nature's Grasp Buff
+A({ 783, 1066 }, { type = SPEED_BOOST }) -- Travel Form & Aquatic Form
 
 -- MAGE
 
@@ -599,6 +617,7 @@ A( 12579 ,{ type = TRASH }) -- Winter's Chill
 A({ 133, 143, 145, 3140, 8400, 8401, 8402, 10148, 10149, 10150, 10151, 25306 }, { type = TRASH }) -- Fireball dot
 A({ 11366, 12505, 12522, 12523, 12524, 12525, 12526, 18809 }, { type = TRASH }) -- Pyroblast dot
 A( 12051 ,{ type = ATTENTION }) -- Evocation
+A({ 1463, 8494, 8495, 10191, 10192, 10193 }, { type = DAMAGE_ABSORB }) -- Mana Shield
 
 -- PRIEST
 
