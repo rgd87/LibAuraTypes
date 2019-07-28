@@ -468,7 +468,9 @@ end
 
 
 --MISC
-
+A( 23451 ,{ type = SPEED_BOOST }) -- Battleground Speed buff
+A( 23493 ,{ type = DAMAGE_REDUCTION }) -- Battleground Heal buff
+A( 23505 ,{ type = DAMAGE_INCREASE }) -- Battleground Damage buff
 A( 6615 ,{ type = EFFECT_IMMUNITY }) -- Free Action Potion
 A( 24364 ,{ type = EFFECT_IMMUNITY }) -- Living Action Potion
 A( 3169 ,{ type = IMMUNITY }) -- Limited Invulnerability Potion
