@@ -26,15 +26,27 @@ local DAMAGE_INCREASE = "DAMAGE_INCREASE"
 local DAMAGE_DECREASE = "DAMAGE_DECREASE"
 local TRASH = "TRASH"
 local EFFECT_IMMUNITY = "EFFECT_IMMUNITY"
+local PHYSICAL_IMMUNITY = "PHYSICAL_IMMUNITY"
+local SPELL_IMMUNITY = "SPELL_IMMUNITY"
+local INTERRUPT_IMMUNITY = "INTERRUPT_IMMUNITY"
+local FEAR_IMMUNITY = "FEAR_IMMUNITY"
+local ROOT_IMMUNITY = "ROOT_IMMUNITY"
 local HEALING_REDUCTION = "HEALING_REDUCTION"
 local ATTENTION = "ATTENTION"
+local STEALTH_DETECTION = "STEALTH_DETECTION"
 
 lib.priority = lib.priority or {
     ATTENTION = 21,
     IMMUNITY = 20,
     STUN = 18,
     ANTI_DISPEL = 17,
+    PHYSICAL_IMMUNITY = 17,
+    SPELL_IMMUNITY = 17,
+    INTERRUPT_IMMUNITY = 17,
+    FEAR_IMMUNITY = 17,
     EFFECT_IMMUNITY = 17,
+    ROOT_IMMUNITY = 17,
+    STEALTH_DETECTION = 15,
 
     CROWD_CONTROL = 14,
     INCAP = 13,
@@ -106,7 +118,7 @@ lib.data = lib.data or {
     [179057] = { type = CROWD_CONTROL }, -- Chaos Nova
     [187827] = { type = DAMAGE_REDUCTION }, -- Metamorphosis
     [188499] = { type = DAMAGE_REDUCTION }, -- Blade Dance
-    [188501] = { type = DAMAGE_INCREASE }, -- Spectral Sight
+    [188501] = { type = STEALTH_DETECTION }, -- Spectral Sight
     [204490] = { type = CROWD_CONTROL }, -- Sigil of Silence
     [205629] = { type = DAMAGE_REDUCTION }, -- Demonic Trample
     [205630] = { type = CROWD_CONTROL }, -- Illidan's Grasp
@@ -330,7 +342,7 @@ lib.data = lib.data or {
     [1833] = { type = STUN }, -- Cheap Shot
     [1966] = { type = DAMAGE_REDUCTION }, -- Feint
     [2094] = { type = CROWD_CONTROL }, -- Blind
-    [5277] = { type = DAMAGE_REDUCTION }, -- Evasion
+    [5277] = { type = PHYSICAL_IMMUNITY }, -- Evasion
     [6770] = { type = INCAP }, -- Sap
     [13750] = { type = DAMAGE_INCREASE }, -- Adrenaline Rush
     [31224] = { type = IMMUNITY }, -- Cloak of Shadows
@@ -345,7 +357,7 @@ lib.data = lib.data or {
     [185763] = { type = SLOW }, -- Pistol Shot
     [206760] = { type = SLOW }, -- Shadow's Grasp
     -- [277953] = { type = SLOW }, -- Night Terrors
-    [199027] = { type = EFFECT_IMMUNITY }, -- Veil of Midnight (100% dodge)
+    [199027] = { type = PHYSICAL_IMMUNITY }, -- Veil of Midnight (100% dodge)
 
 
     -- Shaman
@@ -379,10 +391,10 @@ lib.data = lib.data or {
     [204366] = { type = DAMAGE_INCREASE }, -- Thundercharge
     [204945] = { type = DAMAGE_INCREASE }, -- Doom Winds
     [260878] = { type = DAMAGE_REDUCTION }, -- Spirit Wolf
-    [8178] = { type = IMMUNITY }, -- Grounding
-        [255016] = { type = IMMUNITY, originalID = 8178 }, -- Grounding
-        [204336] = { type = IMMUNITY, originalID = 8178 }, -- Grounding
-        [34079] = { type = IMMUNITY, originalID = 8178 }, -- Grounding
+    [8178] = { type = SPELL_IMMUNITY }, -- Grounding
+        [255016] = { type = SPELL_IMMUNITY, originalID = 8178 }, -- Grounding
+        [204336] = { type = SPELL_IMMUNITY, originalID = 8178 }, -- Grounding
+        [34079] = { type = SPELL_IMMUNITY, originalID = 8178 }, -- Grounding
 
     -- Warlock / ok, no slow
 
@@ -420,7 +432,7 @@ lib.data = lib.data or {
     [1719] = { type = DAMAGE_INCREASE }, -- Recklessness
     [5246] = { type = CROWD_CONTROL }, -- Intimidating Shout
     [12975] = { type = DAMAGE_REDUCTION }, -- Last Stand
-    [18499] = { type = EFFECT_IMMUNITY }, -- Berserker Rage
+    [18499] = { type = FEAR_IMMUNITY }, -- Berserker Rage
     [23920] = { type = IMMUNITY }, -- Spell Reflection
         -- [213915] = { type = IMMUNITY, originalID = 23920 }, -- Mass Spell Reflection
         [216890] = { type = IMMUNITY, originalID = 23920 }, -- Spell Reflection (Arms, Fury)
@@ -495,16 +507,16 @@ A({ 23333, 23335 }, { type = ATTENTION }) -- Warsong Flag
 A({ 25750, 25747, 25746, 23991 }, { type = DAMAGE_ABSORB }) -- AB Trinkets
 A( 23506 ,{ type = DAMAGE_ABSORB }) -- Arena Grand Master trinket
 A( 29506 ,{ type = DAMAGE_ABSORB }) -- Burrower's Shell trinket
-A( 12733 ,{ type = EFFECT_IMMUNITY }) -- Blacksmith trinket, Fear immunity
+A( 12733 ,{ type = FEAR_IMMUNITY }) -- Blacksmith trinket, Fear immunity
 A( 15753 ,{ type = STUN }) -- Linken's Boomerang stun
 A( 15752 ,{ type = DAMAGE_DECREASE }) -- Linken's Boomerang disarm
 A( 14530 ,{ type = SPEED_BOOST }) -- Nifty Stopwatch
 A( 13237 ,{ type = STUN }) -- Goblin Mortar trinket
-A( 14253 ,{ type = EFFECT_IMMUNITY }) -- Black Husk Shield
+A( 14253 ,{ type = EFFECT_IMMUNITY }) -- Black Husk Shield, Periodic Poison dispel
 A( 9175 ,{ type = SPEED_BOOST }) -- Swift Boots
 A( 13141 ,{ type = SPEED_BOOST }) -- Gnomish Rocket Boots
 A( 8892 ,{ type = SPEED_BOOST }) -- Goblin Rocket Boots
-A( 9774 ,{ type = EFFECT_IMMUNITY }) -- Spider Belt & Ornate Mithril Boots
+A( 9774 ,{ type = ROOT_IMMUNITY }) -- Spider Belt & Ornate Mithril Boots, Root Immune
 
 
 
@@ -516,7 +528,7 @@ A( 20594 ,{ type = EFFECT_IMMUNITY }) -- Stoneform, Immune to Bleed, Poison, and
 A( 20549 ,{ type = STUN }) -- War Stomp
 A( 7744 ,{ type = EFFECT_IMMUNITY }) -- Will of the Forsaken, Immune to Charm, Fear, and Sleep.
 A({ 9035, 19281, 19282, 19283, 19284, 19285 }, { type = HEALING_REDUCTION }) -- Hex of Weakness
-A( 20600 ,{ type = EFFECT_IMMUNITY }) -- Perception
+A( 20600 ,{ type = STEALTH_DETECTION }) -- Perception
 
 
 
@@ -542,12 +554,12 @@ A({ 8056, 8058, 10472, 10473 }, { type = SLOW }) -- Frost Shock
 A( 3600 ,{ type = SLOW }) -- Earthbind
 A({ 8034, 8037, 10458, 16352, 16353  }, { type = SLOW }) -- Frostbrand Attack
 -- Lightning shield??
-A( 8178 ,{ type = IMMUNITY }) -- Grounding Totem Effect
+A( 8178 ,{ type = SPELL_IMMUNITY }) -- Grounding Totem Effect
 -- A( 2645 ,{ type = SPEED_BOOST }) -- Ghost Wolf
 
 -- PALADIN
 
-A({ 1022, 5599, 10278 }, { type = IMMUNITY }) -- Blessing of Protection
+A({ 1022, 5599, 10278 }, { type = PHYSICAL_IMMUNITY }) -- Blessing of Protection
 A({ 498, 5573, 642, 1020 }, { type = IMMUNITY }) -- Divine Shield
 A({ 853, 5588, 5589, 10308 }, { type = STUN }) -- Hammer of Justice
 A( 1044 ,{ type = SPEED_BOOST }) -- Blessing of Freedom
@@ -586,7 +598,7 @@ A( 19975 ,{ type = ROOT }) -- Nature's Grasp
 A({ 339, 1062, 5195, 5196, 9852, 9853 }, { type = ROOT }) -- Entangling Roots
 A({ 770, 778, 9749, 9907, 17390, 17391, 17392 }, { type = DAMAGE_VULNERABILITY }) -- Faerie Fire
 A({ 2637, 18657, 18658 }, { type = CROWD_CONTROL }) -- Hibernate
-A( 29166, { type = TRASH }) -- Innervate
+A( 29166, { type = DAMAGE_INCREASE }) -- Innervate
 A({ 9005, 9823, 9827 }, { type = STUN }) -- Pounce Stun
 A( 16922, { type = STUN }) -- Starfire Stun
 -- A({ 5217, 6793, 9845, 9846 }, { type = DAMAGE_INCREASE }) -- Tiger's Fury
@@ -652,10 +664,10 @@ A( 14278 ,{ type = DAMAGE_REDUCTION }) -- Ghostly Strike
 -- WARRIOR
 
 A( 18498 ,{ type = SILENCE }) -- Improved Shield Bash
-A( 20230 ,{ type = IMMUNITY }) -- Retaliation
-A( 1719 ,{ type = EFFECT_IMMUNITY }) -- Recklessness, Fear immunity
+A( 20230 ,{ type = PHYSICAL_IMMUNITY }) -- Retaliation
+A( 1719 ,{ type = FEAR_IMMUNITY }) -- Recklessness, Fear immunity
 A( 871, { type = DAMAGE_REDUCTION }) -- Shield Wall
-A( 12328, { type = EFFECT_IMMUNITY }) -- Death Wish, Fear immunity
+A( 12328, { type = FEAR_IMMUNITY }) -- Death Wish, Fear immunity
 A({ 1715, 7372, 7373 }, { type = SLOW }) -- Hamstring
 A( 23694 , { type = ROOT }) -- Improved Hamstring
 A( 12323, { type = SLOW }) -- Piercing Howl
