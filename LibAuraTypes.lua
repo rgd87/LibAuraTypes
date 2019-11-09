@@ -761,8 +761,8 @@ end
 
 function lib.GetDebuffInfo(spellID, targetType)
     if data[spellID] then
-        targetType = targetType or "FRIEND"
-        local priorityTable = targetType == "FRIEND" and friendlyPriority or enemyPriority
+        targetType = targetType or "ALLY"
+        local priorityTable = targetType == "ALLY" and friendlyPriority or enemyPriority
 
         local spellData = data[spellID]
         -- TODO: Compare multiple categories if assigned
@@ -775,8 +775,8 @@ end
 lib.GetAuraInfo = lib.GetDebuffInfo
 
 function lib.GetDebuffTypePriority(dType, targetType)
-    targetType = targetType or "FRIEND"
-    local priorityTable = targetType == "FRIEND" and friendlyPriority or enemyPriority
+    targetType = targetType or "ALLY"
+    local priorityTable = targetType == "ALLY" and friendlyPriority or enemyPriority
     return priorityTable[dType]
 end
 lib.GetAuraTypePriority = lib.GetDebuffTypePriority
