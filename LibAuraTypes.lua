@@ -35,41 +35,90 @@ local HEALING_REDUCTION = "HEALING_REDUCTION"
 local ATTENTION = "ATTENTION"
 local STEALTH_DETECTION = "STEALTH_DETECTION"
 
-lib.priority = lib.priority or {
-    ATTENTION = 21,
-    IMMUNITY = 20,
-    STUN = 18,
-    ANTI_DISPEL = 17,
-    PHYSICAL_IMMUNITY = 17,
-    SPELL_IMMUNITY = 17,
-    INTERRUPT_IMMUNITY = 17,
-    FEAR_IMMUNITY = 17,
-    EFFECT_IMMUNITY = 17,
-    ROOT_IMMUNITY = 17,
-    STEALTH_DETECTION = 15,
+lib.friendlyPriority = lib.friendlyPriority or {
+    ATTENTION = 95,
+    IMMUNITY = 90,
+    STUN = 85,
+    ANTI_DISPEL = 55,
+    PHYSICAL_IMMUNITY = 65,
+    SPELL_IMMUNITY = 65,
 
-    CROWD_CONTROL = 14,
-    INCAP = 13,
-    SILENCE = 10,
-    FROZEN = 9.1,
-    ROOT = 9,
+    CROWD_CONTROL = 70,
 
-    DAMAGE_REDUCTION = 6,
-    DAMAGE_ABSORB = 5.7,
-    DAMAGE_VULNERABILITY = 5.5,
+    -- Don't care about these on friendly
+    INTERRUPT_IMMUNITY = 10,
+    FEAR_IMMUNITY = 10,
+    EFFECT_IMMUNITY = 30,
+    ROOT_IMMUNITY = 30,
 
-    DAMAGE_INCREASE = 6,
-    DAMAGE_DECREASE = 5.5,
+    INCAP = 68,
+    SILENCE = 65,
+    FROZEN = 51,
+    ROOT = 50,
 
-    SLOW = 3,
-    SPEED_BOOST = 2.8,
-    HEALING_REDUCTION = 2,
+    DAMAGE_REDUCTION = 40,
+    DAMAGE_ABSORB = 1,
+    DAMAGE_VULNERABILITY = 37,
+
+    DAMAGE_INCREASE = 10,
+    DAMAGE_DECREASE = 9,
+
+    SLOW = 30,
+    SPEED_BOOST = 25,
+    HEALING_REDUCTION = 2, -- increased for healers
+    STEALTH_DETECTION = 0,
     TRASH = -1,
 }
-local priority = lib.priority
+local friendlyPriority = lib.friendlyPriority
+
+lib.enemyPriority = lib.enemyPriority or {
+    ATTENTION = 95,
+    IMMUNITY = 90,
+    STUN = 85,
+    ANTI_DISPEL = 0, ------------
+    PHYSICAL_IMMUNITY = 65,
+    SPELL_IMMUNITY = 65,
+
+    CROWD_CONTROL = 70,
+    INCAP = 69,
+    SILENCE = 67,
+
+    INTERRUPT_IMMUNITY = 55,
+    FEAR_IMMUNITY = 55,
+    EFFECT_IMMUNITY = 50,
+    ROOT_IMMUNITY = 50,
+
+
+    FROZEN = 51,
+    ROOT = 50,
+
+    DAMAGE_REDUCTION = 40,
+    DAMAGE_ABSORB = 38,
+    DAMAGE_VULNERABILITY = 37,
+
+    DAMAGE_INCREASE = 35,
+    DAMAGE_DECREASE = 34,
+
+    SLOW = 30,
+    SPEED_BOOST = 25,
+    HEALING_REDUCTION = 1,
+    STEALTH_DETECTION = 1, -- increased for stealth classes
+    TRASH = -1,
+}
+local enemyPriority = lib.enemyPriority
+
 local data
 
-local isClassic = select(4,GetBuildInfo()) <= 19999
+local isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+
+
+local playerClass = select(2, UnitClass('player'))
+if playerClass == "ROGUE" then
+    enemyPriority[STEALTH_DETECTION] = 60
+elseif playerClass == "DRUID" then
+    enemyPriority[STEALTH_DETECTION] = 60
+    enemyPriority[HEALING_REDUCTION] = 28
+end
 
 -----------------------
 -- LIVE
@@ -596,7 +645,7 @@ A( 25999 ,{ type = ROOT }) -- Boar Charge
 A( 22812 ,{ type = DAMAGE_REDUCTION }) -- Barkskin
 A( 19975 ,{ type = ROOT }) -- Nature's Grasp
 A({ 339, 1062, 5195, 5196, 9852, 9853 }, { type = ROOT }) -- Entangling Roots
-A({ 770, 778, 9749, 9907, 17390, 17391, 17392 }, { type = DAMAGE_VULNERABILITY }) -- Faerie Fire
+A({ 770, 778, 9749, 9907, 17390, 17391, 17392 }, { type = STEALTH_DETECTION }) -- Faerie Fire
 A({ 2637, 18657, 18658 }, { type = CROWD_CONTROL }) -- Hibernate
 A( 29166, { type = DAMAGE_INCREASE }) -- Innervate
 A({ 9005, 9823, 9827 }, { type = STUN }) -- Pounce Stun
@@ -686,16 +735,23 @@ A( 5530 ,{ type = STUN }) -- Mace Spec. Stun (Warrior & Rogue)
 end
 
 
-function lib.GetDebuffInfo(spellID)
+function lib.GetDebuffInfo(spellID, targetType)
     if data[spellID] then
+        targetType = targetType or "FRIEND"
+        local priorityTable = targetType == "FRIEND" and friendlyPriority or enemyPriority
+
         local spellData = data[spellID]
         local spellType = spellData.type
         if spellData.originalID then spellID = spellData.originalID end
-        local prio = priority[spellType]
+        local prio = priorityTable[spellType]
         return spellID, spellType, prio
     end
 end
+lib.GetAuraInfo = lib.GetDebuffInfo
 
-function lib.GetDebuffTypePriority(dType)
-    return priority[dType]
+function lib.GetDebuffTypePriority(dType, targetType)
+    targetType = targetType or "FRIEND"
+    local priorityTable = targetType == "FRIEND" and friendlyPriority or enemyPriority
+    return priorityTable[dType]
 end
+lib.GetAuraTypePriority = lib.GetDebuffTypePriority
