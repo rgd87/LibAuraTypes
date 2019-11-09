@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 4
+local MAJOR, MINOR = "LibAuraTypes", 6
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -17,6 +17,7 @@ local FROZEN = "FROZEN"
 local SILENCE = "SILENCE"
 local ROOT = "ROOT"
 local SLOW = "SLOW"
+local ANTI_DISPEL = "ANTI_DISPEL"
 local SPEED_BOOST = "SPEED_BOOST"
 local IMMUNITY = "IMMUNITY"
 local DAMAGE_REDUCTION = "DAMAGE_REDUCTION"
@@ -36,7 +37,7 @@ local HEALING_REDUCTION = "HEALING_REDUCTION"
 local ATTENTION = "ATTENTION"
 local STEALTH_DETECTION = "STEALTH_DETECTION"
 
-lib.friendlyPriority = lib.friendlyPriority or {
+lib.friendlyPriority = {
     ATTENTION = 95,
     IMMUNITY = 90,
     STUN = 85,
@@ -73,7 +74,7 @@ lib.friendlyPriority = lib.friendlyPriority or {
 }
 local friendlyPriority = lib.friendlyPriority
 
-lib.enemyPriority = lib.enemyPriority or {
+lib.enemyPriority = {
     ATTENTION = 95,
     IMMUNITY = 90,
     STUN = 85,
@@ -149,7 +150,7 @@ end
 -----------------------
 if not isClassic then
 
-lib.data = lib.data or {
+lib.data = {
     -- [25163] = { ATTENTION }, -- Oozeling's Aura
 
     [115804] = { HEALING_REDUCTION }, -- Mortal Wounds
@@ -669,7 +670,7 @@ A( 25999 ,{ ROOT }) -- Boar Charge
 A( 22812 ,{ DAMAGE_REDUCTION }) -- Barkskin
 A( 19975 ,{ ROOT }) -- Nature's Grasp
 A({ 339, 1062, 5195, 5196, 9852, 9853 }, { ROOT }) -- Entangling Roots
-A({ 770, 778, 9749, 9907, 17390, 17391, 17392 }, { STEALTH_DETECTION }) -- Faerie Fire
+A({ 770, 778, 9749, 9907, 16857, 17390, 17391, 17392 }, { STEALTH_DETECTION }) -- Faerie Fire
 A({ 2637, 18657, 18658 }, { CROWD_CONTROL }) -- Hibernate
 A( 29166, { DAMAGE_INCREASE }) -- Innervate
 A({ 9005, 9823, 9827 }, { STUN }) -- Pounce Stun
@@ -759,11 +760,10 @@ A( 5530 ,{ STUN }) -- Mace Spec. Stun (Warrior & Rogue)
 end
 
 
-function lib.GetDebuffInfo(spellID, targetType)
+function lib.GetDebuffInfo(spellID, targetType) -- older version of the function with stupid return value order
     if data[spellID] then
         targetType = targetType or "ALLY"
         local priorityTable = targetType == "ALLY" and friendlyPriority or enemyPriority
-
         local spellData = data[spellID]
         -- TODO: Compare multiple categories if assigned
         local spellType = spellData[1]
@@ -772,11 +772,18 @@ function lib.GetDebuffInfo(spellID, targetType)
         return spellID, spellType, prio
     end
 end
-lib.GetAuraInfo = lib.GetDebuffInfo
+function lib.GetAuraInfo(...)
+    local spellID, spellType, prio = lib.GetDebuffInfo(...)
+    return prio, spellType, spellID
+end
 
-function lib.GetDebuffTypePriority(dType, targetType)
+function lib.GetAuraTypePriority(dType, targetType)
     targetType = targetType or "ALLY"
     local priorityTable = targetType == "ALLY" and friendlyPriority or enemyPriority
     return priorityTable[dType]
 end
-lib.GetAuraTypePriority = lib.GetDebuffTypePriority
+lib.GetDebuffTypePriority = lib.GetAuraTypePriority
+
+-- function lib.GetRelativeAuraTypePriority(...)
+--     return lib.GetAuraTypePriority(...)/100
+-- end
