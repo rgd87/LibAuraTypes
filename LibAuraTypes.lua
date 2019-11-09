@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 6
+local MAJOR, MINOR = "LibAuraTypes", 7
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -783,6 +783,20 @@ function lib.GetAuraTypePriority(dType, targetType)
     return priorityTable[dType]
 end
 lib.GetDebuffTypePriority = lib.GetAuraTypePriority
+
+function lib.GetPriorities(targetType)
+    targetType = targetType or "ALLY"
+    local priorityTable = targetType == "ALLY" and friendlyPriority or enemyPriority
+
+    local sortfunc = function(a,b) return a[2] > b[2] end
+    local orderedTable = {}
+    for category, priority in pairs(priorityTable) do
+        table.insert(orderedTable, { category, priority })
+    end
+    table.sort(orderedTable, sortfunc)
+
+    return orderedTable
+end
 
 -- function lib.GetRelativeAuraTypePriority(...)
 --     return lib.GetAuraTypePriority(...)/100
