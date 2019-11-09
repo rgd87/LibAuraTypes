@@ -31,6 +31,7 @@ local SPELL_IMMUNITY = "SPELL_IMMUNITY"
 local INTERRUPT_IMMUNITY = "INTERRUPT_IMMUNITY"
 local FEAR_IMMUNITY = "FEAR_IMMUNITY"
 local ROOT_IMMUNITY = "ROOT_IMMUNITY"
+local CROWD_CONTROL_IMMUNITY = "CROWD_CONTROL_IMMUNITY"
 local HEALING_REDUCTION = "HEALING_REDUCTION"
 local ATTENTION = "ATTENTION"
 local STEALTH_DETECTION = "STEALTH_DETECTION"
@@ -39,7 +40,8 @@ lib.friendlyPriority = lib.friendlyPriority or {
     ATTENTION = 95,
     IMMUNITY = 90,
     STUN = 85,
-    ANTI_DISPEL = 55,
+    CROWD_CONTROL_IMMUNITY = 60,
+    ANTI_DISPEL = 10,
     PHYSICAL_IMMUNITY = 65,
     SPELL_IMMUNITY = 65,
 
@@ -48,8 +50,8 @@ lib.friendlyPriority = lib.friendlyPriority or {
     -- Don't care about these on friendly
     INTERRUPT_IMMUNITY = 10,
     FEAR_IMMUNITY = 10,
-    EFFECT_IMMUNITY = 30,
-    ROOT_IMMUNITY = 30,
+    EFFECT_IMMUNITY = 31,
+    ROOT_IMMUNITY = 25,
 
     INCAP = 68,
     SILENCE = 65,
@@ -76,6 +78,7 @@ lib.enemyPriority = lib.enemyPriority or {
     IMMUNITY = 90,
     STUN = 85,
     ANTI_DISPEL = 0, ------------
+    CROWD_CONTROL_IMMUNITY = 80,
     PHYSICAL_IMMUNITY = 65,
     SPELL_IMMUNITY = 65,
 
@@ -84,7 +87,7 @@ lib.enemyPriority = lib.enemyPriority or {
     SILENCE = 67,
 
     INTERRUPT_IMMUNITY = 55,
-    FEAR_IMMUNITY = 55,
+    FEAR_IMMUNITY = 20,
     EFFECT_IMMUNITY = 50,
     ROOT_IMMUNITY = 50,
 
@@ -117,7 +120,28 @@ if playerClass == "ROGUE" then
     enemyPriority[STEALTH_DETECTION] = 60
 elseif playerClass == "DRUID" then
     enemyPriority[STEALTH_DETECTION] = 60
-    enemyPriority[HEALING_REDUCTION] = 28
+    friendlyPriority[HEALING_REDUCTION] = 28
+    friendlyPriority[ANTI_DISPEL] = 70
+elseif playerClass == "PRIEST" then
+    enemyPriority[FEAR_IMMUNITY] = 80
+    friendlyPriority[HEALING_REDUCTION] = 28
+    friendlyPriority[ANTI_DISPEL] = 70
+elseif playerClass == "SHAMAN" then
+    friendlyPriority[HEALING_REDUCTION] = 28
+    friendlyPriority[ANTI_DISPEL] = 70
+elseif playerClass == "PALADIN" then
+    friendlyPriority[HEALING_REDUCTION] = 28
+    friendlyPriority[ANTI_DISPEL] = 70
+elseif playerClass == "MONK" then
+    friendlyPriority[HEALING_REDUCTION] = 28
+    friendlyPriority[ANTI_DISPEL] = 70
+elseif playerClass == "MAGE" then
+    enemyPriority[FROZEN] = 60
+elseif playerClass == "WARLOCK" then
+    enemyPriority[FEAR_IMMUNITY] = 80
+elseif playerClass == "WARRIOR" then
+    enemyPriority[SLOW] = 39
+    enemyPriority[FEAR_IMMUNITY] = 55
 end
 
 -----------------------
@@ -532,8 +556,8 @@ end
 A( 23451 ,{ SPEED_BOOST }) -- Battleground Speed buff
 A( 23493 ,{ DAMAGE_REDUCTION }) -- Battleground Heal buff
 A( 23505 ,{ DAMAGE_INCREASE }) -- Battleground Damage buff
-A( 6615 ,{ EFFECT_IMMUNITY }) -- Free Action Potion
-A( 24364 ,{ EFFECT_IMMUNITY }) -- Living Action Potion
+A( 6615 ,{ CROWD_CONTROL_IMMUNITY }) -- Free Action Potion
+A( 24364 ,{ CROWD_CONTROL_IMMUNITY }) -- Living Action Potion
 A( 3169 ,{ IMMUNITY }) -- Limited Invulnerability Potion
 A( 16621 ,{ IMMUNITY }) -- Invulnerable Mail
 A( 1090 ,{ CROWD_CONTROL }) -- Magic Dust
