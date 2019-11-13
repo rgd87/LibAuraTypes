@@ -56,8 +56,8 @@ lib.friendlyPriority = {
 
     INCAP = 68,
     SILENCE = 65,
-    FROZEN = 51,
-    ROOT = 50,
+    FROZEN = 46,
+    ROOT = 45,
 
     DAMAGE_REDUCTION = 40,
     DAMAGE_ABSORB = 1,
@@ -93,10 +93,10 @@ lib.enemyPriority = {
     ROOT_IMMUNITY = 50,
 
 
-    FROZEN = 51,
-    ROOT = 50,
+    FROZEN = 46,
+    ROOT = 45,
 
-    DAMAGE_REDUCTION = 40,
+    DAMAGE_REDUCTION = 55,
     DAMAGE_ABSORB = 38,
     DAMAGE_VULNERABILITY = 37,
 
