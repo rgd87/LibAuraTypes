@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 7
+local MAJOR, MINOR = "LibAuraTypes", 8
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -543,10 +543,11 @@ lib.data = {
     [236077] = { DAMAGE_DECREASE }, -- Disarm
     [1715] = { SLOW }, -- Hamstring
 }
+data = lib.data
 
 A({ 118, 28271, 28272, 61025, 61305, 61721, 61780, 126819, 161353, 161354, 161355, 161372, 277787, 277792 }, { CROWD_CONTROL }) -- Polymorph
 
-data = lib.data
+
 
 
 -----------------------
