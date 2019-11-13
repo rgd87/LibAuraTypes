@@ -145,6 +145,23 @@ elseif playerClass == "WARRIOR" then
     enemyPriority[FEAR_IMMUNITY] = 55
 end
 
+local function A( id, opts )
+    if type(id) == "table" then
+        if #id > 2 then
+            if type(opts) == "string" then
+                local category = opts
+                opts = { category }
+            end
+            opts.originalID = id[1]
+        end
+        for i, spellID in ipairs(id) do
+            data[spellID] = opts
+        end
+    else
+        data[id] = opts
+    end
+end
+
 -----------------------
 -- LIVE
 -----------------------
@@ -282,20 +299,20 @@ lib.data = {
 
     [66] = { DAMAGE_INCREASE }, -- Invisibility
         [110959] = { DAMAGE_INCREASE, originalID = 66 }, -- Greater Invisibility
-    [118] = { CROWD_CONTROL }, -- Polymorph
-        [28271] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Turtle
-        [28272] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Pig
-        [61025] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Serpent
-        [61305] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Black Cat
-        [61721] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Rabbit
-        [61780] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Turkey
-        [126819] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Porcupine
-        [161353] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Polar Bear Cub
-        [161354] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Monkey
-        [161355] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Penguin
-        [161372] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Peacock
-        [277787] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Direhorn
-        [277792] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Bumblebee
+    -- [118] = { CROWD_CONTROL }, -- Polymorph
+    --     [28271] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Turtle
+    --     [28272] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Pig
+    --     [61025] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Serpent
+    --     [61305] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Black Cat
+    --     [61721] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Rabbit
+    --     [61780] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Turkey
+    --     [126819] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Porcupine
+    --     [161353] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Polar Bear Cub
+    --     [161354] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Monkey
+    --     [161355] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Penguin
+    --     [161372] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Peacock
+    --     [277787] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Direhorn
+    --     [277792] = { CROWD_CONTROL, originalID = 118 }, -- Polymorph Bumblebee
     [122] = { ROOT }, -- Frost Nova
         [33395] = { ROOT, originalID = 122 }, -- Freeze
     [11426] = { DAMAGE_REDUCTION }, -- Ice Barrier
@@ -526,6 +543,9 @@ lib.data = {
     [236077] = { DAMAGE_DECREASE }, -- Disarm
     [1715] = { SLOW }, -- Hamstring
 }
+
+A({ 118, 28271, 28272, 61025, 61305, 61721, 61780, 126819, 161353, 161354, 161355, 161372, 277787, 277792 }, { CROWD_CONTROL }) -- Polymorph
+
 data = lib.data
 
 
@@ -536,22 +556,8 @@ data = lib.data
 elseif isClassic then
 
 
-lib.data = lib.data or {}
+lib.data = {}
 data = lib.data
-
-local function A( id, opts )
-    if type(id) == "table" then
-        for i, spellID in ipairs(id) do
-            data[spellID] = opts
-        end
-        if #id > 2 then
-            opts.originalID = id[1]
-        end
-    else
-        data[id] = opts
-    end
-end
-
 
 --MISC
 A( 23451 ,{ SPEED_BOOST }) -- Battleground Speed buff
@@ -766,7 +772,12 @@ function lib.GetDebuffInfo(spellID, targetType) -- older version of the function
         local priorityTable = targetType == "ALLY" and friendlyPriority or enemyPriority
         local spellData = data[spellID]
         -- TODO: Compare multiple categories if assigned
-        local spellType = spellData[1]
+        local spellType
+        if type(spellData) == "table" then
+            spellType = spellData[1]
+        else
+            spellType = spellData
+        end
         if spellData.originalID then spellID = spellData.originalID end
         local prio = priorityTable[spellType]
         return spellID, spellType, prio
@@ -796,6 +807,10 @@ function lib.GetPriorities(targetType)
     table.sort(orderedTable, sortfunc)
 
     return orderedTable
+end
+
+function lib.AddAura( id, opts )
+    A(id, opts)
 end
 
 -- function lib.GetRelativeAuraTypePriority(...)

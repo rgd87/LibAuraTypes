@@ -84,5 +84,6 @@ globals = {
 
 	-- everything else
 	"GetBuildInfo",
+	"UnitClass",
 	"LibStub",
 }
