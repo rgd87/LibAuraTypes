@@ -119,6 +119,7 @@ local isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 local playerClass = select(2, UnitClass('player'))
 if playerClass == "ROGUE" then
     enemyPriority[STEALTH_DETECTION] = 60
+    enemyPriority[PHYSICAL_IMMUNITY] = 90
 elseif playerClass == "DRUID" then
     enemyPriority[STEALTH_DETECTION] = 60
     friendlyPriority[HEALING_REDUCTION] = 28
@@ -143,6 +144,7 @@ elseif playerClass == "WARLOCK" then
 elseif playerClass == "WARRIOR" then
     enemyPriority[SLOW] = 39
     enemyPriority[FEAR_IMMUNITY] = 55
+    enemyPriority[PHYSICAL_IMMUNITY] = 90
 end
 
 local function A( id, opts )
@@ -810,6 +812,8 @@ function lib.GetPriorities(targetType)
     return orderedTable
 end
 
+-- If you're going to use this, make sure it's after all addons are loaded.
+-- Otherwise newer version of the lib data may overwrite your changes
 function lib.AddAura( id, opts )
     A(id, opts)
 end
