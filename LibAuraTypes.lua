@@ -261,8 +261,7 @@ lib.data = {
     [204437] = { STUN }, -- Lightning Lasso
 
     [209749] = { DAMAGE_DECREASE }, -- Faerie Swarm (Slow/Disarm)
-    [209753] = { CROWD_CONTROL, priority = true }, -- Cyclone
-        [33786] = { CROWD_CONTROL, originalID = 209753 }, -- Cyclone
+    [33786] = { CROWD_CONTROL }, -- Cyclone
     [22570] = { STUN }, -- Maim
     [236696] = { DAMAGE_REDUCTION }, -- Thorns (PvP Talent)
     [232559] = { SLOW }, -- Thorns Slow (PvP Talent)
@@ -280,13 +279,14 @@ lib.data = {
         [24394] = { CROWD_CONTROL, originalID = 19577 }, -- Intimidation
     [53480] = { DAMAGE_REDUCTION }, -- Roar of Sacrifice (Hunter Pet Skill)
     [117526] = { ROOT }, -- Binding Shot
+    [321469] = { DAMAGE_DECREASE }, -- Binding Shot
     [131894] = { DAMAGE_INCREASE }, -- A Murder of Crows (Beast Mastery, Marksmanship)
         [206505] = { DAMAGE_INCREASE, originalID = 131894 }, -- A Murder of Crows (Survival)
     [186265] = { DAMAGE_REDUCTION }, -- Aspect of the Turtle
     [186289] = { DAMAGE_INCREASE }, -- Aspect of the Eagle
     [238559] = { CROWD_CONTROL }, -- Bursting Shot
         [186387] = { CROWD_CONTROL, originalID = 238559 }, -- Bursting Shot
-    [193526] = { DAMAGE_INCREASE }, -- Trueshot
+    [288613] = { DAMAGE_INCREASE }, -- Trueshot
     [193530] = { DAMAGE_INCREASE }, -- Aspect of the Wild
     [199483] = { DAMAGE_REDUCTION }, -- Camouflage
     [202914] = { CROWD_CONTROL }, -- Spider Sting (Armed)
@@ -412,7 +412,7 @@ lib.data = {
     [81782] = { DAMAGE_REDUCTION }, -- Power Word: Barrier
         [271466] = { DAMAGE_REDUCTION, originalID = 81782 }, -- Luminous Barrier (Disc Talent)
     [87204] = { CROWD_CONTROL }, -- Sin and Punishment
-    [193223] = { DAMAGE_INCREASE }, -- Surrender to Madness
+    [319952] = { DAMAGE_INCREASE }, -- Surrender to Madness
     [194249] = { DAMAGE_INCREASE }, -- Voidform
     [196762] = { DAMAGE_REDUCTION }, -- Inner Focus
     [197268] = { DAMAGE_REDUCTION }, -- Ray of Hope
@@ -511,13 +511,9 @@ lib.data = {
     [171017] = { CROWD_CONTROL }, -- Meteor Strike
     [196098] = { DAMAGE_INCREASE }, -- Soul Harvest
     [196364] = { SILENCE }, -- Unstable Affliction (Silence)
-    [233490] = { ANTI_DISPEL }, -- Unstable Affliction applications
-    [233496] = { ANTI_DISPEL, originalID = 233490 }, -- Unstable Affliction applications
-    [233497] = { ANTI_DISPEL, originalID = 233490 }, -- Unstable Affliction applications
-    [233498] = { ANTI_DISPEL, originalID = 233490 }, -- Unstable Affliction applications
-    [233499] = { ANTI_DISPEL, originalID = 233490 }, -- Unstable Affliction applications
+    [316099] = { ANTI_DISPEL }, -- Unstable Affliction applications
     [212284] = { DAMAGE_INCREASE }, -- Firestone
-    [212295] = { IMMUNITY }, -- Nether Ward
+    [212295] = { SPELL_IMMUNITY }, -- Nether Ward
 
     -- Warrior / good, maybe more slow?
 
@@ -526,9 +522,7 @@ lib.data = {
     [5246] = { CROWD_CONTROL }, -- Intimidating Shout
     [12975] = { DAMAGE_REDUCTION }, -- Last Stand
     [18499] = { FEAR_IMMUNITY }, -- Berserker Rage
-    [23920] = { IMMUNITY }, -- Spell Reflection
-        -- [213915] = { IMMUNITY, originalID = 23920 }, -- Mass Spell Reflection
-        [216890] = { IMMUNITY, originalID = 23920 }, -- Spell Reflection (Arms, Fury)
+    [23920] = { SPELL_IMMUNITY }, -- Spell Reflection
     [46968] = { STUN }, -- Shockwave
     [97462] = { DAMAGE_REDUCTION }, -- Rallying Cry
     [105771] = { ROOT }, -- Charge (Warrior)
