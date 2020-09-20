@@ -20,6 +20,7 @@ local SLOW = "SLOW"
 local ANTI_DISPEL = "ANTI_DISPEL"
 local SPEED_BOOST = "SPEED_BOOST"
 local IMMUNITY = "IMMUNITY"
+local SPELLSTOLEN = "SPELLSTOLEN"
 local DAMAGE_REDUCTION = "DAMAGE_REDUCTION"
 local DAMAGE_ABSORB = "DAMAGE_ABSORB"
 local DAMAGE_VULNERABILITY = "DAMAGE_VULNERABILITY"
@@ -28,6 +29,7 @@ local DAMAGE_DECREASE = "DAMAGE_DECREASE"
 local TRASH = "TRASH"
 local EFFECT_IMMUNITY = "EFFECT_IMMUNITY"
 local PHYSICAL_IMMUNITY = "PHYSICAL_IMMUNITY"
+local SPELL_REFLECTION = "SPELL_REFLECTION"
 local SPELL_IMMUNITY = "SPELL_IMMUNITY"
 local INTERRUPT_IMMUNITY = "INTERRUPT_IMMUNITY"
 local FEAR_IMMUNITY = "FEAR_IMMUNITY"
@@ -53,7 +55,9 @@ lib.friendlyPriority = {
     FEAR_IMMUNITY = 10,
     EFFECT_IMMUNITY = 31,
     ROOT_IMMUNITY = 25,
+    SPELL_REFLECTION = 35,
 
+    SPELLSTOLEN = 50,
     INCAP = 68,
     SILENCE = 65,
     FROZEN = 46,
@@ -76,6 +80,7 @@ local friendlyPriority = lib.friendlyPriority
 
 lib.enemyPriority = {
     ATTENTION = 95,
+    SPELL_REFLECTION = 95,
     IMMUNITY = 90,
     STUN = 85,
     ANTI_DISPEL = 0, ------------
@@ -99,6 +104,7 @@ lib.enemyPriority = {
     DAMAGE_REDUCTION = 55,
     DAMAGE_ABSORB = 38,
     DAMAGE_VULNERABILITY = 37,
+    SPELLSTOLEN = 37,
 
     DAMAGE_INCREASE = 35,
     DAMAGE_DECREASE = 34,
@@ -145,6 +151,8 @@ elseif playerClass == "WARRIOR" then
     enemyPriority[SLOW] = 39
     enemyPriority[FEAR_IMMUNITY] = 55
     enemyPriority[PHYSICAL_IMMUNITY] = 90
+    enemyPriority[SPELL_REFLECTION] = 60
+    enemyPriority[SPELL_IMMUNITY] = 10
 end
 
 local function A( id, opts )
@@ -358,6 +366,7 @@ lib.data = {
     [232055] = { CROWD_CONTROL }, -- Fists of Fury
         [120086] = { CROWD_CONTROL, originalID = 232055 }, -- Fists of Fury
     [233759] = { CROWD_CONTROL }, -- Grapple Weapon
+    [209584] = { INTERRUPT_IMMUNITY }, -- Zen Focus Tea
 
     -- Paladin
 
@@ -426,6 +435,9 @@ lib.data = {
     [213610] = { EFFECT_IMMUNITY }, -- Holy Ward
     [215769] = { IMMUNITY }, -- Spirit of Redemption
     [221660] = { IMMUNITY }, -- Holy Concentration
+    [323716] = { SPELLSTOLEN }, -- Thoughtsteal (PVP talent)
+    [329543] = { DAMAGE_REDUCTION }, -- Divine Ascension
+    [199845] = { HEALING_REDUCTION }, -- Psyflay from Psyfiend, 9.0 Priest pvp talent
 
     -- Rogue / good
 
@@ -513,7 +525,9 @@ lib.data = {
     [196364] = { SILENCE }, -- Unstable Affliction (Silence)
     [316099] = { ANTI_DISPEL }, -- Unstable Affliction applications
     [212284] = { DAMAGE_INCREASE }, -- Firestone
-    [212295] = { SPELL_IMMUNITY }, -- Nether Ward
+    [212295] = { SPELL_REFLECTION }, -- Nether Ward
+    [221705] = { INTERRUPT_IMMUNITY }, -- Casting Circle, immune to interrupt and silence
+    [200587] = { HEALING_REDUCTION }, -- Fel Fissue, 25% Healing reduction from CB
 
     -- Warrior / good, maybe more slow?
 
@@ -522,7 +536,7 @@ lib.data = {
     [5246] = { CROWD_CONTROL }, -- Intimidating Shout
     [12975] = { DAMAGE_REDUCTION }, -- Last Stand
     [18499] = { FEAR_IMMUNITY }, -- Berserker Rage
-    [23920] = { SPELL_IMMUNITY }, -- Spell Reflection
+    [23920] = { SPELL_REFLECTION }, -- Spell Reflection
     [46968] = { STUN }, -- Shockwave
     [97462] = { DAMAGE_REDUCTION }, -- Rallying Cry
     [105771] = { ROOT }, -- Charge (Warrior)
@@ -538,6 +552,7 @@ lib.data = {
     [228920] = { DAMAGE_REDUCTION }, -- Ravager
     [236077] = { DAMAGE_DECREASE }, -- Disarm
     [1715] = { SLOW }, -- Hamstring
+    [236321] = { EFFECT_IMMUNITY }, -- War Banner, 50% CC reduction
 }
 data = lib.data
 
@@ -574,9 +589,9 @@ A( 5024 ,{ EFFECT_IMMUNITY }) -- Skull of Impending Doom
 A( 2379 ,{ SPEED_BOOST }) -- Swiftness Potion
 A({ 13099, 13138, 16566 }, { CROWD_CONTROL }) -- Net-o-matic + Backfire
 A( 5134 ,{ CROWD_CONTROL }) -- Flash Bomb
-A( 23097 ,{ ATTENTION }) -- Fire Reflector
-A( 23131 ,{ ATTENTION }) -- Frost Reflector
-A( 23132 ,{ ATTENTION }) -- Shadow Reflector
+A( 23097 ,{ SPELL_REFLECTION }) -- Fire Reflector
+A( 23131 ,{ SPELL_REFLECTION }) -- Frost Reflector
+A( 23132 ,{ SPELL_REFLECTION }) -- Shadow Reflector
 A( 19769 ,{ INCAP }) -- Thorium Grenade
 A( 4068 ,{ INCAP }) -- Iron Grenade
 A( 1604 ,{ SLOW }) -- Common Daze
