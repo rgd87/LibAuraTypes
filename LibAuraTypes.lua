@@ -17,6 +17,7 @@ local FROZEN = "FROZEN"
 local SILENCE = "SILENCE"
 local ROOT = "ROOT"
 local SLOW = "SLOW"
+local STEALTH = "STEALTH"
 local ANTI_DISPEL = "ANTI_DISPEL"
 local ANTI_HEAL = "ANTI_HEAL"
 local SPEED_BOOST = "SPEED_BOOST"
@@ -51,7 +52,7 @@ lib.friendlyPriority = {
     PHYSICAL_IMMUNITY = 65,
     PHYSICAL_REFLECTION = 65,
     SPELL_IMMUNITY = 65,
-
+    STEALTH = 20,
     CROWD_CONTROL = 70,
 
     -- Don't care about these on friendly
@@ -116,6 +117,7 @@ lib.enemyPriority = {
     DAMAGE_DECREASE = 34,
 
     SLOW = 30,
+    STEALTH = 20,
     SPEED_BOOST = 25,
     HEALING_REDUCTION = 1,
     STEALTH_DETECTION = 1, -- increased for stealth classes
@@ -349,7 +351,7 @@ lib.data = {
     [12042] = { DAMAGE_INCREASE }, -- Arcane Power
     [12051] = { DAMAGE_INCREASE }, -- Evocation
     [12472] = { DAMAGE_INCREASE }, -- Icy Veins
-        [198144] = { DAMAGE_INCREASE, originalID = 12472 }, -- Ice Form
+        [198144] = { DAMAGE_INCREASE, originalID = 12472 }, -- Ice Form, Stun Immune
     [31661] = { CROWD_CONTROL }, -- Dragon's Breath
     [45438] = { IMMUNITY }, -- Ice Block
         [41425] = { TRASH }, -- Hypothermia
@@ -359,11 +361,12 @@ lib.data = {
     [157997] = { ROOT }, -- Ice Nova
     [190319] = { DAMAGE_INCREASE }, -- Combustion
     [198111] = { DAMAGE_REDUCTION }, -- Temporal Shield
-    [198158] = { DAMAGE_INCREASE }, -- Mass Invisibility
+    [198158] = { STEALTH }, -- Mass Invisibility
     [198064] = { DAMAGE_REDUCTION }, -- Prismatic Cloak
         [198065] = { DAMAGE_REDUCTION, originalID = 198064 }, -- Prismatic Cloak
     [205025] = { DAMAGE_INCREASE }, -- Presence of Mind
     [228600] = { ROOT }, -- Glacial Spike Root
+    [198121] = { FROZEN }, -- Frostbite
 
     -- Monk / good
 
@@ -487,6 +490,7 @@ lib.data = {
     -- [277953] = { SLOW }, -- Night Terrors
     [199027] = { PHYSICAL_IMMUNITY }, -- Veil of Midnight (100% dodge)
     [207777] = { DAMAGE_DECREASE }, -- Dismantle
+    [11327] = { STEALTH }, -- Vanish
 
     -- Shaman
 
@@ -508,7 +512,7 @@ lib.data = {
     [77505] = { CROWD_CONTROL }, -- Earthquake (Stun)
     [98008] = { DAMAGE_REDUCTION }, -- Spirit Link Totem
     [108271] = { DAMAGE_REDUCTION }, -- Astral Shift
-        [210918] = { DAMAGE_REDUCTION, originalID = 108271 }, -- Ethereal Form
+        [210918] = { PHYSICAL_IMMUNITY, originalID = 108271 }, -- Ethereal Form
     [114050] = { DAMAGE_REDUCTION }, -- Ascendance (Elemental)
         [114051] = { DAMAGE_INCREASE, originalID = 114050 }, -- Ascendance (Enhancement)
         [114052] = { DAMAGE_REDUCTION, originalID = 114050 }, -- Ascendance (Restoration)
@@ -523,6 +527,8 @@ lib.data = {
         [255016] = { SPELL_IMMUNITY, originalID = 8178 }, -- Grounding
         [204336] = { SPELL_IMMUNITY, originalID = 8178 }, -- Grounding
         [34079] = { SPELL_IMMUNITY, originalID = 8178 }, -- Grounding
+
+    [290641] = { INTERRUPT_IMMUNITY }, -- Ancestral Gift
 
     -- Warlock / ok, no slow
 
