@@ -248,6 +248,8 @@ lib.data = {
     [221527] = { CROWD_CONTROL }, -- Imprison (Detainment Honor Talent)
         [217832] = { CROWD_CONTROL, originalID = 221527 }, -- Imprison (Baseline Undispellable)
     [227225] = { DAMAGE_REDUCTION }, -- Soul Barrier
+    [206803] = { DAMAGE_REDUCTION }, -- Rain from Above, initial jump
+    [206804] = { DAMAGE_REDUCTION }, -- Rain from Above, slow fall
 
     -- Druid / probably good, no slow
 
@@ -312,13 +314,16 @@ lib.data = {
     [288613] = { DAMAGE_INCREASE }, -- Trueshot
     [193530] = { DAMAGE_INCREASE }, -- Aspect of the Wild
     [199483] = { DAMAGE_REDUCTION }, -- Camouflage
-    [202914] = { CROWD_CONTROL }, -- Spider Sting (Armed)
-        [202933] = { CROWD_CONTROL, originalID = 202914 }, -- Spider Sting (Silenced)
-        [233022] = { CROWD_CONTROL, originalID = 202914 }, -- Spider Sting (Silenced)
+    [202914] = { SILENCE }, -- Spider Sting (Armed)
+        -- [202933] = { CROWD_CONTROL, originalID = 202914 }, -- Spider Sting (Silenced)
+        [233022] = { SILENCE, originalID = 202914 }, -- Spider Sting (Silenced)
     [209790] = { CROWD_CONTROL }, -- Freezing Arrow
     [209997] = { DAMAGE_REDUCTION }, -- Play Dead
     [213691] = { CROWD_CONTROL }, -- Scatter Shot
     [272682] = { DAMAGE_REDUCTION }, -- Master's Call
+    [202900] = { DAMAGE_DECREASE }, -- Scorpid Sting
+    [212638] = { ROOT }, -- Tracker's Net
+    [203337] = { CROWD_CONTROL }, -- Diamond Ice
 
     -- Mage / ok, no slow
 
@@ -447,11 +452,12 @@ lib.data = {
         [200200] = { CROWD_CONTROL, originalID = 200196 }, -- Holy Word: Chastise (Stun)
     [205369] = { CROWD_CONTROL }, -- Mind Bomb
         [226943] = { CROWD_CONTROL, originalID = 205369 }, -- Mind Bomb (Disorient)
-    [213610] = { EFFECT_IMMUNITY }, -- Holy Ward
+    [213610] = { CROWD_CONTROL_IMMUNITY }, -- Holy Ward
     [215769] = { IMMUNITY }, -- Spirit of Redemption
     [221660] = { IMMUNITY }, -- Holy Concentration
     [323716] = { SPELLSTOLEN }, -- Thoughtsteal (PVP talent)
-    [329543] = { DAMAGE_REDUCTION }, -- Divine Ascension
+    [328530] = { DAMAGE_REDUCTION }, -- Divine Ascension, rise
+    [329543] = { DAMAGE_REDUCTION }, -- Divine Ascension, fall
     [199845] = { HEALING_REDUCTION }, -- Psyflay from Psyfiend, 9.0 Priest pvp talent
     -- [323673] = { }, -- Mindgames (Venthyr), The next 450 damage and 450 healing dealt will be reversed.
 
@@ -480,7 +486,7 @@ lib.data = {
     [206760] = { SLOW }, -- Shadow's Grasp
     -- [277953] = { SLOW }, -- Night Terrors
     [199027] = { PHYSICAL_IMMUNITY }, -- Veil of Midnight (100% dodge)
-
+    [207777] = { DAMAGE_DECREASE }, -- Dismantle
 
     -- Shaman
 
