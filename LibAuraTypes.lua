@@ -18,6 +18,7 @@ local SILENCE = "SILENCE"
 local ROOT = "ROOT"
 local SLOW = "SLOW"
 local ANTI_DISPEL = "ANTI_DISPEL"
+local ANTI_HEAL = "ANTI_HEAL"
 local SPEED_BOOST = "SPEED_BOOST"
 local IMMUNITY = "IMMUNITY"
 local SPELLSTOLEN = "SPELLSTOLEN"
@@ -28,6 +29,7 @@ local DAMAGE_INCREASE = "DAMAGE_INCREASE"
 local DAMAGE_DECREASE = "DAMAGE_DECREASE"
 local TRASH = "TRASH"
 local EFFECT_IMMUNITY = "EFFECT_IMMUNITY"
+local PHYSICAL_REFLECTION = "PHYSICAL_REFLECTION"
 local PHYSICAL_IMMUNITY = "PHYSICAL_IMMUNITY"
 local SPELL_REFLECTION = "SPELL_REFLECTION"
 local SPELL_IMMUNITY = "SPELL_IMMUNITY"
@@ -45,7 +47,9 @@ lib.friendlyPriority = {
     STUN = 85,
     CROWD_CONTROL_IMMUNITY = 60,
     ANTI_DISPEL = 10,
+    ANTI_HEAL = 10,
     PHYSICAL_IMMUNITY = 65,
+    PHYSICAL_REFLECTION = 65,
     SPELL_IMMUNITY = 65,
 
     CROWD_CONTROL = 70,
@@ -81,9 +85,11 @@ local friendlyPriority = lib.friendlyPriority
 lib.enemyPriority = {
     ATTENTION = 95,
     SPELL_REFLECTION = 95,
+    PHYSICAL_REFLECTION = 85,
     IMMUNITY = 90,
     STUN = 85,
     ANTI_DISPEL = 0, ------------
+    ANTI_HEAL = 0,
     CROWD_CONTROL_IMMUNITY = 80,
     PHYSICAL_IMMUNITY = 65,
     SPELL_IMMUNITY = 65,
@@ -92,7 +98,7 @@ lib.enemyPriority = {
     INCAP = 69,
     SILENCE = 67,
 
-    INTERRUPT_IMMUNITY = 55,
+    INTERRUPT_IMMUNITY = 64,
     FEAR_IMMUNITY = 20,
     EFFECT_IMMUNITY = 50,
     ROOT_IMMUNITY = 50,
@@ -130,19 +136,24 @@ elseif playerClass == "DRUID" then
     enemyPriority[STEALTH_DETECTION] = 60
     friendlyPriority[HEALING_REDUCTION] = 28
     friendlyPriority[ANTI_DISPEL] = 70
+    friendlyPriority[ANTI_HEAL] = 70
 elseif playerClass == "PRIEST" then
     enemyPriority[FEAR_IMMUNITY] = 80
     friendlyPriority[HEALING_REDUCTION] = 28
     friendlyPriority[ANTI_DISPEL] = 70
+    friendlyPriority[ANTI_HEAL] = 70
 elseif playerClass == "SHAMAN" then
     friendlyPriority[HEALING_REDUCTION] = 28
     friendlyPriority[ANTI_DISPEL] = 70
+    friendlyPriority[ANTI_HEAL] = 70
 elseif playerClass == "PALADIN" then
     friendlyPriority[HEALING_REDUCTION] = 28
     friendlyPriority[ANTI_DISPEL] = 70
+    friendlyPriority[ANTI_HEAL] = 70
 elseif playerClass == "MONK" then
     friendlyPriority[HEALING_REDUCTION] = 28
     friendlyPriority[ANTI_DISPEL] = 70
+    friendlyPriority[ANTI_HEAL] = 70
 elseif playerClass == "MAGE" then
     enemyPriority[FROZEN] = 60
 elseif playerClass == "WARLOCK" then
@@ -213,6 +224,9 @@ lib.data = {
     [212552] = { DAMAGE_REDUCTION }, -- Wraith Walk
     [219809] = { DAMAGE_REDUCTION }, -- Tombstone
     [223929] = { HEALING_REDUCTION }, -- Necrotic Wound
+    [204085] = { FROZEN }, -- Deathchill
+    [204206] = { SLOW }, -- Chill Streak, 70% mov red
+    [288849] = { ANTI_HEAL }, -- Crypt Fever, 8% over 4s, refreshed on heal
 
     -- Demon Hunter
 
@@ -271,8 +285,9 @@ lib.data = {
     [209749] = { DAMAGE_DECREASE }, -- Faerie Swarm (Slow/Disarm)
     [33786] = { CROWD_CONTROL }, -- Cyclone
     [22570] = { STUN }, -- Maim
-    [236696] = { DAMAGE_REDUCTION }, -- Thorns (PvP Talent)
+    [236696] = { PHYSICAL_REFLECTION }, -- Thorns (PvP Talent)
     [232559] = { SLOW }, -- Thorns Slow (PvP Talent)
+    -- [234084] = { INTERRUPT_IMMUNITY }, Moon and Stars, pvp  70% interrupt reduction
 
 
     -- Hunter
@@ -399,7 +414,7 @@ lib.data = {
     [210256] = { DAMAGE_REDUCTION }, -- Blessing of Sanctuary
     [210294] = { IMMUNITY }, -- Divine Favor
     [215652] = { DAMAGE_INCREASE }, -- Shield of Virtue
-
+    [210294] = { INTERRUPT_IMMUNITY }, -- Divine Favor
 
     -- Priest / unchecked, no slow
 
@@ -438,6 +453,8 @@ lib.data = {
     [323716] = { SPELLSTOLEN }, -- Thoughtsteal (PVP talent)
     [329543] = { DAMAGE_REDUCTION }, -- Divine Ascension
     [199845] = { HEALING_REDUCTION }, -- Psyflay from Psyfiend, 9.0 Priest pvp talent
+    -- [323673] = { }, -- Mindgames (Venthyr), The next 450 damage and 450 healing dealt will be reversed.
+
 
     -- Rogue / good
 
