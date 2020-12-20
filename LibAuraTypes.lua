@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 9
+local MAJOR, MINOR = "LibAuraTypes", 10
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -41,8 +41,11 @@ local CROWD_CONTROL_IMMUNITY = "CROWD_CONTROL_IMMUNITY"
 local HEALING_REDUCTION = "HEALING_REDUCTION"
 local ATTENTION = "ATTENTION"
 local STEALTH_DETECTION = "STEALTH_DETECTION"
+local PVE_DAMAGE_REDUCTION = "PVE_DAMAGE_REDUCTION"
 
 lib.friendlyPriority = {
+    PVE_DAMAGE_REDUCTION = 0,
+
     ATTENTION = 95,
     IMMUNITY = 90,
     STUN = 85,
@@ -84,6 +87,8 @@ lib.friendlyPriority = {
 local friendlyPriority = lib.friendlyPriority
 
 lib.enemyPriority = {
+    PVE_DAMAGE_REDUCTION = 85,
+
     ATTENTION = 95,
     SPELL_REFLECTION = 95,
     PHYSICAL_REFLECTION = 85,
@@ -553,6 +558,7 @@ lib.data = {
     [196098] = { DAMAGE_INCREASE }, -- Soul Harvest
     [196364] = { SILENCE }, -- Unstable Affliction (Silence)
     [316099] = { ANTI_DISPEL }, -- Unstable Affliction applications
+    [342938] = { ANTI_DISPEL }, -- Unstable Affliction with Rampant Afflictions
     [212284] = { DAMAGE_INCREASE }, -- Firestone
     [212295] = { SPELL_REFLECTION }, -- Nether Ward
     [221705] = { INTERRUPT_IMMUNITY }, -- Casting Circle, immune to interrupt and silence
@@ -582,6 +588,10 @@ lib.data = {
     [236077] = { DAMAGE_DECREASE }, -- Disarm
     [1715] = { SLOW }, -- Hamstring
     [236321] = { EFFECT_IMMUNITY }, -- War Banner, 50% CC reduction
+
+    -- Mythic+ Shadowlands
+
+    [333737] = PVE_DAMAGE_REDUCTION, -- Congealed Contagion, Ickus, Plaguefall
 }
 data = lib.data
 
@@ -807,21 +817,26 @@ A( 5530 ,{ STUN }) -- Mace Spec. Stun (Warrior & Rogue)
 end
 
 
+local math_max = math.max
 function lib.GetDebuffInfo(spellID, targetType) -- older version of the function with stupid return value order
-    if data[spellID] then
+    local spellData = data[spellID]
+    if spellData then
         targetType = targetType or "ALLY"
         local priorityTable = targetType == "ALLY" and friendlyPriority or enemyPriority
-        local spellData = data[spellID]
-        -- TODO: Compare multiple categories if assigned
         local spellType
+        local maxPrio = -1000
         if type(spellData) == "table" then
-            spellType = spellData[1]
+            if spellData.originalID then spellID = spellData.originalID end
+            for _, spellType in ipairs(spellData) do
+                local prio = priorityTable[spellType]
+                maxPrio = math_max(prio, maxPrio)
+            end
         else
             spellType = spellData
+            maxPrio = priorityTable[spellType]
         end
-        if spellData.originalID then spellID = spellData.originalID end
-        local prio = priorityTable[spellType]
-        return spellID, spellType, prio
+
+        return spellID, spellType, maxPrio
     end
 end
 function lib.GetAuraInfo(...)
