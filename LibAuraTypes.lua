@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 11
+local MAJOR, MINOR = "LibAuraTypes", 12
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -42,9 +42,11 @@ local HEALING_REDUCTION = "HEALING_REDUCTION"
 local ATTENTION = "ATTENTION"
 local STEALTH_DETECTION = "STEALTH_DETECTION"
 local PVE_DAMAGE_REDUCTION = "PVE_DAMAGE_REDUCTION"
+local TAUNT = "TAUNT"
 
 lib.friendlyPriority = {
     PVE_DAMAGE_REDUCTION = 0,
+    TAUNT = 0,
 
     ATTENTION = 95,
     IMMUNITY = 90,
@@ -103,6 +105,8 @@ lib.enemyPriority = {
     CROWD_CONTROL = 70,
     INCAP = 69,
     SILENCE = 67,
+
+    TAUNT = 60,
 
     INTERRUPT_IMMUNITY = 64,
     FEAR_IMMUNITY = 20,
@@ -739,6 +743,8 @@ A( 16979 , ROOT) -- Feral Charge
 A({ 1850, 9821 },  SPEED_BOOST) -- Dash
 A({ 16689, 16810, 16811, 16812, 16813, 17329},  ATTENTION) -- Nature's Grasp Buff
 A({ 783, 1066 },  SPEED_BOOST) -- Travel Form & Aquatic Form
+A( 6795 , TAUNT) -- Growl
+A( 5209 , TAUNT) -- Challenging Roar
 
 -- MAGE
 
@@ -794,6 +800,8 @@ A( 14278 , DAMAGE_REDUCTION) -- Ghostly Strike
 
 -- WARRIOR
 
+A( 355 , TAUNT) -- Taunt
+A( 1161 , TAUNT) -- Challenging Shout
 A( 18498 , SILENCE) -- Improved Shield Bash
 A( 20230 , PHYSICAL_IMMUNITY) -- Retaliation
 A( 1719 , DAMAGE_VULNERABILITY) -- Recklessness, Fear immunity, Damage Vuln
