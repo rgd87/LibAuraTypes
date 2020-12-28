@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 12
+local MAJOR, MINOR = "LibAuraTypes", 13
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -24,9 +24,11 @@ local SPEED_BOOST = "SPEED_BOOST"
 local IMMUNITY = "IMMUNITY"
 local SPELLSTOLEN = "SPELLSTOLEN"
 local DAMAGE_REDUCTION = "DAMAGE_REDUCTION"
+local DAMAGE_REDUCTION2 = "DAMAGE_REDUCTION2"
 local DAMAGE_ABSORB = "DAMAGE_ABSORB"
 local DAMAGE_VULNERABILITY = "DAMAGE_VULNERABILITY"
 local DAMAGE_INCREASE = "DAMAGE_INCREASE"
+local DAMAGE_INCREASE2 = "DAMAGE_INCREASE2"
 local DAMAGE_DECREASE = "DAMAGE_DECREASE"
 local TRASH = "TRASH"
 local EFFECT_IMMUNITY = "EFFECT_IMMUNITY"
@@ -74,10 +76,12 @@ lib.friendlyPriority = {
     ROOT = 45,
 
     DAMAGE_REDUCTION = 40,
+    DAMAGE_REDUCTION2 = 50,
     DAMAGE_ABSORB = 1,
     DAMAGE_VULNERABILITY = 37,
 
     DAMAGE_INCREASE = 10,
+    DAMAGE_INCREASE2 = 12,
     DAMAGE_DECREASE = 9,
 
     SLOW = 30,
@@ -93,7 +97,7 @@ lib.enemyPriority = {
 
     ATTENTION = 95,
     SPELL_REFLECTION = 95,
-    PHYSICAL_REFLECTION = 85,
+    PHYSICAL_REFLECTION = 90,
     IMMUNITY = 90,
     STUN = 85,
     ANTI_DISPEL = 0, ------------
@@ -122,6 +126,7 @@ lib.enemyPriority = {
     DAMAGE_VULNERABILITY = 37,
     SPELLSTOLEN = 37,
 
+    DAMAGE_INCREASE2 = 80,
     DAMAGE_INCREASE = 35,
     DAMAGE_DECREASE = 34,
 
@@ -298,7 +303,8 @@ lib.data = {
     [209749] = DAMAGE_DECREASE, -- Faerie Swarm (Slow/Disarm)
     [33786] = CROWD_CONTROL, -- Cyclone
     [22570] = STUN, -- Maim
-    [236696] = PHYSICAL_REFLECTION, -- Thorns (PvP Talent)
+    [305497] = PHYSICAL_REFLECTION, -- Thorns (PvP Talent)
+    [323764] = DAMAGE_INCREASE2, -- Convoke Spirits
     [232559] = SLOW, -- Thorns Slow (PvP Talent)
     -- [234084] = INTERRUPT_IMMUNITY, Moon and Stars, pvp  70% interrupt reduction
 
@@ -368,7 +374,7 @@ lib.data = {
     [82691] = CROWD_CONTROL, -- Ring of Frost
     [108839] = DAMAGE_INCREASE, -- Ice Floes
     [157997] = ROOT, -- Ice Nova
-    [190319] = DAMAGE_INCREASE, -- Combustion
+    [190319] = DAMAGE_INCREASE2, -- Combustion
     [198111] = DAMAGE_REDUCTION, -- Temporal Shield
     [198158] = STEALTH, -- Mass Invisibility
     [198064] = DAMAGE_REDUCTION, -- Prismatic Cloak
@@ -437,7 +443,7 @@ lib.data = {
 
     [34914] = ANTI_DISPEL, -- Vampiric Touch
     [586] = DAMAGE_REDUCTION, -- Fade
-        [213602] = DAMAGE_REDUCTION, -- Greater Fade
+        [213602] = DAMAGE_REDUCTION2, -- Greater Fade
     [605] = CROWD_CONTROL, -- Mind Control
     [8122] = CROWD_CONTROL, -- Psychic Scream
     [9484] = CROWD_CONTROL, -- Shackle Undead
@@ -446,15 +452,14 @@ lib.data = {
         [199683] = { CROWD_CONTROL, originalID = 15487 }, -- Last Word
     [33206] = DAMAGE_REDUCTION, -- Pain Suppression
     [47536] = DAMAGE_REDUCTION, -- Rapture
-    [47585] = DAMAGE_REDUCTION, -- Dispersion
+    [47585] = DAMAGE_REDUCTION2, -- Dispersion
     [47788] = DAMAGE_REDUCTION, -- Guardian Spirit
     [64044] = CROWD_CONTROL, -- Psychic Horror
     [64843] = DAMAGE_REDUCTION, -- Divine Hymn
     [81782] = DAMAGE_REDUCTION, -- Power Word: Barrier
-        [271466] = { DAMAGE_REDUCTION, originalID = 81782 }, -- Luminous Barrier (Disc Talent)
     [87204] = CROWD_CONTROL, -- Sin and Punishment
     [319952] = DAMAGE_INCREASE, -- Surrender to Madness
-    [194249] = DAMAGE_INCREASE, -- Voidform
+    [194249] = DAMAGE_INCREASE2, -- Voidform
     [196762] = DAMAGE_REDUCTION, -- Inner Focus
     [197268] = DAMAGE_REDUCTION, -- Ray of Hope
     [197862] = DAMAGE_REDUCTION, -- Archangel
@@ -471,7 +476,7 @@ lib.data = {
     [328530] = DAMAGE_REDUCTION, -- Divine Ascension, rise
     [329543] = DAMAGE_REDUCTION, -- Divine Ascension, fall
     [199845] = HEALING_REDUCTION, -- Psyflay from Psyfiend, 9.0 Priest pvp talent
-    -- [323673] = },- Mindgames (Venthyr), The next 450 damage and 450 healing dealt will be reversed.
+    [323673] = ANTI_HEAL, -- Mindgames (Venthyr), The next 450 damage and 450 healing dealt will be reversed.
 
 
     -- Rogue / good
