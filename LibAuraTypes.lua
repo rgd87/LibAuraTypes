@@ -756,8 +756,8 @@ A( 5209 , TAUNT) -- Challenging Roar
 A( 18469 , SILENCE) -- Improved Counterspell
 A({ 118, 12824, 12825, 12826, 28270, 28271, 28272 },  CROWD_CONTROL) -- Polymorph
 A({ 11426, 13031, 13032, 13033 },  DAMAGE_ABSORB) -- Ice Barrier
-A({ 543, 8457, 8458, 10223, 10225 },  DAMAGE_ABSOR) -- Fire Ward
-A({ 6143, 8461, 8462, 10177, 28609 },  DAMAGE_ABSOR) -- Frost Ward
+A({ 543, 8457, 8458, 10223, 10225 },  DAMAGE_ABSORB) -- Fire Ward
+A({ 6143, 8461, 8462, 10177, 28609 },  DAMAGE_ABSORB) -- Frost Ward
 A( 12355 , STUN) -- Impact
 A( 22959 , TRASH) -- Fire Vulnerability
 A({ 11113, 13018, 13019, 13020, 13021 },  SLOW) -- Blast Wave
