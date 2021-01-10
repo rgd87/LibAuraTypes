@@ -17,6 +17,7 @@ local FROZEN = "FROZEN"
 local SILENCE = "SILENCE"
 local ROOT = "ROOT"
 local SLOW = "SLOW"
+local HEAVY_SLOW = "HEAVY_SLOW"
 local STEALTH = "STEALTH"
 local ANTI_DISPEL = "ANTI_DISPEL"
 local ANTI_HEAL = "ANTI_HEAL"
@@ -46,6 +47,28 @@ local STEALTH_DETECTION = "STEALTH_DETECTION"
 local PVE_DAMAGE_REDUCTION = "PVE_DAMAGE_REDUCTION"
 local TAUNT = "TAUNT"
 
+local E_SLOW         = 1
+local E_ROOT         = 2
+local E_DISORIENT    = 4
+local E_DISARM       = 8
+local E_SILENCE      = 16
+local E_INCAP        = 32
+local E_FEAR         = 64
+local E_STUN         = 128
+local E_ANTIDISPEL   = 256
+local E_PHASED       = 512
+local E_BADTHING     = 1024
+
+-- effects.SLOW         = 1
+-- effects.ROOT         = 2
+-- effects.DISORIENT    = 4
+-- effects.DISARM       = 8
+-- effects.SILENCE      = 16
+-- effects.INCAP        = 32
+-- effects.FEAR         = 64
+-- effects.STUN         = 128
+-- effects.ANTIDISPEL   = 256
+
 lib.friendlyPriority = {
     PVE_DAMAGE_REDUCTION = 0,
     TAUNT = 0,
@@ -74,6 +97,7 @@ lib.friendlyPriority = {
     SILENCE = 65,
     FROZEN = 46,
     ROOT = 45,
+    HEAVY_SLOW = 40,
 
     DAMAGE_REDUCTION = 40,
     DAMAGE_REDUCTION2 = 50,
@@ -130,6 +154,7 @@ lib.enemyPriority = {
     DAMAGE_INCREASE = 35,
     DAMAGE_DECREASE = 34,
 
+    HEAVY_SLOW = 31,
     SLOW = 30,
     STEALTH = 20,
     SPEED_BOOST = 25,
@@ -213,36 +238,37 @@ lib.data = {
 
     -- DEATH KNIGHT
 
-    [47476] = CROWD_CONTROL, -- Strangulate
-    [48707] = IMMUNITY, -- Anti-Magic Shell
-    [48265] = DAMAGE_REDUCTION, -- Death's Advance
-    [48792] = DAMAGE_REDUCTION, -- Icebound Fortitude
+    [47476] = { SILENCE, effect = E_SILENCE }, -- Strangulate
+    [48707] = SPELL_IMMUNITY, -- Anti-Magic Shell
+    [145629] = DAMAGE_REDUCTION, -- Anti-Magic Zone
+    [48265] = ROOT_IMMUNITY, -- Death's Advance
+    [48792] = DAMAGE_REDUCTION2, -- Icebound Fortitude
     [81256] = DAMAGE_REDUCTION, -- Dancing Rune Weapon
     [51271] = DAMAGE_INCREASE, -- Pillar of Frost
     [55233] = DAMAGE_REDUCTION, -- Vampiric Blood
     [77606] = ATTENTION, -- Dark Simulacrum
-    [91797] = CROWD_CONTROL, -- Monstrous Blow
-    [91800] = CROWD_CONTROL, -- Gnaw
-    [108194] = CROWD_CONTROL, -- Asphyxiate
-        [221562] = { CROWD_CONTROL, originalID = 108194 }, -- Asphyxiate (Blood)
+    [91797] = { STUN, effect = E_STUN }, -- Monstrous Blow
+    [91800] = { STUN, effect = E_STUN }, -- Gnaw
+    [108194] = { STUN, effect = E_STUN }, -- Asphyxiate
+        [221562] = { STUN, effect = E_STUN, originalID = 108194 }, -- Asphyxiate (Blood)
     [152279] = DAMAGE_INCREASE, -- Breath of Sindragosa
     [194679] = DAMAGE_REDUCTION, -- Rune Tap
     [194844] = DAMAGE_REDUCTION, -- Bonestorm
-    [204080] = ROOT, -- Frostbite
     [206977] = DAMAGE_REDUCTION, -- Blood Mirror
     [207127] = DAMAGE_INCREASE, -- Hungering Rune Weapon
-    [207167] = CROWD_CONTROL, -- Blinding Sleet
-    [207171] = CROWD_CONTROL, -- Winter is Coming
+    [207167] = { CROWD_CONTROL, effect = E_DISORIENT }, -- Blinding Sleet
+    [317898] = { CROWD_CONTROL, effect = E_SLOW }, -- Blinding Sleet Slow 50% 6s
     [207256] = DAMAGE_INCREASE, -- Obliteration
     [207289] = DAMAGE_INCREASE, -- Unholy Frenzy
-    [212332] = CROWD_CONTROL, -- Smash
-        [212337] = { CROWD_CONTROL, originalID = 212332 }, -- Powerful Smash
+    [212332] = { CROWD_CONTROL, effect = E_STUN }, -- Smash
+        [212337] = { CROWD_CONTROL, effect = E_STUN, originalID = 212332 }, -- Powerful Smash
     [212552] = DAMAGE_REDUCTION, -- Wraith Walk
     [219809] = DAMAGE_REDUCTION, -- Tombstone
     [223929] = HEALING_REDUCTION, -- Necrotic Wound
-    [204085] = FROZEN, -- Deathchill
-    [204206] = SLOW, -- Chill Streak, 70% mov red
-    [288849] = ANTI_HEAL, -- Crypt Fever, 8% over 4s, refreshed on heal
+    [204085] = { FROZEN, effect = E_ROOT }, -- Deathchill, pvp talent 4s root on chains
+    [204206] = { HEAVY_SLOW, effect = E_SLOW }, -- Chill Streak, 70% mov red
+    [288849] = ANTI_HEAL, -- Crypt Fever, Unholy pvp talent 8% over 4s, refreshed on heal
+    [45524] = { HEAVY_SLOW, effect = E_SLOW }, -- Chains of Ice, 70% slow
 
     -- Demon Hunter
 
@@ -301,7 +327,7 @@ lib.data = {
     [204437] = STUN, -- Lightning Lasso
 
     [209749] = DAMAGE_DECREASE, -- Faerie Swarm (Slow/Disarm)
-    [33786] = CROWD_CONTROL, -- Cyclone
+    [33786] = { CROWD_CONTROL, effect = E_PHASED }, -- Cyclone
     [22570] = STUN, -- Maim
     [305497] = PHYSICAL_REFLECTION, -- Thorns (PvP Talent)
     [323764] = DAMAGE_INCREASE2, -- Convoke Spirits
@@ -360,104 +386,100 @@ lib.data = {
     --     [161372] = CROWD_CONTROLoriginalID = 118 }, -- Polymorph Peacock
     --     [277787] = CROWD_CONTROLoriginalID = 118 }, -- Polymorph Direhorn
     --     [277792] = CROWD_CONTROLoriginalID = 118 }, -- Polymorph Bumblebee
-    [122] = ROOT, -- Frost Nova
-        [33395] = { ROOT, originalID = 122 }, -- Freeze
+    [122] = { ROOT, effect = E_ROOT }, -- Frost Nova
+    [33395] = { ROOT, effect = E_ROOT }, -- Freeze
     [11426] = DAMAGE_REDUCTION, -- Ice Barrier
     [12042] = DAMAGE_INCREASE, -- Arcane Power
     [12051] = DAMAGE_INCREASE, -- Evocation
     [12472] = DAMAGE_INCREASE, -- Icy Veins
         [198144] = { DAMAGE_INCREASE, originalID = 12472 }, -- Ice Form, Stun Immune
-    [31661] = CROWD_CONTROL, -- Dragon's Breath
+    [31661] = { CROWD_CONTROL, effect = E_DISORIENT }, -- Dragon's Breath
     [45438] = IMMUNITY, -- Ice Block
         [41425] = TRASH, -- Hypothermia
     [80353] = DAMAGE_INCREASE, -- Time Warp
-    [82691] = CROWD_CONTROL, -- Ring of Frost
+    [82691] = { CROWD_CONTROL, effect = E_INCAP }, -- Ring of Frost
     [108839] = DAMAGE_INCREASE, -- Ice Floes
-    [157997] = ROOT, -- Ice Nova
+    [157997] = { ROOT, effect = E_ROOT }, -- Ice Nova
     [190319] = DAMAGE_INCREASE2, -- Combustion
     [198111] = DAMAGE_REDUCTION, -- Temporal Shield
     [198158] = STEALTH, -- Mass Invisibility
     [198064] = DAMAGE_REDUCTION, -- Prismatic Cloak
         [198065] = { DAMAGE_REDUCTION, originalID = 198064 }, -- Prismatic Cloak
     [205025] = DAMAGE_INCREASE, -- Presence of Mind
-    [228600] = ROOT, -- Glacial Spike Root
-    [198121] = FROZEN, -- Frostbite
+    [228600] = { ROOT, effect = E_ROOT }, -- Glacial Spike Root
+    [198121] = { FROZEN, effect = E_ROOT }, -- Frostbite
 
     -- Monk / good
 
-    [115078] = CROWD_CONTROL, -- Paralysis
+    [115078] = { CROWD_CONTROL, effect = E_INCAP }, -- Paralysis
     [115080] = DAMAGE_VULNERABILITY, -- Touch of Death
     [120954] = DAMAGE_REDUCTION, -- Fortifying Brew (Brewmaster)
         [201318] = { DAMAGE_REDUCTION, originalID = 120954 }, -- Fortifying Brew (Windwalker PvP Talent)
         [243435] = { DAMAGE_REDUCTION, originalID = 120954 }, -- Fortifying Brew (Mistweaver)
-    [116095] = SLOW, -- Disable Slow
-    [116706] = ROOT, -- Disable Root
+    [201787] = SLOW, -- Heavy-Handed Strikes (PVP talent) slow from fists of fury
+    [116095] = { SLOW, effect = E_SLOW }, -- Disable Slow
+    [116706] = { ROOT, effect = E_ROOT }, -- Disable Root
     [116849] = DAMAGE_REDUCTION, -- Life Cocoon
-    [119381] = STUN, -- Leg Sweep
+    [119381] = { STUN, effect = E_STUN }, -- Leg Sweep
     [122278] = DAMAGE_REDUCTION, -- Dampen Harm
     [122470] = IMMUNITY, -- Touch of Karma
-    [122783] = DAMAGE_REDUCTION, -- Diffuse Magic
-    [137639] = DAMAGE_REDUCTION, -- Storm, Earth, and Fire
+    [122783] = DAMAGE_REDUCTION2, -- Diffuse Magic
+    [137639] = DAMAGE_INCREASE2, -- Storm, Earth, and Fire
     [198909] = CROWD_CONTROL, -- Song of Chi-Ji
     [115176] = DAMAGE_REDUCTION, -- Zen Meditation
     [216113] = DAMAGE_INCREASE, -- Way of the Crane
-    [232055] = CROWD_CONTROL, -- Fists of Fury
-        [120086] = { CROWD_CONTROL, originalID = 232055 }, -- Fists of Fury
-    [233759] = CROWD_CONTROL, -- Grapple Weapon
+    [233759] = { CROWD_CONTROL, effect = E_DISARM }, -- Grapple Weapon
     [209584] = INTERRUPT_IMMUNITY, -- Zen Focus Tea
 
     -- Paladin
 
     [498] = DAMAGE_REDUCTION, -- Divine Protection
     [642] = IMMUNITY, -- Divine Shield
-    [853] = CROWD_CONTROL, -- Hammer of Justice
-    [1022] = DAMAGE_REDUCTION, -- Blessing of Protection
-        [204018] = DAMAGE_REDUCTION, -- Blessing of Spellwarding
-    [1044] = DAMAGE_REDUCTION, -- Blessing of Freedom
+    [853] = { CROWD_CONTROL, effect = E_STUN }, -- Hammer of Justice
+    [1022] = PHYSICAL_IMMUNITY, -- Blessing of Protection
+        [204018] = SPELL_IMMUNITY, -- Blessing of Spellwarding
+    [1044] = ROOT_IMMUNITY, -- Blessing of Freedom
     [6940] = DAMAGE_REDUCTION, -- Blessing of Sacrifice
         [199448] = { DAMAGE_REDUCTION, originalID = 6940 }, -- Blessing of Sacrifice (Ultimate Sacrifice Honor Talent)
-    [20066] = CROWD_CONTROL, -- Repentance
+    [20066] = { CROWD_CONTROL, effect = E_INCAP }, -- Repentance
     [31821] = DAMAGE_REDUCTION, -- Aura Mastery
     [31850] = DAMAGE_REDUCTION, -- Ardent Defender
-    [31884] = DAMAGE_INCREASE, -- Avenging Wrath (Protection/Retribution)
-        [31842] = { DAMAGE_INCREASE, originalID = 31884 }, -- Avenging Wrath (Holy)
-        [216331] = { DAMAGE_INCREASE, originalID = 31884 }, -- Avenging Crusader (Holy Honor Talent)
-        [231895] = { DAMAGE_INCREASE, originalID = 31884 }, -- Crusade (Retribution Talent)
-    [31935] = CROWD_CONTROL, -- Avenger's Shield
+    [31884] = DAMAGE_INCREASE2, -- Avenging Wrath (Protection/Retribution)
+        [216331] = { DAMAGE_INCREASE2, originalID = 31884 }, -- Avenging Crusader (Holy Talent)
+        [231895] = { DAMAGE_INCREASE2, originalID = 31884 }, -- Crusade (Retribution Talent)
+    [31935] = { CROWD_CONTROL, effect = E_SILENCE }, -- Avenger's Shield
     [86659] = DAMAGE_REDUCTION, -- Guardian of Ancient Kings
         [212641] = DAMAGE_REDUCTION, -- Guardian of Ancient Kings (Glyphed)
         [228049] = DAMAGE_REDUCTION, -- Guardian of the Forgotten Queen
     [105809] = DAMAGE_INCREASE, -- Holy Avenger
-    [115750] = CROWD_CONTROL, -- Blinding Light
-        [105421] = { CROWD_CONTROL, originalID = 115750 }, -- Blinding Light
+    [105421] = { CROWD_CONTROL, effect = E_DISORIENT }, -- Blinding Light
     [152262] = DAMAGE_INCREASE, -- Seraphim
     [184662] = DAMAGE_REDUCTION, -- Shield of Vengeance
     [204150] = DAMAGE_REDUCTION, -- Aegis of Light
     [205191] = DAMAGE_REDUCTION, -- Eye for an Eye
     [210256] = DAMAGE_REDUCTION, -- Blessing of Sanctuary
-    [210294] = IMMUNITY, -- Divine Favor
     [215652] = DAMAGE_INCREASE, -- Shield of Virtue
     [210294] = INTERRUPT_IMMUNITY, -- Divine Favor
+    [183218] = { HEAVY_SLOW, effect = E_SLOW }, -- Hand of Hindrance 70% slow
 
     -- Priest / unchecked, no slow
 
-    [34914] = ANTI_DISPEL, -- Vampiric Touch
+    [34914] = { ANTI_DISPEL, effect = E_ANTIDISPEL }, -- Vampiric Touch
     [586] = DAMAGE_REDUCTION, -- Fade
         [213602] = DAMAGE_REDUCTION2, -- Greater Fade
-    [605] = CROWD_CONTROL, -- Mind Control
-    [8122] = CROWD_CONTROL, -- Psychic Scream
-    [9484] = CROWD_CONTROL, -- Shackle Undead
+    [605] = { CROWD_CONTROL, effect = E_INCAP }, -- Mind Control
+    [8122] = { CROWD_CONTROL, effect = E_FEAR }, -- Psychic Scream
+    [9484] = { CROWD_CONTROL, effect = E_INCAP }, -- Shackle Undead
     [10060] = DAMAGE_INCREASE, -- Power Infusion
-    [15487] = SILENCE, -- Silence
-        [199683] = { CROWD_CONTROL, originalID = 15487 }, -- Last Word
+    [15487] = { SILENCE, effect = E_SILENCE }, -- Silence
     [33206] = DAMAGE_REDUCTION, -- Pain Suppression
     [47536] = DAMAGE_REDUCTION, -- Rapture
     [47585] = DAMAGE_REDUCTION2, -- Dispersion
     [47788] = DAMAGE_REDUCTION, -- Guardian Spirit
-    [64044] = CROWD_CONTROL, -- Psychic Horror
+    [64044] = { STUN, effect = E_STUN }, -- Psychic Horror
     [64843] = DAMAGE_REDUCTION, -- Divine Hymn
     [81782] = DAMAGE_REDUCTION, -- Power Word: Barrier
-    [87204] = CROWD_CONTROL, -- Sin and Punishment
+    [87204] = { CROWD_CONTROL, effect = E_FEAR }, -- Sin and Punishment (for VT dispel)
     [319952] = DAMAGE_INCREASE, -- Surrender to Madness
     [194249] = DAMAGE_INCREASE2, -- Voidform
     [196762] = DAMAGE_REDUCTION, -- Inner Focus
@@ -465,10 +487,10 @@ lib.data = {
     [197862] = DAMAGE_REDUCTION, -- Archangel
     [197871] = DAMAGE_INCREASE, -- Dark Archangel
     [200183] = DAMAGE_REDUCTION, -- Apotheosis
-    [200196] = INCAP, -- Holy Word: Chastise
-        [200200] = { CROWD_CONTROL, originalID = 200196 }, -- Holy Word: Chastise (Stun)
-    [205369] = CROWD_CONTROL, -- Mind Bomb
-        [226943] = { CROWD_CONTROL, originalID = 205369 }, -- Mind Bomb (Disorient)
+    [200196] = { INCAP, effect = E_INCAP }, -- Holy Word: Chastise
+        [200200] = { STUN, effect = E_STUN, originalID = 200196 }, -- Holy Word: Censure (Stun)
+    [205369] = { CROWD_CONTROL, effect = E_DISORIENT }, -- Mind Bomb
+        [226943] = { CROWD_CONTROL, effect = E_DISORIENT, originalID = 205369 }, -- Mind Bomb (Disorient)
     [213610] = CROWD_CONTROL_IMMUNITY, -- Holy Ward
     [215769] = IMMUNITY, -- Spirit of Redemption
     [221660] = IMMUNITY, -- Holy Concentration
@@ -481,59 +503,59 @@ lib.data = {
 
     -- Rogue / good
 
-    [408] = STUN, -- Kidney Shot
-    [1330] = SILENCE, -- Garrote - Silence
-    [1776] = INCAP, -- Gouge
-    [1833] = STUN, -- Cheap Shot
+    [408] = { STUN, effect = E_STUN }, -- Kidney Shot
+    [1330] = { SILENCE, effect = E_SILENCE }, -- Garrote - Silence
+    [1776] = { INCAP, effect = E_INCAP }, -- Gouge
+    [1833] = { STUN, effect = E_STUN }, -- Cheap Shot
     [1966] = DAMAGE_REDUCTION, -- Feint
-    [2094] = CROWD_CONTROL, -- Blind
+    [2094] = { CROWD_CONTROL, effect = E_DISORIENT }, -- Blind
     [5277] = PHYSICAL_IMMUNITY, -- Evasion
-    [6770] = INCAP, -- Sap
+    [6770] = { INCAP, effect = E_INCAP }, -- Sap
     [13750] = DAMAGE_INCREASE, -- Adrenaline Rush
     [31224] = IMMUNITY, -- Cloak of Shadows
     [51690] = DAMAGE_INCREASE, -- Killing Spree
     [79140] = DAMAGE_INCREASE, -- Vendetta
-    [121471] = DAMAGE_INCREASE, -- Shadow Blades
-    [199754] = IMMUNITY, -- Riposte
-    [199804] = STUN, -- Between the Eyes
-    [207736] = DAMAGE_INCREASE, -- Shadowy Duel
-    [212183] = CROWD_CONTROL, -- Smoke Bomb
-    [3409] = SLOW, -- Crippling Poison
-    [185763] = SLOW, -- Pistol Shot
-    [206760] = SLOW, -- Shadow's Grasp
+    [121471] = DAMAGE_INCREASE2, -- Shadow Blades
+    [199754] = PHYSICAL_IMMUNITY, -- Riposte
+    [199804] = { STUN, effect = E_STUN }, -- Between the Eyes
+    [207736] = ANTI_HEAL, -- Shadowy Duel
+    [212183] = { ANTI_HEAL, effect = E_PHASED }, -- Smoke Bomb
+    [3409] = { SLOW, effect = E_SLOW }, -- Crippling Poison 50%
+    [185763] = { SLOW, effect = E_SLOW }, -- Pistol Shot 30%
+    [206760] = SLOW, -- Shadow's Grasp 30%
     -- [277953] = SLOW, -- Night Terrors
     [199027] = PHYSICAL_IMMUNITY, -- Veil of Midnight (100% dodge)
-    [207777] = DAMAGE_DECREASE, -- Dismantle
+    [207777] = { DAMAGE_DECREASE, effect = E_DISARM }, -- Dismantle
     [11327] = STEALTH, -- Vanish
-    [207736] = ANTI_HEAL, -- Shadowy Duel
+    [207736] = { ANTI_HEAL, effect = E_PHASED }, -- Shadowy Duel
 
     -- Shaman
 
     [2825] = DAMAGE_INCREASE, -- Bloodlust
         [32182] = { DAMAGE_INCREASE, originalID = 2825 }, -- Heroism
-    [51514] = CROWD_CONTROL, -- Hex
-        [196932] = { CROWD_CONTROL, originalID = 51514 }, -- Voodoo Totem
-        [210873] = { CROWD_CONTROL, originalID = 51514 }, -- Hex (Compy)
-        [211004] = { CROWD_CONTROL, originalID = 51514 }, -- Hex (Spider)
-        [211010] = { CROWD_CONTROL, originalID = 51514 }, -- Hex (Snake)
-        [211015] = { CROWD_CONTROL, originalID = 51514 }, -- Hex (Cockroach)
-        [269352] = { CROWD_CONTROL, originalID = 51514 }, -- Hex (Skeletal Hatchling)
-        [277778] = { CROWD_CONTROL, originalID = 51514 }, -- Hex (Zandalari Tendonripper)
-        [277784] = { CROWD_CONTROL, originalID = 51514 }, -- Hex (Wicker Mongrel)
+    [51514] = { CROWD_CONTROL, effect = E_INCAP }, -- Hex
+        [196932] = { CROWD_CONTROL, effect = E_INCAP, originalID = 51514 }, -- Voodoo Totem
+        [210873] = { CROWD_CONTROL, effect = E_INCAP, originalID = 51514 }, -- Hex (Compy)
+        [211004] = { CROWD_CONTROL, effect = E_INCAP, originalID = 51514 }, -- Hex (Spider)
+        [211010] = { CROWD_CONTROL, effect = E_INCAP, originalID = 51514 }, -- Hex (Snake)
+        [211015] = { CROWD_CONTROL, effect = E_INCAP, originalID = 51514 }, -- Hex (Cockroach)
+        [269352] = { CROWD_CONTROL, effect = E_INCAP, originalID = 51514 }, -- Hex (Skeletal Hatchling)
+        [277778] = { CROWD_CONTROL, effect = E_INCAP, originalID = 51514 }, -- Hex (Zandalari Tendonripper)
+        [277784] = { CROWD_CONTROL, effect = E_INCAP, originalID = 51514 }, -- Hex (Wicker Mongrel)
     [79206] = DAMAGE_REDUCTION, -- Spiritwalker's Grace 60 * OTHER
     [108281] = DAMAGE_REDUCTION, -- Ancestral Guidance
     [16166] = DAMAGE_INCREASE, -- Elemental Mastery
-    [64695] = ROOT, -- Earthgrab Totem
-    [77505] = CROWD_CONTROL, -- Earthquake (Stun)
+    [64695] = { ROOT, effect = E_ROOT }, -- Earthgrab Totem
+    [77505] = { CROWD_CONTROL, effect = E_STUN }, -- Earthquake (Stun/Knockdown)
     [98008] = DAMAGE_REDUCTION, -- Spirit Link Totem
     [108271] = DAMAGE_REDUCTION, -- Astral Shift
         [210918] = { PHYSICAL_IMMUNITY, originalID = 108271 }, -- Ethereal Form
-    [114050] = DAMAGE_REDUCTION, -- Ascendance (Elemental)
-        [114051] = { DAMAGE_INCREASE, originalID = 114050 }, -- Ascendance (Enhancement)
-        [114052] = { DAMAGE_REDUCTION, originalID = 114050 }, -- Ascendance (Restoration)
-    [118345] = CROWD_CONTROL, -- Pulverize
-    [118905] = CROWD_CONTROL, -- Static Charge
-    [197214] = CROWD_CONTROL, -- Sundering
+    [114050] = DAMAGE_INCREASE2, -- Ascendance (Elemental)
+    [114051] = DAMAGE_INCREASE2, -- Ascendance (Enhancement)
+    [114052] = DAMAGE_REDUCTION2, -- Ascendance (Restoration)
+    [118345] = { CROWD_CONTROL, effect = E_STUN }, -- Pulverize (Earth Elemental stun)
+    [118905] = { CROWD_CONTROL, effect = E_STUN }, -- Static Charge
+    [197214] = { CROWD_CONTROL, effect = E_INCAP }, -- Sundering
     [204293] = DAMAGE_REDUCTION, -- Spirit Link
     [204366] = DAMAGE_INCREASE, -- Thundercharge
     [204945] = DAMAGE_INCREASE, -- Doom Winds
@@ -547,28 +569,27 @@ lib.data = {
 
     -- Warlock / ok, no slow
 
-    [710] = CROWD_CONTROL, -- Banish
-    [5484] = CROWD_CONTROL, -- Howl of Terror
-    [6358] = CROWD_CONTROL, -- Seduction
-        [115268] = { CROWD_CONTROL, originalID = 6358 }, -- Mesmerize
-    [6789] = CROWD_CONTROL, -- Mortal Coil
+    [710] = { CROWD_CONTROL, effect = E_INCAP }, -- Banish
+    [5484] = { CROWD_CONTROL, effect = E_FEAR }, -- Howl of Terror
+    [6358] = { CROWD_CONTROL, effect = E_DISORIENT }, -- Seduction
+        [115268] = { CROWD_CONTROL, effect = E_DISORIENT, originalID = 6358 }, -- Mesmerize
+    [6789] = { CROWD_CONTROL, effect = E_INCAP }, -- Mortal Coil
     -- [20707] = DAMAGE_REDUCTION, -- Soulstone
     -- [22703] = CROWD_CONTROL, -- Infernal Awakening (infernal summon)
-    [30283] = STUN, -- Shadowfury
+    [30283] = { STUN, effect = E_STUN }, -- Shadowfury
     [89751] = DAMAGE_INCREASE, -- Felstorm
         [115831] = { DAMAGE_INCREASE, originalID = 89751 }, -- Wrathstorm
-    [89766] = STUN, -- Axe Toss
+    [89766] = { STUN, effect = E_STUN }, -- Axe Toss
     [104773] = IMMUNITY, -- Unending Resolve
     [108416] = DAMAGE_REDUCTION, -- Dark Pact
     [113860] = DAMAGE_INCREASE, -- Dark Soul: Misery (Affliction)
     [113858] = DAMAGE_INCREASE, -- Dark Soul: Instability (Demonology)
-    [118699] = CROWD_CONTROL, -- Fear
-        [130616] = { CROWD_CONTROL, originalID = 118699 }, -- Fear (Glyph of Fear)
-    [171017] = CROWD_CONTROL, -- Meteor Strike
+    [118699] = { CROWD_CONTROL, effect = E_FEAR }, -- Fear
+    [171017] = { CROWD_CONTROL, effect = E_FEAR }, -- Meteor Strike, Infernal Ability 2s stun
     [196098] = DAMAGE_INCREASE, -- Soul Harvest
-    [196364] = SILENCE, -- Unstable Affliction (Silence)
-    [316099] = ANTI_DISPEL, -- Unstable Affliction applications
-    [342938] = ANTI_DISPEL, -- Unstable Affliction with Rampant Afflictions
+    [196364] = { SILENCE, effect = E_SILENCE }, -- Unstable Affliction (Silence)
+    [316099] = { ANTI_DISPEL, effect = E_ANTIDISPEL }, -- Unstable Affliction applications
+    [342938] = { ANTI_DISPEL, effect = E_ANTIDISPEL }, -- Unstable Affliction with Rampant Afflictions
     [212284] = DAMAGE_INCREASE, -- Firestone
     [212295] = SPELL_REFLECTION, -- Nether Ward
     [221705] = INTERRUPT_IMMUNITY, -- Casting Circle, immune to interrupt and silence
@@ -578,16 +599,16 @@ lib.data = {
 
     [871] = DAMAGE_REDUCTION, -- Shield Wall
     [1719] = DAMAGE_INCREASE, -- Recklessness
-    [5246] = CROWD_CONTROL, -- Intimidating Shout
+    [5246] = { CROWD_CONTROL, effect = E_FEAR }, -- Intimidating Shout
     [12975] = DAMAGE_REDUCTION, -- Last Stand
     [18499] = FEAR_IMMUNITY, -- Berserker Rage
     [23920] = SPELL_REFLECTION, -- Spell Reflection
-    [46968] = STUN, -- Shockwave
+    [46968] = { STUN, effect = E_STUN }, -- Shockwave
     [97462] = DAMAGE_REDUCTION, -- Rallying Cry
     [105771] = ROOT, -- Charge (Warrior)
     [107574] = DAMAGE_INCREASE, -- Avatar
     [118038] = DAMAGE_REDUCTION, -- Die by the Sword
-    [107570] = STUN, -- Storm Bolt
+    [107570] = { STUN, effect = E_STUN }, -- Storm Bolt
     -- [184364] = DAMAGE_REDUCTION, -- Enraged Regeneration
     [197690] = DAMAGE_REDUCTION, -- Defensive Stance
     [330279] = SPELL_REFLECTION, -- Overwatch pvp talent, spell reflect on intervene
@@ -596,9 +617,10 @@ lib.data = {
         [46924] = { IMMUNITY, originalID = 227847 }, -- Bladestorm (Fury)
         -- [152277] = IMMUNITYoriginalID = 227847 }, -- Ravager
     [228920] = DAMAGE_REDUCTION, -- Ravager
-    [236077] = DAMAGE_DECREASE, -- Disarm
-    [1715] = SLOW, -- Hamstring
+    [236077] = { CROWD_CONTROL, effect = E_DISARM }, -- Disarm
+    [1715] = { SLOW, effect = E_SLOW }, -- Hamstring
     [236321] = EFFECT_IMMUNITY, -- War Banner, 50% CC reduction
+    [167105] = DAMAGE_VULNERABILITY, -- Colossus Smash
 
     -- Mythic+ Shadowlands
 
@@ -607,7 +629,7 @@ lib.data = {
 }
 data = lib.data
 
-A({ 118, 28271, 28272, 61025, 61305, 61721, 61780, 126819, 161353, 161354, 161355, 161372, 277787, 277792 }, { CROWD_CONTROL }) -- Polymorph
+A({ 118, 28271, 28272, 61025, 61305, 61721, 61780, 126819, 161353, 161354, 161355, 161372, 277787, 277792 }, { CROWD_CONTROL, effect = E_INCAP }) -- Polymorph
 
 
 
