@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 13
+local MAJOR, MINOR = "LibAuraTypes", 14
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -505,6 +505,7 @@ lib.data = {
     [199027] = PHYSICAL_IMMUNITY, -- Veil of Midnight (100% dodge)
     [207777] = DAMAGE_DECREASE, -- Dismantle
     [11327] = STEALTH, -- Vanish
+    [207736] = ANTI_HEAL, -- Shadowy Duel
 
     -- Shaman
 
@@ -589,6 +590,7 @@ lib.data = {
     [107570] = STUN, -- Storm Bolt
     -- [184364] = DAMAGE_REDUCTION, -- Enraged Regeneration
     [197690] = DAMAGE_REDUCTION, -- Defensive Stance
+    [330279] = SPELL_REFLECTION, -- Overwatch pvp talent, spell reflect on intervene
     [213871] = DAMAGE_REDUCTION, -- Bodyguard
     [227847] = IMMUNITY, -- Bladestorm (Arms)
         [46924] = { IMMUNITY, originalID = 227847 }, -- Bladestorm (Fury)
@@ -601,6 +603,7 @@ lib.data = {
     -- Mythic+ Shadowlands
 
     [333737] = PVE_DAMAGE_REDUCTION, -- Congealed Contagion, Ickus, Plaguefall
+    [343502] = PVE_DAMAGE_REDUCTION, -- Inspiring Affix Buff
 }
 data = lib.data
 
