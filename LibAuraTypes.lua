@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 14
+local MAJOR, MINOR = "LibAuraTypes", 15
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -47,17 +47,29 @@ local STEALTH_DETECTION = "STEALTH_DETECTION"
 local PVE_DAMAGE_REDUCTION = "PVE_DAMAGE_REDUCTION"
 local TAUNT = "TAUNT"
 
-local E_SLOW         = 1
-local E_ROOT         = 2
-local E_DISORIENT    = 4
-local E_DISARM       = 8
-local E_SILENCE      = 16
-local E_INCAP        = 32
-local E_FEAR         = 64
-local E_STUN         = 128
-local E_ANTIDISPEL   = 256
-local E_PHASED       = 512
-local E_BADTHING     = 1024
+lib.E_SLOW         = 1
+lib.E_ROOT         = 2
+lib.E_DISORIENT    = 4
+lib.E_DISARM       = 8
+lib.E_SILENCE      = 16
+lib.E_INCAP        = 32
+lib.E_FEAR         = 64
+lib.E_STUN         = 128
+lib.E_ANTIDISPEL   = 256
+lib.E_PHASED       = 512
+lib.E_BADTHING     = 1024
+
+local E_SLOW         = lib.E_SLOW
+local E_ROOT         = lib.E_ROOT
+local E_DISORIENT    = lib.E_DISORIENT
+local E_DISARM       = lib.E_DISARM
+local E_SILENCE      = lib.E_SILENCE
+local E_INCAP        = lib.E_INCAP
+local E_FEAR         = lib.E_FEAR
+local E_STUN         = lib.E_STUN
+local E_ANTIDISPEL   = lib.E_ANTIDISPEL
+local E_PHASED       = lib.E_PHASED
+local E_BADTHING     = lib.E_BADTHING
 
 -- effects.SLOW         = 1
 -- effects.ROOT         = 2
@@ -856,30 +868,32 @@ end
 
 
 local math_max = math.max
-function lib.GetDebuffInfo(spellID, targetType) -- older version of the function with stupid return value order
+function lib.GetDebuffInfo(...) -- older version of the function with stupid return value order
+    local prio, spellType, spellID, effectType = lib.GetAuraInfo(...)
+    return spellID, spellType, prio, effectType
+end
+function lib.GetAuraInfo(spellID, targetType)
     local spellData = data[spellID]
     if spellData then
         targetType = targetType or "ALLY"
         local priorityTable = targetType == "ALLY" and friendlyPriority or enemyPriority
         local spellType
         local maxPrio = -1000
+        local effectType
         if type(spellData) == "table" then
             if spellData.originalID then spellID = spellData.originalID end
             for _, spellType in ipairs(spellData) do
                 local prio = priorityTable[spellType]
                 maxPrio = math_max(prio, maxPrio)
             end
+            effectType = spellData.effect
         else
             spellType = spellData
             maxPrio = priorityTable[spellType]
         end
 
-        return spellID, spellType, maxPrio
+        return maxPrio, spellType, spellID, effectType
     end
-end
-function lib.GetAuraInfo(...)
-    local spellID, spellType, prio = lib.GetDebuffInfo(...)
-    return prio, spellType, spellID
 end
 
 function lib.GetAuraTypePriority(dType, targetType)
