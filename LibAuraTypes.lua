@@ -587,8 +587,10 @@ lib.data = {
 
     [290641] = INTERRUPT_IMMUNITY, -- Ancestral Gift
 
-    -- Warlock / ok, no slow
+    -- Warlock
 
+    [334275] = { SLOW, effect = E_SLOW }, -- CoEX
+    [1714] = DAMAGE_DECREASE, -- Curse of Tongues
     [710] = { CROWD_CONTROL, effect = E_INCAP }, -- Banish
     [5484] = { CROWD_CONTROL, effect = E_FEAR }, -- Howl of Terror
     [6358] = { CROWD_CONTROL, effect = E_DISORIENT }, -- Seduction
@@ -615,7 +617,7 @@ lib.data = {
     [221705] = INTERRUPT_IMMUNITY, -- Casting Circle, immune to interrupt and silence
     [200587] = HEALING_REDUCTION, -- Fel Fissue, 25% Healing reduction from CB
 
-    -- Warrior / good, maybe more slow?
+    -- Warrior
 
     [871] = DAMAGE_REDUCTION, -- Shield Wall
     [1719] = DAMAGE_INCREASE, -- Recklessness
@@ -626,6 +628,7 @@ lib.data = {
     [46968] = { STUN, effect = E_STUN }, -- Shockwave
     [97462] = DAMAGE_REDUCTION, -- Rallying Cry
     [105771] = ROOT, -- Charge (Warrior)
+    [236273] = DAMAGE_DECREASE, -- Duel pvp talent
     [107574] = DAMAGE_INCREASE, -- Avatar
     [118038] = DAMAGE_REDUCTION, -- Die by the Sword
     [107570] = { STUN, effect = E_STUN }, -- Storm Bolt
