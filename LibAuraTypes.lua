@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 15
+local MAJOR, MINOR = "LibAuraTypes", 16
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -251,6 +251,7 @@ lib.data = {
     -- DEATH KNIGHT
 
     [47476] = { SILENCE, effect = E_SILENCE }, -- Strangulate
+    [49039] = FEAR_IMMUNITY, -- Lichborne
     [48707] = SPELL_IMMUNITY, -- Anti-Magic Shell
     [145629] = DAMAGE_REDUCTION, -- Anti-Magic Zone
     [48265] = ROOT_IMMUNITY, -- Death's Advance
