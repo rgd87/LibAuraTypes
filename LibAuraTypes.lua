@@ -5,10 +5,11 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 16
+local MAJOR, MINOR = "LibAuraTypes", 17
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
+local isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 
 local CROWD_CONTROL = "CROWD_CONTROL"
 local STUN = "STUN"
@@ -153,6 +154,9 @@ lib.enemyPriority = {
     EFFECT_IMMUNITY = 50,
     ROOT_IMMUNITY = 50,
 
+    STEALTH_DETECTION = 60,
+
+    DAMAGE_REDUCTION2 = 55,
 
     FROZEN = 46,
     ROOT = 45,
@@ -171,22 +175,22 @@ lib.enemyPriority = {
     STEALTH = 20,
     SPEED_BOOST = 25,
     HEALING_REDUCTION = 1,
-    STEALTH_DETECTION = 1, -- increased for stealth classes
     TRASH = -1,
 }
 local enemyPriority = lib.enemyPriority
 
 local data
 
-local isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
-
 
 local playerClass = select(2, UnitClass('player'))
 if playerClass == "ROGUE" then
-    enemyPriority[STEALTH_DETECTION] = 60
+    -- enemyPriority[STEALTH_DETECTION] = 60
     enemyPriority[PHYSICAL_IMMUNITY] = 90
+elseif playerClass == "DEMONHUNTER" then
+    enemyPriority[PHYSICAL_IMMUNITY] = 90
+    enemyPriority[STEALTH] = 60
 elseif playerClass == "DRUID" then
-    enemyPriority[STEALTH_DETECTION] = 60
+    -- enemyPriority[STEALTH_DETECTION] = 60
     friendlyPriority[HEALING_REDUCTION] = 28
     friendlyPriority[ANTI_DISPEL] = 70
     friendlyPriority[ANTI_HEAL] = 70
@@ -248,6 +252,13 @@ lib.data = {
     [8680] = HEALING_REDUCTION, -- Wound Poison
     [197046] = HEALING_REDUCTION, -- Minor Wound Poison
 
+    [330749] = DAMAGE_REDUCTION, -- Phial of Serenity (Patience, overtime soulbind trait from pelagos)
+
+    -- [336126] = ATTENTTION, -- PVP trinket (Medallion)
+
+    [320224] = ATTENTION, -- Podtender Night Fae soulbind ability (move in all, not druid specific)
+	[327140] = IMMUNITY, -- Forgeborn covenant necrolord (new soulbind necrolord)
+
     -- DEATH KNIGHT
 
     [47476] = { SILENCE, effect = E_SILENCE }, -- Strangulate
@@ -289,7 +300,6 @@ lib.data = {
     [179057] = { CROWD_CONTROL, effect = E_STUN }, -- Chaos Nova
     [162264] = DAMAGE_INCREASE2, -- Metamorphosis (Havoc)
     [187827] = DAMAGE_REDUCTION2, -- Metamorphosis (Vengeance)
-    [188499] = DAMAGE_REDUCTION, -- Blade Dance
     [188501] = STEALTH_DETECTION, -- Spectral Sight
     [204490] = { SILENCE, effect = E_SILENCE }, -- Sigil of Silence
     [205629] = DAMAGE_REDUCTION, -- Demonic Trample
@@ -300,9 +310,11 @@ lib.data = {
     [211048] = DAMAGE_INCREASE, -- Chaos Blades
     [211881] = { STUN, effect = E_STUN }, -- Fel Eruption 4s stun
     [212800] = DAMAGE_REDUCTION, -- Blur
-        [196555] = DAMAGE_REDUCTION, -- Netherwalk
+    [196555] = IMMUNITY, -- Netherwalk
     [218256] = DAMAGE_REDUCTION, -- Empower Wards
     [217832] = { CROWD_CONTROL, effect = E_INCAP }, -- Imprison Magic 4s incap
+    [221527] = { CROWD_CONTROL, effect = E_INCAP }, -- the id for PvP talent
+	[323996] = { ROOT, effect = E_ROOT }, -- Hunt root
     [227225] = DAMAGE_REDUCTION, -- Soul Barrier
     [206803] = DAMAGE_REDUCTION, -- Rain from Above, initial jump
     [206804] = DAMAGE_REDUCTION, -- Rain from Above, slow fall
@@ -343,6 +355,7 @@ lib.data = {
     [22570] = { STUN, effect = E_STUN }, -- Maim
     [305497] = PHYSICAL_REFLECTION, -- Thorns (PvP Talent)
     [323764] = DAMAGE_INCREASE2, -- Convoke Spirits
+    [337433] = DAMAGE_INCREASE2, -- Convoke Spirits other id
     [320224] = ATTENTION, -- Podtender Night Fae soulbind ability
     -- [234084] = INTERRUPT_IMMUNITY, Moon and Stars, pvp  70% interrupt reduction
 
@@ -412,6 +425,7 @@ lib.data = {
     [108839] = DAMAGE_INCREASE, -- Ice Floes
     [157997] = { ROOT, effect = E_ROOT }, -- Ice Nova
     [190319] = DAMAGE_INCREASE2, -- Combustion
+    [269651] = DAMAGE_INCREASE2, -- Pyroclasm
     [198111] = DAMAGE_REDUCTION, -- Temporal Shield
     [198158] = STEALTH, -- Mass Invisibility
     [198064] = DAMAGE_REDUCTION, -- Prismatic Cloak
@@ -433,7 +447,7 @@ lib.data = {
     [116849] = DAMAGE_REDUCTION, -- Life Cocoon
     [119381] = { STUN, effect = E_STUN }, -- Leg Sweep
     [122278] = DAMAGE_REDUCTION, -- Dampen Harm
-    [122470] = IMMUNITY, -- Touch of Karma
+    [125174] = IMMUNITY, -- Touch of Karma
     [122783] = DAMAGE_REDUCTION2, -- Diffuse Magic
     [137639] = DAMAGE_INCREASE2, -- Storm, Earth, and Fire
     [198909] = CROWD_CONTROL, -- Song of Chi-Ji
@@ -528,8 +542,8 @@ lib.data = {
     [79140] = DAMAGE_INCREASE, -- Vendetta
     [121471] = DAMAGE_INCREASE2, -- Shadow Blades
     [199754] = PHYSICAL_IMMUNITY, -- Riposte
-    [199804] = { STUN, effect = E_STUN }, -- Between the Eyes
     [207736] = ANTI_HEAL, -- Shadowy Duel
+    [185422] = DAMAGE_INCREASE, -- Shadow Dance
     [212183] = { ANTI_HEAL, effect = E_PHASED }, -- Smoke Bomb
     [3409] = { SLOW, effect = E_SLOW }, -- Crippling Poison 50%
     [185763] = { SLOW, effect = E_SLOW }, -- Pistol Shot 30%
@@ -566,6 +580,7 @@ lib.data = {
     [64695] = { ROOT, effect = E_ROOT }, -- Earthgrab Totem
     [77505] = { CROWD_CONTROL, effect = E_STUN }, -- Earthquake (Stun/Knockdown)
     [98008] = DAMAGE_REDUCTION, -- Spirit Link Totem
+    [325174] = DAMAGE_REDUCTION, -- Spirit Link other id
     [108271] = DAMAGE_REDUCTION, -- Astral Shift
         [210918] = { PHYSICAL_IMMUNITY, originalID = 108271 }, -- Ethereal Form
     [114050] = DAMAGE_INCREASE2, -- Ascendance (Elemental)
