@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 17
+local MAJOR, MINOR = "LibAuraTypes", 18
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -47,6 +47,7 @@ local ATTENTION = "ATTENTION"
 local STEALTH_DETECTION = "STEALTH_DETECTION"
 local PVE_DAMAGE_REDUCTION = "PVE_DAMAGE_REDUCTION"
 local TAUNT = "TAUNT"
+local ANTI_STEALTH = "ANTI_STEALTH"
 
 lib.E_SLOW         = 1
 lib.E_ROOT         = 2
@@ -92,6 +93,7 @@ lib.friendlyPriority = {
     CROWD_CONTROL_IMMUNITY = 60,
     ANTI_DISPEL = 10,
     ANTI_HEAL = 10,
+    ANTI_STEALTH = 25,
     PHYSICAL_IMMUNITY = 65,
     PHYSICAL_REFLECTION = 65,
     SPELL_IMMUNITY = 65,
@@ -139,6 +141,7 @@ lib.enemyPriority = {
     STUN = 85,
     ANTI_DISPEL = 0, ------------
     ANTI_HEAL = 0,
+    ANTI_STEALTH = 0,
     CROWD_CONTROL_IMMUNITY = 80,
     PHYSICAL_IMMUNITY = 65,
     SPELL_IMMUNITY = 65,
@@ -650,6 +653,7 @@ lib.data = {
     [107570] = { STUN, effect = E_STUN }, -- Storm Bolt
     -- [184364] = DAMAGE_REDUCTION, -- Enraged Regeneration
     [197690] = DAMAGE_REDUCTION, -- Defensive Stance
+    [147833] = DAMAGE_REDUCTION2, -- Intervene
     [330279] = SPELL_REFLECTION, -- Overwatch pvp talent, spell reflect on intervene
     [213871] = DAMAGE_REDUCTION, -- Bodyguard
     [227847] = IMMUNITY, -- Bladestorm (Arms)
@@ -800,7 +804,7 @@ A( 25999,{ ROOT, effect = E_ROOT }) -- Boar Charge
 A( 22812 , DAMAGE_REDUCTION) -- Barkskin
 A( 19975,{ ROOT, effect = E_ROOT }) -- Nature's Grasp
 A({ 339, 1062, 5195, 5196, 9852, 9853 },{ ROOT, effect = E_ROOT }) -- Entangling Roots
-A({ 770, 778, 9749, 9907, 16857, 17390, 17391, 17392 }, STEALTH_DETECTION) -- Faerie Fire
+A({ 770, 778, 9749, 9907, 16857, 17390, 17391, 17392 }, ANTI_STEALTH) -- Faerie Fire
 A({ 2637, 18657, 18658 },{ CROWD_CONTROL, effect = E_INCAP }) -- Hibernate
 A( 29166, DAMAGE_INCREASE) -- Innervate
 A({ 9005, 9823, 9827 }, { STUN, effect = E_STUN }) -- Pounce Stun
