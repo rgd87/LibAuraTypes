@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 18
+local MAJOR, MINOR = "LibAuraTypes", 19
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -423,6 +423,8 @@ lib.data = {
     [31661] = { CROWD_CONTROL, effect = E_DISORIENT }, -- Dragon's Breath
     [45438] = IMMUNITY, -- Ice Block
         [41425] = TRASH, -- Hypothermia
+    [110909] = DAMAGE_REDUCTION, -- Alter Time Fire/Frost
+    [342246] = DAMAGE_REDUCTION, -- Alter Time Arcane
     [80353] = DAMAGE_INCREASE, -- Time Warp
     [82691] = { CROWD_CONTROL, effect = E_INCAP }, -- Ring of Frost
     [108839] = DAMAGE_INCREASE, -- Ice Floes
