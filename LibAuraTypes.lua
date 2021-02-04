@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 19
+local MAJOR, MINOR = "LibAuraTypes", 20
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -258,11 +258,14 @@ lib.data = {
     [330749] = DAMAGE_REDUCTION, -- Phial of Serenity (Patience, overtime soulbind trait from pelagos)
 
     -- [336126] = ATTENTTION, -- PVP trinket (Medallion)
+    [345231] = DAMAGE_REDUCTION, -- Gladiator's Emblem (+max hp)
 
     [320224] = ATTENTION, -- Podtender Night Fae soulbind ability (move in all, not druid specific)
 	[327140] = IMMUNITY, -- Forgeborn covenant necrolord (new soulbind necrolord)
 
     -- DEATH KNIGHT
+
+    [315443] = DAMAGE_INCREASE2, -- Abomination Limb
 
     [47476] = { SILENCE, effect = E_SILENCE }, -- Strangulate
     [49039] = FEAR_IMMUNITY, -- Lichborne
@@ -494,6 +497,9 @@ lib.data = {
 
     -- Priest / unchecked, no slow
 
+    [323673] = ANTI_HEAL, -- Mindgames (Venthyr), The next 450 damage and 450 healing dealt will be reversed.
+    [325013] = DAMAGE_INCREASE, --  Boon of the Ascended
+
     [34914] = { ANTI_DISPEL, effect = E_ANTIDISPEL }, -- Vampiric Touch
     [586] = DAMAGE_REDUCTION, -- Fade
         [213602] = DAMAGE_REDUCTION2, -- Greater Fade
@@ -528,7 +534,6 @@ lib.data = {
     [328530] = DAMAGE_REDUCTION, -- Divine Ascension, rise
     [329543] = DAMAGE_REDUCTION, -- Divine Ascension, fall
     [199845] = HEALING_REDUCTION, -- Psyflay from Psyfiend, 9.0 Priest pvp talent
-    [323673] = ANTI_HEAL, -- Mindgames (Venthyr), The next 450 damage and 450 healing dealt will be reversed.
 
 
     -- Rogue / good
