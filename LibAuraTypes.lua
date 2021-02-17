@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 20
+local MAJOR, MINOR = "LibAuraTypes", 22
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -255,6 +255,15 @@ lib.data = {
     [8680] = HEALING_REDUCTION, -- Wound Poison
     [197046] = HEALING_REDUCTION, -- Minor Wound Poison
 
+    [348436] = ATTENTION, -- Shadowlands Drink
+    [308429] = ATTENTION, -- Shadowlands Drink
+    [308433] = ATTENTION, -- Shadowlands Drink
+    [327786] = ATTENTION, -- Shadowlands Drink
+    [340109] = ATTENTION, -- Shadowlands Drink
+    [167152] = ATTENTION, -- Mage food
+
+    [34709] = STEALTH_DETECTION, -- Arena Shadow Sight
+
     [330749] = DAMAGE_REDUCTION, -- Phial of Serenity (Patience, overtime soulbind trait from pelagos)
 
     -- [336126] = ATTENTTION, -- PVP trinket (Medallion)
@@ -262,6 +271,10 @@ lib.data = {
 
     [320224] = ATTENTION, -- Podtender Night Fae soulbind ability (move in all, not druid specific)
 	[327140] = IMMUNITY, -- Forgeborn covenant necrolord (new soulbind necrolord)
+
+    [323524] = CROWD_CONTROL_IMMUNITY, -- Ultimate Form, Anti cc Necrolord
+
+    -- [324631] = DAMAGE_REDUCTION, -- Fleshcraft 30% DR (9.0.5)
 
     -- DEATH KNIGHT
 
@@ -299,6 +312,9 @@ lib.data = {
     [204206] = { HEAVY_SLOW, effect = E_SLOW }, -- Chill Streak, 70% mov red
     [288849] = ANTI_HEAL, -- Crypt Fever, Unholy pvp talent 8% over 4s, refreshed on heal
     [45524] = { HEAVY_SLOW, effect = E_SLOW }, -- Chains of Ice, 70% slow
+    [287254] = { STUN, effect = E_STUN }, -- Dead of Winter pvp Talent
+    [334693] = { STUN, effect = E_STUN }, -- Absolute Zero legendary
+    [207171] = { ROOT, effect = E_ROOT }, -- Winter is Coming
 
     -- Demon Hunter
 
@@ -325,7 +341,7 @@ lib.data = {
     [206803] = DAMAGE_REDUCTION, -- Rain from Above, initial jump
     [206804] = DAMAGE_REDUCTION, -- Rain from Above, slow fall
 
-    -- Druid / probably good, no slow
+    -- DRUID
 
     [99] = { CROWD_CONTROL, effect = E_INCAP }, -- Incapacitating Roar 3s
     [339] = { ROOT, effect = E_ROOT }, -- Entangling Roots
@@ -336,7 +352,7 @@ lib.data = {
     [5211] = { STUN, effect = E_STUN }, -- Mighty Bash 5s
     [5217] = DAMAGE_INCREASE, -- Tiger's Fury
     [22812] = DAMAGE_REDUCTION, -- Barkskin
-    -- [22842] = DAMAGE_REDUCTION, -- Frenzied Regeneration
+    [22842] = DAMAGE_REDUCTION, -- Frenzied Regeneration
     -- [29166] = DAMAGE_INCREASE, -- Innervate
     [33891] = DAMAGE_INCREASE, -- Incarnation: Tree of Life
     [45334] = { ROOT, effect = E_ROOT }, -- Wild Charge
@@ -346,7 +362,11 @@ lib.data = {
     [102359] = { ROOT, effect = E_ROOT }, -- Mass Entanglement
     [279642] = DAMAGE_INCREASE, -- Lively Spirit
     [102543] = DAMAGE_INCREASE, -- Incarnation: King of the Jungle
-    [102558] = DAMAGE_INCREASE, -- Incarnation: Guardian of Ursoc
+
+    [50334] = CROWD_CONTROL_IMMUNITY, -- Guardian Berserk (for Legacy of the Sleeper legendary)
+    [102558] = CROWD_CONTROL_IMMUNITY, -- Guardian Incarnation (replaces Berserk)
+    -- [102558] = DAMAGE_INCREASE, -- Incarnation: Guardian of Ursoc
+
     [102560] = DAMAGE_INCREASE, -- Incarnation: Chosen of Elune
     [106951] = DAMAGE_INCREASE, -- Berserk
     [155835] = DAMAGE_REDUCTION, -- Bristling Fur
@@ -401,6 +421,7 @@ lib.data = {
     [212638] = { ROOT, effect = E_ROOT }, -- Tracker's Net 6s root
 
     -- Mage / ok, no slow
+    [317589] = { CROWD_CONTROL, effect = E_SILENCE }, -- Tormenting Backlash Venthyr Mage root+silence
 
     [157981] = { SLOW, effect = E_SLOW }, -- Blast Wave 70% slow
     [205708] = { SLOW, effect = E_SLOW }, -- Chilled 50% frostbolt slow
@@ -442,7 +463,10 @@ lib.data = {
     [228600] = { ROOT, effect = E_ROOT }, -- Glacial Spike Root
     [198121] = { FROZEN, effect = E_ROOT }, -- Frostbite
 
-    -- Monk / good
+    -- Monk
+
+    [310454] = DAMAGE_INCREASE, -- Weapons of order
+    [152173] = DAMAGE_INCREASE2, -- Serenity
 
     [115078] = { CROWD_CONTROL, effect = E_INCAP }, -- Paralysis
     [115080] = DAMAGE_VULNERABILITY, -- Touch of Death
@@ -612,6 +636,8 @@ lib.data = {
     [204437] = { STUN, effect = E_STUN }, -- Lightning Lasso
 
     [290641] = INTERRUPT_IMMUNITY, -- Ancestral Gift
+    [191634] = DAMAGE_INCREASE2, -- Stormkeeper
+    [320125] = DAMAGE_INCREASE2, -- Echoing Shock
 
     -- Warlock
 
@@ -644,6 +670,8 @@ lib.data = {
     [200587] = HEALING_REDUCTION, -- Fel Fissue, 25% Healing reduction from CB
 
     -- Warrior
+
+    -- [324143] = ROOT_IMMUNITY, -- Conqueror's Banner 9.0.5, Warrior Necrolord ability can't slow below 100%
 
     [871] = DAMAGE_REDUCTION, -- Shield Wall
     [1719] = DAMAGE_INCREASE, -- Recklessness
