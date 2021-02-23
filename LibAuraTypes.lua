@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 22
+local MAJOR, MINOR = "LibAuraTypes", 23
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -42,6 +42,7 @@ local INTERRUPT_IMMUNITY = "INTERRUPT_IMMUNITY"
 local FEAR_IMMUNITY = "FEAR_IMMUNITY"
 local ROOT_IMMUNITY = "ROOT_IMMUNITY"
 local CROWD_CONTROL_IMMUNITY = "CROWD_CONTROL_IMMUNITY"
+local CROWD_CONTROL_REDUCTION = "CROWD_CONTROL_REDUCTION"
 local HEALING_REDUCTION = "HEALING_REDUCTION"
 local ATTENTION = "ATTENTION"
 local STEALTH_DETECTION = "STEALTH_DETECTION"
@@ -91,6 +92,7 @@ lib.friendlyPriority = {
     IMMUNITY = 90,
     STUN = 85,
     CROWD_CONTROL_IMMUNITY = 60,
+    CROWD_CONTROL_REDUCTION = 10,
     ANTI_DISPEL = 10,
     ANTI_HEAL = 10,
     ANTI_STEALTH = 25,
@@ -143,6 +145,7 @@ lib.enemyPriority = {
     ANTI_HEAL = 0,
     ANTI_STEALTH = 0,
     CROWD_CONTROL_IMMUNITY = 80,
+    CROWD_CONTROL_REDUCTION = 70,
     PHYSICAL_IMMUNITY = 65,
     SPELL_IMMUNITY = 65,
 
@@ -271,6 +274,9 @@ lib.data = {
 
     [320224] = ATTENTION, -- Podtender Night Fae soulbind ability (move in all, not druid specific)
 	[327140] = IMMUNITY, -- Forgeborn covenant necrolord (new soulbind necrolord)
+
+    [332505] = CROWD_CONTROL_REDUCTION, -- Soulsteel Clamps still (Mikanikos cc reduction Soulbind Kyrian)
+    [332506] = CROWD_CONTROL_REDUCTION, -- Soulsteel Clamps moving (Mikanikos cc reduction Soulbind Kyrian)
 
     [323524] = CROWD_CONTROL_IMMUNITY, -- Ultimate Form, Anti cc Necrolord
 
