@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 23
+local MAJOR, MINOR = "LibAuraTypes", 24
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -524,6 +524,7 @@ lib.data = {
     [215652] = DAMAGE_INCREASE, -- Shield of Virtue
     [210294] = INTERRUPT_IMMUNITY, -- Divine Favor
     [183218] = { HEAVY_SLOW, effect = E_SLOW }, -- Hand of Hindrance 70% slow
+    [199545] = ROOT_IMMUNITY, -- Protection paladin steed cc immunity
 
     -- Priest / unchecked, no slow
 
