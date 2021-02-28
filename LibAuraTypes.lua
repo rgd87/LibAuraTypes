@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 24
+local MAJOR, MINOR = "LibAuraTypes", 25
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -692,7 +692,7 @@ lib.data = {
     [236273] = DAMAGE_DECREASE, -- Duel pvp talent
     [107574] = DAMAGE_INCREASE, -- Avatar
     [118038] = DAMAGE_REDUCTION, -- Die by the Sword
-    [107570] = { STUN, effect = E_STUN }, -- Storm Bolt
+    [132169] = { STUN, effect = E_STUN }, -- Storm Bolt
     -- [184364] = DAMAGE_REDUCTION, -- Enraged Regeneration
     [197690] = DAMAGE_REDUCTION, -- Defensive Stance
     [147833] = DAMAGE_REDUCTION2, -- Intervene
