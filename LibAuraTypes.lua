@@ -9,7 +9,12 @@ local MAJOR, MINOR = "LibAuraTypes", 25
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
-local isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+local isMainline = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+
+local tocVersion = select(4,GetBuildInfo())
+local isBC = tocVersion >= 20000 and tocVersion < 30000
+
+local isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC and not isBC
 
 local CROWD_CONTROL = "CROWD_CONTROL"
 local STUN = "STUN"
@@ -249,7 +254,7 @@ end
 -----------------------
 -- LIVE
 -----------------------
-if not isClassic then
+if isMainline then
 
 lib.data = {
     -- [25163] = { ATTENTION }, -- Oozeling's Aura
@@ -936,6 +941,32 @@ A({ 16488, 16490, 16491 },  TRASH) -- Blood Craze
 A({ 12294, 21551, 21552, 21553 },  HEALING_REDUCTION) -- Mortal Strike
 A( 7922, { STUN, effect = E_STUN }) -- Charge Stun
 A( 5530, { STUN, effect = E_STUN }) -- Mace Spec. Stun (Warrior & Rogue)
+
+-----------------------
+-- BURNING CRUSADE
+-----------------------
+
+elseif isBC then
+
+-- DRUID
+A( 22812 , DAMAGE_REDUCTION) -- Barkskin
+A( 33786, { CROWD_CONTROL, effect = E_PHASED }) -- Cyclone
+A( 19975,{ ROOT, effect = E_ROOT }) -- Nature's Grasp
+A({ 339, 1062, 5195, 5196, 9852, 9853, 26989 },{ ROOT, effect = E_ROOT }) -- Entangling Roots
+A({ 770, 778, 9749, 9907, 26993,     16857, 17390, 17391, 17392, 27011 }, ANTI_STEALTH) -- Faerie Fire (normal & feral)
+A({ 2637, 18657, 18658 },{ CROWD_CONTROL, effect = E_INCAP }) -- Hibernate
+A( 29166, DAMAGE_INCREASE) -- Innervate
+A({ 9005, 9823, 9827, 27006 }, { STUN, effect = E_STUN }) -- Pounce Stun
+A( 16922, { STUN, effect = E_STUN }) -- Starfire Stun
+-- A({ 5217, 6793, 9845, 9846 },  DAMAGE_INCREASE) -- Tiger's Fury
+A({ 5211, 6798, 8983 }, { STUN, effect = E_STUN }) -- Bash
+A( 16979, { ROOT, effect = E_ROOT }) -- Feral Charge
+-- A( 2893 , TRASH) -- Abolish Poison
+A({ 1850, 9821, 33357 }, SPEED_BOOST) -- Dash
+A({ 16689, 16810, 16811, 16812, 16813, 17329, 27009 },  ATTENTION) -- Nature's Grasp Buff
+A({ 783, 1066 },  SPEED_BOOST) -- Travel Form & Aquatic Form
+A( 6795 , TAUNT) -- Growl
+A( 5209 , TAUNT) -- Challenging Roar
 
 end
 
