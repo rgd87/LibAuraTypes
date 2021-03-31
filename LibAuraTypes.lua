@@ -988,6 +988,16 @@ A({ 30108, 30404, 30405 } , { ANTI_DISPEL, effect = E_ANTIDISPEL }) -- Unstable 
 A( 17794, TRASH) -- Improved Shadowbolt
 A({ 30153, 30195, 30197 }, { STUN, effect = E_STUN }) -- Felguard Intercept Stun
 
+-- PRIEST
+A( 15487, { SILENCE, effect = E_SILENCE }) -- Silence
+A( 10060,  DAMAGE_INCREASE) -- Power Infusion
+A({ 17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901, 25217, 25218 },  DAMAGE_ABSORB) -- Power Word: Shield
+A({ 8122, 8124, 10888, 10890 }, { CROWD_CONTROL, effect = E_FEAR }) -- Psychic Scream
+A( 15269, { STUN, effect = E_STUN }) -- Blackout
+A({ 15407, 17311, 17312, 17313, 17314, 18807, 25387 }, { SLOW, effect = E_SLOW }) -- Mind Flay
+A( 15258 , TRASH) -- Shadow Vulnerability
+A({ 605, 10911, 10912 }, { CROWD_CONTROL, effect = E_PHASED }) -- Mind Control
+A({ 33196, 33197, 33198, 33199, 33200 }, TRASH) -- Misery
 
 end
 
