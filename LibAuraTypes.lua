@@ -967,6 +967,27 @@ A({ 16689, 16810, 16811, 16812, 16813, 17329, 27009 },  ATTENTION) -- Nature's G
 A({ 783, 1066 },  SPEED_BOOST) -- Travel Form & Aquatic Form
 A( 6795 , TAUNT) -- Growl
 A( 5209 , TAUNT) -- Challenging Roar
+A({ 33878, 33986, 33987,    33876, 33982, 33983 }, TRASH) -- Mangle (Bear & Cat)
+
+
+-- WARLOCK
+
+A( 24259 , SILENCE) -- Spell Lock Silence
+A( 6358, { CROWD_CONTROL, effect = E_DISORIENT }) -- Seduction
+A({ 5782, 6213, 6215 }, { CROWD_CONTROL, effect = E_FEAR }) -- Fear
+A({ 5484, 17928 }, { CROWD_CONTROL, effect = E_FEAR }) -- Howl of Terror
+A({ 710, 18647 }, { CROWD_CONTROL, effect = E_PHASED }) -- Banish
+A({ 6789, 17925, 17926, 27223 }, { CROWD_CONTROL, effect = E_DISORIENT }) -- Death Coil
+A( 18223 , { SLOW, effect = E_SLOW }) -- Curse of Exhaustion
+A( 18118 , { SLOW, effect = E_SLOW }) -- Aftermath (Destruction Talent)
+A({ 1714, 11719 },  DAMAGE_DECREASE) -- Curse of Tongues
+A({ 6229, 11739, 11740, 28610 } , DAMAGE_ABSORB) -- Shadow Ward
+A({ 7812, 19438, 19440, 19441, 19442, 19443, 27273 } , DAMAGE_ABSORB) -- Sacrifice
+A( 18093 , { STUN, effect = E_STUN }) -- Pyroclasm
+A({ 30108, 30404, 30405 } , { ANTI_DISPEL, effect = E_ANTIDISPEL }) -- Unstable Affliction
+A( 17794, TRASH) -- Improved Shadowbolt
+A({ 30153, 30195, 30197 }, { STUN, effect = E_STUN }) -- Felguard Intercept Stun
+
 
 end
 
