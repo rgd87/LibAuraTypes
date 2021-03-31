@@ -914,7 +914,7 @@ A( 2094 , { CROWD_CONTROL, effect = E_DISORIENT }) -- Blind
 A({ 2983, 8696, 11305 },  SPEED_BOOST) -- Sprint
 A( 5277 , DAMAGE_REDUCTION) -- Evasion
 A({ 1776, 1777, 8629, 11285, 11286 }, { INCAP, effect = E_INCAP }) -- Gouge
-A({ 3409, 11201 }, { ROOT, effect = E_ROOT }) -- Crippling Poison NOTE: it's a slow but we prio it as root because its 70% and better than all other slows
+A({ 3409, 11201 }, { HEAVY_SLOW, effect = E_SLOW })
 A( 14251 , DAMAGE_DECREASE) -- Riposte (Disarm)
 A( 14278 , DAMAGE_REDUCTION) -- Ghostly Strike
 
@@ -998,6 +998,25 @@ A({ 15407, 17311, 17312, 17313, 17314, 18807, 25387 }, { SLOW, effect = E_SLOW }
 A( 15258 , TRASH) -- Shadow Vulnerability
 A({ 605, 10911, 10912 }, { CROWD_CONTROL, effect = E_PHASED }) -- Mind Control
 A({ 33196, 33197, 33198, 33199, 33200 }, TRASH) -- Misery
+
+-- ROGUE
+A( 18425, { SILENCE, effect = E_SILENCE }) -- Improved Kick
+A( 13750 , DAMAGE_INCREASE2) -- Adrenaline Rush
+A( 13877 , DAMAGE_INCREASE) -- Blade Flurry
+A( 1833, { STUN, effect = E_STUN }) -- Cheap Shot
+A({ 408, 8643 }, { STUN, effect = E_STUN }) -- Kidney Shot
+A({ 2070, 6770, 11297 }, { INCAP, effect = E_INCAP }) -- Sap
+A( 2094 , { CROWD_CONTROL, effect = E_DISORIENT }) -- Blind
+-- A({ 8647, 8649, 8650, 11197, 11198, 26866 },  DAMAGE_VULNERABILITY) -- Expose Armor
+A({ 2983, 8696, 11305 },  SPEED_BOOST) -- Sprint
+A({ 5277, 26669 }, DAMAGE_REDUCTION2) -- Evasion
+A({ 1776, 1777, 8629, 11285, 11286, 38764 }, { INCAP, effect = E_INCAP }) -- Gouge
+A({ 3409, 11201 }, { HEAVY_SLOW, effect = E_SLOW })
+A( 14251 , DAMAGE_DECREASE) -- Riposte (Disarm)
+A( 14278 , DAMAGE_REDUCTION) -- Ghostly Strike
+A( 1330 , { SILENCE, effect = E_SILENCE }) -- Garrote Silence
+A({ 31234, 31235, 31236, 31237, 31238 }, TRASH) -- Find Weakness
+
 
 end
 
