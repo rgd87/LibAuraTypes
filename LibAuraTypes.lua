@@ -1044,6 +1044,29 @@ A( 7922, { STUN, effect = E_STUN }) -- Charge Stun
 A( 5530, { STUN, effect = E_STUN }) -- Mace Spec. Stun (Warrior & Rogue)
 A({ 30069, 30070 },  TRASH) -- Blood Frenzy
 
+-- HUNTER
+A( 13159 , SPEED_BOOST) -- Aspect of the Pack
+A( 5118 , SPEED_BOOST) -- Aspect of the Cheetah
+A( 15571, { SLOW, effect = E_SLOW }) -- Daze from Aspect of Cheetah/Pack
+A({ 1513, 14326, 14327 }, { CROWD_CONTROL, effect = E_FEAR }) -- Scare Beast
+A( 5116 ,{ SLOW, effect = E_SLOW }) -- Concussive Shot
+A( 19410,{ STUN, effect = E_STUN }) -- Concussive Shot Stun
+A({ 1130, 14323, 14324, 14325 },  DAMAGE_VULNERABILITY) -- Hunter's Mark
+A( 3045 , DAMAGE_INCREASE) -- Rapid Fire
+-- A( 19574 , DAMAGE_INCREASE) -- Bestial Wrath
+A( 19263 , DAMAGE_REDUCTION) -- Deterrence
+A( 13810,{ SLOW, effect = E_SLOW }) -- Frost Trap Aura
+A({ 3355, 14308, 14309 }, { CROWD_CONTROL, effect = E_INCAP }) -- Freezing Trap
+A({ 2974, 14267, 14268 }, { SLOW, effect = E_SLOW }) -- Wing Clip
+A( 19229, { ROOT, effect = E_ROOT }) -- Wing Clip Root
+A({ 19306, 20909, 20910 },{ ROOT, effect = E_ROOT }) -- Counterattack Root
+A( 24394,{ STUN, effect = E_STUN }) -- Intimidation
+A({ 19386, 24132, 24133 }, { CROWD_CONTROL, effect = E_INCAP }) --Wyvern Sting
+A( 19185,{ ROOT, effect = E_ROOT }) -- Entrapment
+-- A({ 3034, 14279, 14280},  TRASH) -- Viper Sting
+A( 19503,{ CROWD_CONTROL, effect = E_DISORIENT }) -- Scatter Shot
+A( 25999,{ ROOT, effect = E_ROOT }) -- Boar Charge
+A( 34490,{ SILENCE, effect = E_SILENCE }) -- Silencing Shot
 
 end
 
