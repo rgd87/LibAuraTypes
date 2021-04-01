@@ -948,6 +948,9 @@ A( 5530, { STUN, effect = E_STUN }) -- Mace Spec. Stun (Warrior & Rogue)
 
 elseif isBC then
 
+lib.data = {}
+data = lib.data
+
 -- DRUID
 A( 22812 , DAMAGE_REDUCTION) -- Barkskin
 A( 33786, { CROWD_CONTROL, effect = E_PHASED }) -- Cyclone
@@ -1040,7 +1043,6 @@ A({ 12294, 21551, 21552, 21553, 25248, 30330 },  HEALING_REDUCTION) -- Mortal St
 A( 7922, { STUN, effect = E_STUN }) -- Charge Stun
 A( 5530, { STUN, effect = E_STUN }) -- Mace Spec. Stun (Warrior & Rogue)
 A({ 30069, 30070 },  TRASH) -- Blood Frenzy
-
 
 
 end
