@@ -1017,6 +1017,31 @@ A( 14278 , DAMAGE_REDUCTION) -- Ghostly Strike
 A( 1330 , { SILENCE, effect = E_SILENCE }) -- Garrote Silence
 A({ 31234, 31235, 31236, 31237, 31238 }, TRASH) -- Find Weakness
 
+-- WARRIOR
+A( 355 , TAUNT) -- Taunt
+A( 1161 , TAUNT) -- Challenging Shout
+A( 18498, { SILENCE, effect = E_SILENCE }) -- Improved Shield Bash
+A( 20230 , PHYSICAL_IMMUNITY) -- Retaliation
+A( 1719 , { DAMAGE_INCREASE2, FEAR_IMMUNITY }) -- Recklessness, Fear immunity, Damage Vuln
+A( 871,  DAMAGE_REDUCTION2) -- Shield Wall
+A( 12328, { DAMAGE_INCREASE, FEAR_IMMUNITY }) -- Death Wish, Fear immunity
+A({ 1715, 7372, 7373, 25212 }, { SLOW, effect = E_SLOW }) -- Hamstring
+A( 23694, { ROOT, effect = E_ROOT }) -- Improved Hamstring
+A( 12323, { SLOW, effect = E_SLOW }) -- Piercing Howl
+-- Thunder Clap?
+A( 18499,  EFFECT_IMMUNITY) -- Berserker Rage, (Fear/Incap)
+A({ 20253, 20614, 20615, 25273, 25274 }, { STUN, effect = E_STUN }) -- Intercept Stun
+A({ 5246, 20511 }, { CROWD_CONTROL, effect = E_FEAR }) -- Intimidating Shout
+A( 676, { DAMAGE_DECREASE, effect = E_DISARM }) -- Disarm
+A( 12798, { STUN, effect = E_STUN }) -- Revenge Stun
+A( 12809, { STUN, effect = E_STUN }) -- Concussion Blow
+A({ 16488, 16490, 16491 },  TRASH) -- Blood Craze
+A({ 12294, 21551, 21552, 21553, 25248, 30330 },  HEALING_REDUCTION) -- Mortal Strike
+A( 7922, { STUN, effect = E_STUN }) -- Charge Stun
+A( 5530, { STUN, effect = E_STUN }) -- Mace Spec. Stun (Warrior & Rogue)
+A({ 30069, 30070 },  TRASH) -- Blood Frenzy
+
+
 
 end
 
