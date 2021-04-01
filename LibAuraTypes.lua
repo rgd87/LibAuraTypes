@@ -948,6 +948,10 @@ A( 5530, { STUN, effect = E_STUN }) -- Mace Spec. Stun (Warrior & Rogue)
 
 elseif isBC then
 
+
+lib.data = {}
+data = lib.data
+
 -- DRUID
 A( 22812 , DAMAGE_REDUCTION) -- Barkskin
 A( 33786, { CROWD_CONTROL, effect = E_PHASED }) -- Cyclone
