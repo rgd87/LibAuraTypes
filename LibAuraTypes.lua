@@ -1068,6 +1068,45 @@ A( 19503,{ CROWD_CONTROL, effect = E_DISORIENT }) -- Scatter Shot
 A( 25999,{ ROOT, effect = E_ROOT }) -- Boar Charge
 A( 34490,{ SILENCE, effect = E_SILENCE }) -- Silencing Shot
 
+-- MAGE
+A( 18469, { SILENCE, effect = E_SILENCE }) -- Improved Counterspell
+A({ 118, 12824, 12825, 12826, 28270, 28271, 28272 }, { CROWD_CONTROL, effect = E_INCAP }) -- Polymorph
+A({ 11426, 13031, 13032, 13033 },  DAMAGE_ABSORB) -- Ice Barrier
+A({ 543, 8457, 8458, 10223, 10225 },  DAMAGE_ABSORB) -- Fire Ward
+A({ 6143, 8461, 8462, 10177, 28609 },  DAMAGE_ABSORB) -- Frost Ward
+A( 12355, { STUN, effect = E_STUN }) -- Impact
+A( 22959 , TRASH) -- Fire Vulnerability
+A({ 11113, 13018, 13019, 13020, 13021 }, { SLOW, effect = E_SLOW }) -- Blast Wave
+A({ 120, 8492, 10159, 10160, 10161 }, { SLOW, effect = E_SLOW }) -- Cone of Cold
+A({ 12484, 12485, 12486 }, { SLOW, effect = E_SLOW }) -- Improved Blizzard
+A({ 6136, 7321 }, { SLOW, effect = E_SLOW }) -- Frost Armor Chill
+A({ 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304 }, { SLOW, effect = E_SLOW }) -- Frostbolt
+A( 12494, { FROZEN, effect = E_ROOT }) -- Frostbite
+A({ 122, 865, 6131, 10230 }, { FROZEN, effect = E_ROOT }) -- Frost Nova
+A( 12042 , DAMAGE_INCREASE2) -- Arcane Power
+A( 11958 , IMMUNITY) -- Ice Block
+A( 12579 , TRASH) -- Winter's Chill
+A({ 133, 143, 145, 3140, 8400, 8401, 8402, 10148, 10149, 10150, 10151, 25306 },  TRASH) -- Fireball dot
+A({ 11366, 12505, 12522, 12523, 12524, 12525, 12526, 18809 },  TRASH) -- Pyroblast dot
+A( 12051 , ATTENTION) -- Evocation
+A({ 1463, 8494, 8495, 10191, 10192, 10193 },  DAMAGE_ABSORB) -- Mana Shield
+
+-- SHAMAN
+A({ 8056, 8058, 10472, 10473 }, { SLOW, effect = E_SLOW }) -- Frost Shock
+A( 3600 , { SLOW, effect = E_SLOW }) -- Earthbind
+A({ 8034, 8037, 10458, 16352, 16353  }, { SLOW, effect = E_SLOW }) -- Frostbrand Attack
+-- Lightning shield??
+A( 8178 , SPELL_IMMUNITY) -- Grounding Totem Effect
+-- A( 2645 , SPEED_BOOST) -- Ghost Wolf
+
+-- PALADIN
+A({ 1022, 5599, 10278 },  PHYSICAL_IMMUNITY) -- Blessing of Protection
+A({ 498, 5573, 642, 1020 },  IMMUNITY) -- Divine Shield
+A({ 853, 5588, 5589, 10308 }, { STUN, effect = E_STUN }) -- Hammer of Justice
+A( 1044 , SPEED_BOOST) -- Blessing of Freedom
+A( 20066 , { INCAP, effect = E_INCAP }) -- Repentance
+A( 20170 , { STUN, effect = E_STUN }) -- Seal of Justice stun
+
 end
 
 
