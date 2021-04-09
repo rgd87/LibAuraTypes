@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 28
+local MAJOR, MINOR = "LibAuraTypes", 29
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -1111,8 +1111,10 @@ A({ 1022, 5599, 10278 },  PHYSICAL_IMMUNITY) -- Blessing of Protection
 A({ 498, 5573, 642, 1020 },  IMMUNITY) -- Divine Shield
 A({ 853, 5588, 5589, 10308 }, { STUN, effect = E_STUN }) -- Hammer of Justice
 A( 1044 , SPEED_BOOST) -- Blessing of Freedom
+A( 31842 , DAMAGE_INCREASE) -- Divine Illumination
+A( 31884 , DAMAGE_INCREASE2) -- Avenging Wrath
 A( 20066 , { INCAP, effect = E_INCAP }) -- Repentance
-A( 20170 , { STUN, effect = E_STUN }) -- Seal of Justice stun
+A( 20170 , { STUN, effect = E_STUN }) -- Seal of Justice stun (from both ranks)
 
 end
 
