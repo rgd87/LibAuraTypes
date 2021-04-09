@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 27
+local MAJOR, MINOR = "LibAuraTypes", 28
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -811,6 +811,7 @@ A({ 8034, 8037, 10458, 16352, 16353  }, { SLOW, effect = E_SLOW }) -- Frostbrand
 -- Lightning shield??
 A( 8178 , SPELL_IMMUNITY) -- Grounding Totem Effect
 -- A( 2645 , SPEED_BOOST) -- Ghost Wolf
+A( 16166, DAMAGE_INCREASE2) -- Elemental Mastery
 
 -- PALADIN
 
@@ -1096,12 +1097,14 @@ A( 12051 , ATTENTION) -- Evocation
 A({ 1463, 8494, 8495, 10191, 10192, 10193, 27131 },  DAMAGE_ABSORB) -- Mana Shield
 
 -- SHAMAN
-A({ 8056, 8058, 10472, 10473 }, { SLOW, effect = E_SLOW }) -- Frost Shock
+A({ 8056, 8058, 10472, 10473, 25464 }, { SLOW, effect = E_SLOW }) -- Frost Shock
 A( 3600 , { SLOW, effect = E_SLOW }) -- Earthbind
-A({ 8034, 8037, 10458, 16352, 16353  }, { SLOW, effect = E_SLOW }) -- Frostbrand Attack
+A({ 8034, 8037, 10458, 16352, 16353, 25501  }, { SLOW, effect = E_SLOW }) -- Frostbrand Attack
 -- Lightning shield??
 A( 8178 , SPELL_IMMUNITY) -- Grounding Totem Effect
 -- A( 2645 , SPEED_BOOST) -- Ghost Wolf
+A( 16166, DAMAGE_INCREASE2) -- Elemental Mastery
+A( 30823, DAMAGE_REDUCTION2) -- Shamanistic Rage 30% DR
 
 -- PALADIN
 A({ 1022, 5599, 10278 },  PHYSICAL_IMMUNITY) -- Blessing of Protection
