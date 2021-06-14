@@ -1017,6 +1017,7 @@ A({ 2983, 8696, 11305 },  SPEED_BOOST) -- Sprint
 A({ 5277, 26669 }, DAMAGE_REDUCTION2) -- Evasion
 A({ 1776, 1777, 8629, 11285, 11286, 38764 }, { INCAP, effect = E_INCAP }) -- Gouge
 A({ 3409, 11201 }, { HEAVY_SLOW, effect = E_SLOW })
+A( 31224 , SPELL_IMMUNITY) -- Cloak of Shadows
 A( 14251 , DAMAGE_DECREASE) -- Riposte (Disarm)
 A( 14278 , DAMAGE_REDUCTION) -- Ghostly Strike
 A( 1330 , { SILENCE, effect = E_SILENCE }) -- Garrote Silence
