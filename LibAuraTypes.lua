@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 30
+local MAJOR, MINOR = "LibAuraTypes", 31
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -1056,7 +1056,8 @@ A( 5116 ,{ SLOW, effect = E_SLOW }) -- Concussive Shot
 A( 19410,{ STUN, effect = E_STUN }) -- Concussive Shot Stun
 A({ 1130, 14323, 14324, 14325 },  DAMAGE_VULNERABILITY) -- Hunter's Mark
 A( 3045 , DAMAGE_INCREASE) -- Rapid Fire
-A( 19574 , { FEAR_IMMUNITY, DAMAGE_INCREASE2 }) -- Bestial Wrath
+A( 19574 , { FEAR_IMMUNITY, DAMAGE_INCREASE2 }) -- Beastial Wrath
+A( 34471 , { FEAR_IMMUNITY, DAMAGE_INCREASE }) -- Beast Within
 A( 19263 , DAMAGE_REDUCTION) -- Deterrence
 A( 13810,{ SLOW, effect = E_SLOW }) -- Frost Trap Aura
 A({ 3355, 14308, 14309 }, { CROWD_CONTROL, effect = E_INCAP }) -- Freezing Trap
