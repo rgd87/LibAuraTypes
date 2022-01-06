@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 31
+local MAJOR, MINOR = "LibAuraTypes", 32
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -960,6 +960,7 @@ A( 19975,{ ROOT, effect = E_ROOT }) -- Nature's Grasp
 A({ 339, 1062, 5195, 5196, 9852, 9853, 26989 },{ ROOT, effect = E_ROOT }) -- Entangling Roots
 A({ 770, 778, 9749, 9907, 26993,     16857, 17390, 17391, 17392, 27011 }, ANTI_STEALTH) -- Faerie Fire (normal & feral)
 A({ 2637, 18657, 18658 },{ CROWD_CONTROL, effect = E_INCAP }) -- Hibernate
+A( 22570,{ CROWD_CONTROL, effect = E_INCAP }) -- Maim
 A( 29166, DAMAGE_INCREASE) -- Innervate
 A({ 9005, 9823, 9827, 27006 }, { STUN, effect = E_STUN }) -- Pounce Stun
 A( 16922, { STUN, effect = E_STUN }) -- Starfire Stun
