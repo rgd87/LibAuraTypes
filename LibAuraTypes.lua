@@ -205,6 +205,7 @@ elseif playerClass == "DRUID" then
     friendlyPriority[HEALING_REDUCTION] = 28
     friendlyPriority[ANTI_DISPEL] = 70
     friendlyPriority[ANTI_HEAL] = 70
+    enemyPriority[ROOT] = 55
 elseif playerClass == "PRIEST" then
     enemyPriority[FEAR_IMMUNITY] = 80
     friendlyPriority[HEALING_REDUCTION] = 28
