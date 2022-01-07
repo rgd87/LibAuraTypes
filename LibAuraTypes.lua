@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 32
+local MAJOR, MINOR = "LibAuraTypes", 33
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -859,7 +859,7 @@ A({ 9005, 9823, 9827 }, { STUN, effect = E_STUN }) -- Pounce Stun
 A( 16922, { STUN, effect = E_STUN }) -- Starfire Stun
 -- A({ 5217, 6793, 9845, 9846 },  DAMAGE_INCREASE) -- Tiger's Fury
 A({ 5211, 6798, 8983 }, { STUN, effect = E_STUN }) -- Bash
-A( 16979, { ROOT, effect = E_ROOT }) -- Feral Charge
+A({ 19675, 16979 }, { ROOT, effect = E_ROOT }) -- Feral Charge
 -- A( 2893 , TRASH) -- Abolish Poison
 A({ 1850, 9821 }, SPEED_BOOST) -- Dash
 A({ 16689, 16810, 16811, 16812, 16813, 17329},  ATTENTION) -- Nature's Grasp Buff
@@ -966,7 +966,7 @@ A({ 9005, 9823, 9827, 27006 }, { STUN, effect = E_STUN }) -- Pounce Stun
 A( 16922, { STUN, effect = E_STUN }) -- Starfire Stun
 -- A({ 5217, 6793, 9845, 9846 },  DAMAGE_INCREASE) -- Tiger's Fury
 A({ 5211, 6798, 8983 }, { STUN, effect = E_STUN }) -- Bash
-A( 16979, { ROOT, effect = E_ROOT }) -- Feral Charge
+A({ 45334, 19675, 16979 } , { ROOT, effect = E_ROOT }) -- Feral Charge
 -- A( 2893 , TRASH) -- Abolish Poison
 A({ 1850, 9821, 33357 }, SPEED_BOOST) -- Dash
 A({ 16689, 16810, 16811, 16812, 16813, 17329, 27009 },  ATTENTION) -- Nature's Grasp Buff
@@ -993,6 +993,7 @@ A( 18093 , { STUN, effect = E_STUN }) -- Pyroclasm
 A({ 30108, 30404, 30405 } , { ANTI_DISPEL, effect = E_ANTIDISPEL }) -- Unstable Affliction
 A( 17794, TRASH) -- Improved Shadowbolt
 A({ 30153, 30195, 30197 }, { STUN, effect = E_STUN }) -- Felguard Intercept Stun
+A({ 30414, 30283, 30413 }, { STUN, effect = E_STUN }) -- Shadowfury
 
 -- PRIEST
 A( 15487, { SILENCE, effect = E_SILENCE }) -- Silence
@@ -1098,6 +1099,7 @@ A({ 11366, 12505, 12522, 12523, 12524, 12525, 12526, 18809, 27132, 33938 },  TRA
 A({ 2120, 2121, 8422, 8423, 10215, 10216, 27086 },  TRASH) -- Flamestrike dot
 A( 12051 , ATTENTION) -- Evocation
 A({ 1463, 8494, 8495, 10191, 10192, 10193, 27131 },  DAMAGE_ABSORB) -- Mana Shield
+A({ 31661, 33041, 33042, 33043 }, { CROWD_CONTROL, effect = E_DISORIENT }) -- Dragon's Breath
 
 -- SHAMAN
 A({ 8056, 8058, 10472, 10473, 25464 }, { SLOW, effect = E_SLOW }) -- Frost Shock
@@ -1119,6 +1121,15 @@ A( 31884 , DAMAGE_INCREASE2) -- Avenging Wrath
 A( 20066 , { INCAP, effect = E_INCAP }) -- Repentance
 A( 20170 , { STUN, effect = E_STUN }) -- Seal of Justice stun (from both ranks)
 
+-- Racials
+A( 23230 , HEALING_REDUCTION) -- Blood Fury Debuff
+A( 20594 , EFFECT_IMMUNITY) -- Stoneform, Immune to Bleed, Poison, and Disease.
+A( 20549 , { STUN, effect = E_STUN }) -- War Stomp
+A( 7744 , EFFECT_IMMUNITY) -- Will of the Forsaken, Immune to Charm, Fear, and Sleep.
+A({ 9035, 19281, 19282, 19283, 19284, 19285 },  HEALING_REDUCTION) -- Hex of Weakness
+A( 20600 , STEALTH_DETECTION) -- Perception
+A( 28730 , SILENCE) -- Arcane Torrent
+A({ 44047, 44041, 44043, 44044, 44045, 44046 }, ROOT) -- Chastise
 end
 
 
