@@ -277,6 +277,7 @@ lib.data = {
 
     -- [336126] = ATTENTTION, -- PVP trinket (Medallion)
     [345231] = DAMAGE_REDUCTION, -- Gladiator's Emblem (+max hp)
+    [362699] = CROWD_CONTROL_IMMUNITY, -- Gladiator's Resolve (PvP Trinket)
 
     [320224] = ATTENTION, -- Podtender Night Fae soulbind ability (move in all, not druid specific)
 	[327140] = IMMUNITY, -- Forgeborn covenant necrolord (new soulbind necrolord)
