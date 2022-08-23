@@ -1261,6 +1261,7 @@ elseif isWrath then
     A( 50461, DAMAGE_DECREASE) -- Anti-Magic Zone
 
     -- HUNTER
+    -- A( 62305 , CROWD_CONTROL_IMMUNITY) -- Master's Call
     A( 13159 , SPEED_BOOST) -- Aspect of the Pack
     A( 5118 , SPEED_BOOST) -- Aspect of the Cheetah
     A( 15571, { SLOW, effect = E_SLOW }) -- Daze from Aspect of Cheetah/Pack
@@ -1272,11 +1273,12 @@ elseif isWrath then
     A( 19574 , { FEAR_IMMUNITY, DAMAGE_INCREASE2 }) -- Beastial Wrath
     A( 34471 , { FEAR_IMMUNITY, DAMAGE_INCREASE }) -- Beast Within
     A( 19263 , DAMAGE_REDUCTION) -- Deterrence
+    A( 34501, TRASH) -- Expose Weakness
     A( 13810,{ SLOW, effect = E_SLOW }) -- Frost Trap Aura
     A({ 3355, 14308, 14309 }, { CROWD_CONTROL, effect = E_INCAP }) -- Freezing Trap
-    A({ 2974, 14267, 14268 }, { SLOW, effect = E_SLOW }) -- Wing Clip
+    A( 2974, { SLOW, effect = E_SLOW }) -- Wing Clip
     A( 19229, { ROOT, effect = E_ROOT }) -- Wing Clip Root
-    A({ 19306, 20909, 20910 },{ ROOT, effect = E_ROOT }) -- Counterattack Root
+    A({ 19306, 20909, 20910, 27067, 48998, 48999 },{ ROOT, effect = E_ROOT }) -- Counterattack Root
     A( 24394,{ STUN, effect = E_STUN }) -- Intimidation
     A({ 19386, 24132, 24133 }, { CROWD_CONTROL, effect = E_INCAP }) --Wyvern Sting
     A( 19185,{ ROOT, effect = E_ROOT }) -- Entrapment
