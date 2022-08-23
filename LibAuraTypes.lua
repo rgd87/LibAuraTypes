@@ -1216,13 +1216,16 @@ elseif isWrath then
     -- A({ 8647, 8649, 8650, 11197, 11198, 26866 },  DAMAGE_VULNERABILITY) -- Expose Armor
     A({ 2983, 8696, 11305 },  SPEED_BOOST) -- Sprint
     A({ 5277, 26669 }, DAMAGE_REDUCTION2) -- Evasion
-    A({ 1776, 1777, 8629, 11285, 11286, 38764 }, { INCAP, effect = E_INCAP }) -- Gouge
-    A({ 3409, 11201 }, { HEAVY_SLOW, effect = E_SLOW })
+    A( 1776, { INCAP, effect = E_INCAP }) -- Gouge
+    A( 3409, { HEAVY_SLOW, effect = E_SLOW })
     A( 31224 , SPELL_IMMUNITY) -- Cloak of Shadows
     A( 14251 , DAMAGE_DECREASE) -- Riposte (Disarm)
     A( 14278 , DAMAGE_REDUCTION) -- Ghostly Strike
     A( 1330 , { SILENCE, effect = E_SILENCE }) -- Garrote Silence
-    A({ 31234, 31235, 31236, 31237, 31238 }, TRASH) -- Find Weakness
+    A({ 31234, 31235, 31236 }, TRASH) -- Find Weakness
+    A( 45182, DAMAGE_REDUCTION2) -- Cheating Death
+    A( 51713, DAMAGE_INCREASE2) -- Shadow Dance
+    A( 51722, DAMAGE_DECREASE) -- Dismantle
 
     -- WARRIOR
     A( 355 , TAUNT) -- Taunt
@@ -1232,21 +1235,30 @@ elseif isWrath then
     A( 1719 , { DAMAGE_INCREASE2, FEAR_IMMUNITY }) -- Recklessness, Fear immunity, Damage Vuln
     A( 871,  DAMAGE_REDUCTION2) -- Shield Wall
     A( 12292, { DAMAGE_INCREASE, FEAR_IMMUNITY }) -- Death Wish, Fear immunity
-    A({ 1715, 7372, 7373, 25212 }, { SLOW, effect = E_SLOW }) -- Hamstring
+    A( 1715, { SLOW, effect = E_SLOW }) -- Hamstring
     A( 23694, { ROOT, effect = E_ROOT }) -- Improved Hamstring
     A( 12323, { SLOW, effect = E_SLOW }) -- Piercing Howl
+    A( 46924, { CROWD_CONTROL_IMMUNITY, DAMAGE_INCREASE }) -- Bladestorm
     -- Thunder Clap?
     A( 18499, { EFFECT_IMMUNITY, FEAR_IMMUNITY }) -- Berserker Rage, (Fear/Incap)
     A({ 20253, 20614, 20615, 25273, 25274 }, { STUN, effect = E_STUN }) -- Intercept Stun
     A({ 5246, 20511 }, { CROWD_CONTROL, effect = E_FEAR }) -- Intimidating Shout
     A( 676, { DAMAGE_DECREASE, effect = E_DISARM }) -- Disarm
-    A( 12798, { STUN, effect = E_STUN }) -- Revenge Stun
     A( 12809, { STUN, effect = E_STUN }) -- Concussion Blow
     A({ 16488, 16490, 16491 },  TRASH) -- Blood Craze
-    A({ 12294, 21551, 21552, 21553, 25248, 30330 },  HEALING_REDUCTION) -- Mortal Strike
+    A({ 12294, 21551, 21552, 21553, 25248, 30330, 47485, 47486 },  HEALING_REDUCTION) -- Mortal Strike
     A( 7922, { STUN, effect = E_STUN }) -- Charge Stun
-    A( 5530, { STUN, effect = E_STUN }) -- Mace Spec. Stun (Warrior & Rogue)
     A({ 30069, 30070 },  TRASH) -- Blood Frenzy
+    A(46968, { STUN, effect = E_STUN })
+
+    -- DEATHKNIGHT
+    A( 47805, { SLOW, effect = E_SLOW }) -- Chains of Ice
+    A( 55233, DAMAGE_DECREASE) -- Vampiric Blood
+    A( 48792, DAMAGE_DECREASE2) -- Icebound Fortitude
+    A( 47476, { STUN, effect = E_STUN }) -- Strangulate
+    A( 49005, DAMAGE_DECREASE) -- Mark of Blood
+    A( 48707, DAMAGE_DECREASE) -- Anti-Magic Shell
+    A( 50461, DAMAGE_DECREASE) -- Anti-Magic Zone
 
     -- HUNTER
     A( 13159 , SPEED_BOOST) -- Aspect of the Pack
@@ -1302,6 +1314,7 @@ elseif isWrath then
     A( 54748 , INTERRUPT_IMMUNITY) -- Burning Determination
     A( 31643 , SPEED_BOOST) -- Blazing Speed
     A( 12472 , DAMAGE_INCREASE2) -- Icy Veins
+    A( 44572, { STUN, effect = E_STUN }) -- Deep Freeze
 
     -- SHAMAN
     A({ 8056, 8058, 10472, 10473, 25464, 49235, 49236 }, { SLOW, effect = E_SLOW }) -- Frost Shock
