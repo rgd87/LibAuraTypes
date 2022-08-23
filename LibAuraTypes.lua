@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 33
+local MAJOR, MINOR = "LibAuraTypes", 35
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -14,7 +14,7 @@ local isMainline = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 local tocVersion = select(4,GetBuildInfo())
 local isBC = tocVersion >= 20000 and tocVersion < 30000
 local isWrath = tocVersion >= 30000
-local isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC and not isBC
+local isClassic = tocVersion < 20000
 
 local CROWD_CONTROL = "CROWD_CONTROL"
 local STUN = "STUN"
