@@ -1178,28 +1178,32 @@ elseif isWrath then
     A({ 5782, 6213, 6215 }, { CROWD_CONTROL, effect = E_FEAR }) -- Fear
     A({ 5484, 17928 }, { CROWD_CONTROL, effect = E_FEAR }) -- Howl of Terror
     A({ 710, 18647 }, { CROWD_CONTROL, effect = E_PHASED }) -- Banish
-    A({ 6789, 17925, 17926, 27223 }, { CROWD_CONTROL, effect = E_DISORIENT }) -- Death Coil
+    A({ 6789, 17925, 17926, 27223, 47859, 47860 }, { CROWD_CONTROL, effect = E_DISORIENT }) -- Death Coil
     A( 18223 , { SLOW, effect = E_SLOW }) -- Curse of Exhaustion
     A( 18118 , { SLOW, effect = E_SLOW }) -- Aftermath (Destruction Talent)
     A({ 1714, 11719 },  DAMAGE_DECREASE) -- Curse of Tongues
-    A({ 6229, 11739, 11740, 28610 } , DAMAGE_ABSORB) -- Shadow Ward
-    A({ 7812, 19438, 19440, 19441, 19442, 19443, 27273 } , DAMAGE_ABSORB) -- Sacrifice
+    A({ 6229, 11739, 11740, 28610, 47890, 47891 } , DAMAGE_ABSORB) -- Shadow Ward
+    A({ 7812, 19438, 19440, 19441, 19442, 19443, 27273, 47985, 47986 } , DAMAGE_ABSORB) -- Sacrifice
     A( 18093 , { STUN, effect = E_STUN }) -- Pyroclasm
-    A({ 30108, 30404, 30405 } , { ANTI_DISPEL, effect = E_ANTIDISPEL }) -- Unstable Affliction
+    A({ 30108, 30404, 30405, 47841, 47843 } , { ANTI_DISPEL, effect = E_ANTIDISPEL }) -- Unstable Affliction
     A( 17794, TRASH) -- Improved Shadowbolt
     A({ 30153, 30195, 30197 }, { STUN, effect = E_STUN }) -- Felguard Intercept Stun
-    A({ 30414, 30283, 30413 }, { STUN, effect = E_STUN }) -- Shadowfury
+    A({ 30414, 30283, 30413, 47846, 47847 }, { STUN, effect = E_STUN }) -- Shadowfury
+    A( 47241, DAMAGE_INCREASE2) -- Metamorphosis
+
 
     -- PRIEST
     A( 15487, { SILENCE, effect = E_SILENCE }) -- Silence
     A( 10060,  DAMAGE_INCREASE) -- Power Infusion
-    A({ 17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901, 25217, 25218 },  DAMAGE_ABSORB) -- Power Word: Shield
+    A({ 17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901, 25217, 25218, 48065, 48066 },  DAMAGE_ABSORB) -- Power Word: Shield
     A({ 8122, 8124, 10888, 10890 }, { CROWD_CONTROL, effect = E_FEAR }) -- Psychic Scream
-    A( 15269, { STUN, effect = E_STUN }) -- Blackout
     A({ 15407, 17311, 17312, 17313, 17314, 18807, 25387 }, { SLOW, effect = E_SLOW }) -- Mind Flay
     A( 15258 , TRASH) -- Shadow Vulnerability
     A({ 605, 10911, 10912 }, { CROWD_CONTROL, effect = E_PHASED }) -- Mind Control
-    A({ 33196, 33197, 33198, 33199, 33200 }, TRASH) -- Misery
+    A({ 33196, 33197, 33198 }, TRASH) -- Misery
+    A( 47585, DAMAGE_REDUCTION2) -- Dispersion
+    A( 47788, DAMAGE_REDUCTION2) -- Guardian Spirit
+
 
     -- ROGUE
     A( 18425, { SILENCE, effect = E_SILENCE }) -- Improved Kick
