@@ -1151,24 +1151,25 @@ elseif isWrath then
     -- DRUID
     A( 22812 , DAMAGE_REDUCTION) -- Barkskin
     A( 33786, { CROWD_CONTROL, effect = E_PHASED }) -- Cyclone
-    A( 19975,{ ROOT, effect = E_ROOT }) -- Nature's Grasp
-    A({ 339, 1062, 5195, 5196, 9852, 9853, 26989 },{ ROOT, effect = E_ROOT }) -- Entangling Roots
-    A({ 770, 778, 9749, 9907, 26993,     16857, 17390, 17391, 17392, 27011 }, ANTI_STEALTH) -- Faerie Fire (normal & feral)
+    A( 19975,{ ROOT, effect = E_ROOT }) -- Roots from Nature's Grasp
+    A({ 339, 1062, 5195, 5196, 9852, 9853, 26989, 53308 },{ ROOT, effect = E_ROOT }) -- Entangling Roots
+    A({ 770, 16857 }, ANTI_STEALTH) -- Faerie Fire (normal & feral)
+    A({ 61391, 53227, 61387, 61388, 61390 }, { SLOW, effect = E_SLOW }) -- Typhoon Daze
     A({ 2637, 18657, 18658 },{ CROWD_CONTROL, effect = E_INCAP }) -- Hibernate
     A( 22570,{ CROWD_CONTROL, effect = E_INCAP }) -- Maim
     A( 29166, DAMAGE_INCREASE) -- Innervate
     A({ 9005, 9823, 9827, 27006 }, { STUN, effect = E_STUN }) -- Pounce Stun
-    A( 16922, { STUN, effect = E_STUN }) -- Starfire Stun
     -- A({ 5217, 6793, 9845, 9846 },  DAMAGE_INCREASE) -- Tiger's Fury
     A({ 5211, 6798, 8983 }, { STUN, effect = E_STUN }) -- Bash
     A({ 45334, 19675, 16979 } , { ROOT, effect = E_ROOT }) -- Feral Charge
     -- A( 2893 , TRASH) -- Abolish Poison
     A({ 1850, 9821, 33357 }, SPEED_BOOST) -- Dash
-    A({ 16689, 16810, 16811, 16812, 16813, 17329, 27009 },  ATTENTION) -- Nature's Grasp Buff
+    A({ 16689, 16810, 16811, 16812, 16813, 17329, 27009, 53312 },  ATTENTION) -- Nature's Grasp Buff
     A({ 783, 1066 },  SPEED_BOOST) -- Travel Form & Aquatic Form
     A( 6795 , TAUNT) -- Growl
     A( 5209 , TAUNT) -- Challenging Roar
-    A({ 33878, 33986, 33987,    33876, 33982, 33983 }, TRASH) -- Mangle (Bear & Cat)
+    A({ 33878, 33986, 33987, 48563, 48564,          33876, 33982, 33983, 48565, 48566 }, TRASH) -- Mangle (Bear & Cat)
+    A( 50334, FEAR_IMMUNITY) -- Berserk
 
 
     -- WARLOCK
@@ -1239,7 +1240,6 @@ elseif isWrath then
     A( 23694, { ROOT, effect = E_ROOT }) -- Improved Hamstring
     A( 12323, { SLOW, effect = E_SLOW }) -- Piercing Howl
     A( 46924, { CROWD_CONTROL_IMMUNITY, DAMAGE_INCREASE }) -- Bladestorm
-    -- Thunder Clap?
     A( 18499, { EFFECT_IMMUNITY, FEAR_IMMUNITY }) -- Berserker Rage, (Fear/Incap)
     A({ 20253, 20614, 20615, 25273, 25274 }, { STUN, effect = E_STUN }) -- Intercept Stun
     A({ 5246, 20511 }, { CROWD_CONTROL, effect = E_FEAR }) -- Intimidating Shout
@@ -1330,23 +1330,22 @@ elseif isWrath then
 
     -- PALADIN
     A({ 1022, 5599, 10278 },  PHYSICAL_IMMUNITY) -- Blessing of Protection
-    A({ 498, 5573, 642, 1020 },  IMMUNITY) -- Divine Shield
+    A( 642, IMMUNITY) -- Divine Shield
+    A( 498, DAMAGE_REDUCTION2) -- Divine Protection
     A({ 853, 5588, 5589, 10308 }, { STUN, effect = E_STUN }) -- Hammer of Justice
-    A( 1044 , SPEED_BOOST) -- Blessing of Freedom
+    A( 1044 , SPEED_BOOST) -- Hand of Freedom
     A( 31842 , DAMAGE_INCREASE) -- Divine Illumination
     A( 31884 , DAMAGE_INCREASE2) -- Avenging Wrath
     A( 20066 , { INCAP, effect = E_INCAP }) -- Repentance
     A( 20170 , { STUN, effect = E_STUN }) -- Seal of Justice stun (from both ranks)
+    A( 10326 , { FEAR, effect = E_FEAR }) -- Turn Evil
+    A( 6940, DAMAGE_REDUCTION2) -- Hand of Sacrifice
+
 
     -- Racials
-    A( 23230 , HEALING_REDUCTION) -- Blood Fury Debuff
-    A( 20594 , EFFECT_IMMUNITY) -- Stoneform, Immune to Bleed, Poison, and Disease.
     A( 20549 , { STUN, effect = E_STUN }) -- War Stomp
-    A( 7744 , EFFECT_IMMUNITY) -- Will of the Forsaken, Immune to Charm, Fear, and Sleep.
-    A({ 9035, 19281, 19282, 19283, 19284, 19285 },  HEALING_REDUCTION) -- Hex of Weakness
     A( 20600 , STEALTH_DETECTION) -- Perception
     A( 28730 , SILENCE) -- Arcane Torrent
-    A({ 44047, 44041, 44043, 44044, 44045, 44046 }, ROOT) -- Chastise
     end
 
 
