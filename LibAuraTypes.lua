@@ -1357,6 +1357,7 @@ elseif isWrath then
     A( 64701, DAMAGE_INCREASE2) -- Elemental Mastery Buff
     A( 30823, DAMAGE_REDUCTION2) -- Shamanistic Rage 30% DR
     A( 16191, REGEN) -- Mana Tide
+    A( 64695 , { ROOT, effect = E_ROOT }) -- Earthgrab
 
     -- PALADIN
     A({ 1022, 5599, 10278 },  PHYSICAL_IMMUNITY) -- Blessing of Protection
