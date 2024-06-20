@@ -5,7 +5,7 @@ Description: Provides aura classification and priority
 --]================]
 
 
-local MAJOR, MINOR = "LibAuraTypes", 37
+local MAJOR, MINOR = "LibAuraTypes", 38
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -1212,7 +1212,7 @@ elseif isWrath then
     A({ 770, 16857 }, ANTI_STEALTH) -- Faerie Fire (normal & feral)
     A({ 61391, 53227, 61387, 61388, 61390 }, { SLOW, effect = E_SLOW }) -- Typhoon Daze
     A({ 2637, 18657, 18658 },{ CROWD_CONTROL, effect = E_INCAP }) -- Hibernate
-    A( 22570,{ CROWD_CONTROL, effect = E_INCAP }) -- Maim
+    A( 22570,{ STUN, effect = E_STUN }) -- Maim
     A( 29166, DAMAGE_INCREASE) -- Innervate
     A({ 9005, 9823, 9827, 27006 }, { STUN, effect = E_STUN }) -- Pounce Stun
     -- A({ 5217, 6793, 9845, 9846 },  DAMAGE_INCREASE) -- Tiger's Fury
@@ -1411,7 +1411,7 @@ elseif isWrath then
 -- CATACLYSM
 -----------------------
 
-elseif isWrath then
+elseif isCata then
 
     lib.data = {}
     data = lib.data
@@ -1420,24 +1420,28 @@ elseif isWrath then
     A( 22812 , DAMAGE_REDUCTION) -- Barkskin
     A( 33786, { CROWD_CONTROL, effect = E_PHASED }) -- Cyclone
     A( 19975,{ ROOT, effect = E_ROOT }) -- Roots from Nature's Grasp
-    A({ 339, 1062, 5195, 5196, 9852, 9853, 26989, 53308 },{ ROOT, effect = E_ROOT }) -- Entangling Roots
+    A( 339,{ ROOT, effect = E_ROOT }) -- Entangling Roots
     A({ 770, 16857 }, ANTI_STEALTH) -- Faerie Fire (normal & feral)
-    A({ 61391, 53227, 61387, 61388, 61390 }, { SLOW, effect = E_SLOW }) -- Typhoon Daze
-    A({ 2637, 18657, 18658 },{ CROWD_CONTROL, effect = E_INCAP }) -- Hibernate
-    A( 22570,{ CROWD_CONTROL, effect = E_INCAP }) -- Maim
+    A( 61391, { SLOW, effect = E_SLOW }) -- Typhoon Daze
+    A( 2637,{ CROWD_CONTROL, effect = E_INCAP }) -- Hibernate
+    A( 22570,{ STUN, effect = E_STUN }) -- Maim
     A( 29166, DAMAGE_INCREASE) -- Innervate
-    A({ 9005, 9823, 9827, 27006 }, { STUN, effect = E_STUN }) -- Pounce Stun
+    A( 9005, { STUN, effect = E_STUN }) -- Pounce Stun
     -- A({ 5217, 6793, 9845, 9846 },  DAMAGE_INCREASE) -- Tiger's Fury
-    A({ 5211, 6798, 8983 }, { STUN, effect = E_STUN }) -- Bash
-    A({ 45334, 19675, 16979 } , { ROOT, effect = E_ROOT }) -- Feral Charge
+    A( 5211, { STUN, effect = E_STUN }) -- Bash
+    A( 45334, { ROOT, effect = E_ROOT }) -- Feral Charge
     -- A( 2893 , TRASH) -- Abolish Poison
-    A({ 1850, 9821, 33357 }, SPEED_BOOST) -- Dash
-    A({ 16689, 16810, 16811, 16812, 16813, 17329, 27009, 53312 },  ATTENTION) -- Nature's Grasp Buff
-    A({ 783, 1066 },  SPEED_BOOST) -- Travel Form & Aquatic Form
+    A( 1850, SPEED_BOOST) -- Dash
+    A( 16689, ATTENTION) -- Nature's Grasp Buff
+    -- A({ 783, 1066 },  SPEED_BOOST) -- Travel Form & Aquatic Form
     A( 6795 , TAUNT) -- Growl
     A( 5209 , TAUNT) -- Challenging Roar
-    A({ 33878, 33986, 33987, 48563, 48564,          33876, 33982, 33983, 48565, 48566 }, TRASH) -- Mangle (Bear & Cat)
+    A( 33878, TRASH) -- Mangle (Bear)
+    A( 33876, TRASH) -- Mangle (Cat)
     A( 50334, FEAR_IMMUNITY) -- Berserk
+    A( 61336, DAMAGE_REDUCTION2) -- Survival Instincts
+    A( 33891, DAMAGE_REDUCTION2) -- Tree of Life
+    A( 78675,{ SILENCE, effect = E_SILENCE }) -- Solar Beam
 
 
     -- WARLOCK
@@ -1548,22 +1552,22 @@ elseif isWrath then
     A( 13159 , SPEED_BOOST) -- Aspect of the Pack
     A( 5118 , SPEED_BOOST) -- Aspect of the Cheetah
     A( 15571, { SLOW, effect = E_SLOW }) -- Daze from Aspect of Cheetah/Pack
-    A({ 1513, 14326, 14327 }, { CROWD_CONTROL, effect = E_FEAR }) -- Scare Beast
+    A( 1513, { CROWD_CONTROL, effect = E_FEAR }) -- Scare Beast
     A( 5116 ,{ SLOW, effect = E_SLOW }) -- Concussive Shot
     A( 19410,{ STUN, effect = E_STUN }) -- Concussive Shot Stun
-    A({ 1130, 14323, 14324, 14325 },  DAMAGE_VULNERABILITY) -- Hunter's Mark
+    A( 1130,  DAMAGE_VULNERABILITY) -- Hunter's Mark
     A( 3045 , DAMAGE_INCREASE) -- Rapid Fire
     A( 19574 , { FEAR_IMMUNITY, DAMAGE_INCREASE2 }) -- Beastial Wrath
     A( 34471 , { FEAR_IMMUNITY, DAMAGE_INCREASE }) -- Beast Within
     A( 19263 , DAMAGE_REDUCTION) -- Deterrence
     A( 34501, TRASH) -- Expose Weakness
     A( 13810,{ SLOW, effect = E_SLOW }) -- Frost Trap Aura
-    A({ 3355, 14308, 14309 }, { CROWD_CONTROL, effect = E_INCAP }) -- Freezing Trap
+    A( 3355, { CROWD_CONTROL, effect = E_INCAP }) -- Freezing Trap
     A( 2974, { SLOW, effect = E_SLOW }) -- Wing Clip
     A( 19229, { ROOT, effect = E_ROOT }) -- Wing Clip Root
-    A({ 19306, 20909, 20910, 27067, 48998, 48999 },{ ROOT, effect = E_ROOT }) -- Counterattack Root
+    A( 19306,{ ROOT, effect = E_ROOT }) -- Counterattack Root
     A( 24394,{ STUN, effect = E_STUN }) -- Intimidation
-    A({ 19386, 24132, 24133 }, { CROWD_CONTROL, effect = E_INCAP }) --Wyvern Sting
+    A( 19386, { CROWD_CONTROL, effect = E_INCAP }) --Wyvern Sting
     A( 19185,{ ROOT, effect = E_ROOT }) -- Entrapment
     -- A({ 3034, 14279, 14280},  TRASH) -- Viper Sting
     A( 19503,{ CROWD_CONTROL, effect = E_DISORIENT }) -- Scatter Shot
@@ -1599,9 +1603,10 @@ elseif isWrath then
     A( 44572, { STUN, effect = E_STUN }) -- Deep Freeze
 
     -- SHAMAN
-    A({ 8056, 8058, 10472, 10473, 25464, 49235, 49236 }, { SLOW, effect = E_SLOW }) -- Frost Shock
+    A( 8056, { SLOW, effect = E_SLOW }) -- Frost Shock
     A( 3600 , { SLOW, effect = E_SLOW }) -- Earthbind
-    A({ 8034, 8037, 10458, 16352, 16353, 25501, 58797, 58798, 58799, 64186  }, { SLOW, effect = E_SLOW }) -- Frostbrand Attack
+    A( 8034, { SLOW, effect = E_SLOW }) -- Frostbrand Attack
+    A( 98007, DAMAGE_REDUCTION2) -- Spirit Link Totem
     -- Lightning shield??
     A( 8178 , SPELL_IMMUNITY) -- Grounding Totem Effect
     -- A( 2645 , SPEED_BOOST) -- Ghost Wolf
