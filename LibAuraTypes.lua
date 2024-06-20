@@ -1260,6 +1260,7 @@ elseif isWrath then
     A({ 33196, 33197, 33198 }, TRASH) -- Misery
     A( 47585, DAMAGE_REDUCTION2) -- Dispersion
     A( 47788, DAMAGE_REDUCTION2) -- Guardian Spirit
+    A( 64044, { CROWD_CONTROL, effect = E_STUN }) -- Psychic Horror
 
 
     -- ROGUE
@@ -1291,7 +1292,7 @@ elseif isWrath then
     A( 20230 , PHYSICAL_IMMUNITY) -- Retaliation
     A( 1719 , { DAMAGE_INCREASE2, FEAR_IMMUNITY }) -- Recklessness, Fear immunity, Damage Vuln
     A( 871,  DAMAGE_REDUCTION2) -- Shield Wall
-    A( 12292, { DAMAGE_INCREASE, FEAR_IMMUNITY }) -- Death Wish, Fear immunity
+    A( 12292, { DAMAGE_INCREASE, DAMAGE_VULNERABILITY }) -- Death Wish, Fear immunity
     A( 1715, { SLOW, effect = E_SLOW }) -- Hamstring
     A( 23694, { ROOT, effect = E_ROOT }) -- Improved Hamstring
     A( 12323, { SLOW, effect = E_SLOW }) -- Piercing Howl
@@ -1443,80 +1444,91 @@ elseif isWrath then
 
     A( 24259 , SILENCE) -- Spell Lock Silence
     A( 6358, { CROWD_CONTROL, effect = E_DISORIENT }) -- Seduction
-    A({ 5782, 6213, 6215 }, { CROWD_CONTROL, effect = E_FEAR }) -- Fear
-    A({ 5484, 17928 }, { CROWD_CONTROL, effect = E_FEAR }) -- Howl of Terror
-    A({ 710, 18647 }, { CROWD_CONTROL, effect = E_PHASED }) -- Banish
-    A({ 6789, 17925, 17926, 27223, 47859, 47860 }, { CROWD_CONTROL, effect = E_DISORIENT }) -- Death Coil
+    A( 5782, { CROWD_CONTROL, effect = E_FEAR }) -- Fear
+    A( 5484, { CROWD_CONTROL, effect = E_FEAR }) -- Howl of Terror
+    A( 710, { CROWD_CONTROL, effect = E_PHASED }) -- Banish
+    A( 6789, { CROWD_CONTROL, effect = E_DISORIENT }) -- Death Coil
     A( 18223 , { SLOW, effect = E_SLOW }) -- Curse of Exhaustion
     A( 18118 , { SLOW, effect = E_SLOW }) -- Aftermath (Destruction Talent)
-    A({ 1714, 11719 },  DAMAGE_DECREASE) -- Curse of Tongues
-    A({ 6229, 11739, 11740, 28610, 47890, 47891 } , DAMAGE_ABSORB) -- Shadow Ward
-    A({ 7812, 19438, 19440, 19441, 19442, 19443, 27273, 47985, 47986 } , DAMAGE_ABSORB) -- Sacrifice
-    A( 18093 , { STUN, effect = E_STUN }) -- Pyroclasm
-    A({ 30108, 30404, 30405, 47841, 47843 } , { ANTI_DISPEL, effect = E_ANTIDISPEL }) -- Unstable Affliction
-    A( 17794, TRASH) -- Improved Shadowbolt
+    A( 1714,  DAMAGE_DECREASE) -- Curse of Tongues
+    A( 6229, DAMAGE_ABSORB) -- Shadow Ward
+    A( 7812, DAMAGE_ABSORB) -- Sacrifice (Voidwalker)
+    A( 30108, { ANTI_DISPEL, effect = E_ANTIDISPEL }) -- Unstable Affliction
     A({ 30153, 30195, 30197 }, { STUN, effect = E_STUN }) -- Felguard Intercept Stun
     A({ 30414, 30283, 30413, 47846, 47847 }, { STUN, effect = E_STUN }) -- Shadowfury
     A( 47241, DAMAGE_INCREASE2) -- Metamorphosis
+    A( 63311, { HEAVY_SLOW, effect = E_SLOW }) -- Shadowsnare (Glyph of Shadowflame)
+    A( 79462, DAMAGE_INCREASE) -- Demon Soul: Felguard
+    A( 79459, DAMAGE_INCREASE) -- Demon Soul: Imp
 
 
     -- PRIEST
     A( 15487, { SILENCE, effect = E_SILENCE }) -- Silence
     A( 10060,  DAMAGE_INCREASE) -- Power Infusion
-    A({ 17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901, 25217, 25218, 48065, 48066 },  DAMAGE_ABSORB) -- Power Word: Shield
-    A({ 8122, 8124, 10888, 10890 }, { CROWD_CONTROL, effect = E_FEAR }) -- Psychic Scream
-    A({ 15407, 17311, 17312, 17313, 17314, 18807, 25387 }, { SLOW, effect = E_SLOW }) -- Mind Flay
-    A( 15258 , TRASH) -- Shadow Vulnerability
-    A({ 605, 10911, 10912 }, { CROWD_CONTROL, effect = E_PHASED }) -- Mind Control
-    A({ 33196, 33197, 33198 }, TRASH) -- Misery
+    A( 17,  DAMAGE_ABSORB) -- Power Word: Shield
+    A( 8122, { CROWD_CONTROL, effect = E_FEAR }) -- Psychic Scream
+    A( 15407, { SLOW, effect = E_SLOW }) -- Mind Flay
+    A( 605, { CROWD_CONTROL, effect = E_PHASED }) -- Mind Control
     A( 47585, DAMAGE_REDUCTION2) -- Dispersion
     A( 47788, DAMAGE_REDUCTION2) -- Guardian Spirit
+    A( 64044, { CROWD_CONTROL, effect = E_STUN }) -- Psychic Horror
+    A( 64843, ATTENTION ) -- Divine Hymn
+    A( 64901, ATTENTION ) -- Hymn of Hope
+    A( 87153, DAMAGE_INCREASE ) -- Dark Archangel
+    A( 88625, { DISORIENT, effect = E_DISORIENT }) -- Holy Word: Chastise
+
 
 
     -- ROGUE
     A( 18425, { SILENCE, effect = E_SILENCE }) -- Improved Kick
     A( 13750 , DAMAGE_INCREASE2) -- Adrenaline Rush
-    A( 13877 , DAMAGE_INCREASE) -- Blade Flurry
     A( 1833, { STUN, effect = E_STUN }) -- Cheap Shot
-    A({ 408, 8643 }, { STUN, effect = E_STUN }) -- Kidney Shot
-    A({ 2070, 6770, 11297 }, { INCAP, effect = E_INCAP }) -- Sap
+    A( 408, { STUN, effect = E_STUN }) -- Kidney Shot
+    A( 2070, { INCAP, effect = E_INCAP }) -- Sap
     A( 2094 , { CROWD_CONTROL, effect = E_DISORIENT }) -- Blind
-    -- A({ 8647, 8649, 8650, 11197, 11198, 26866 },  DAMAGE_VULNERABILITY) -- Expose Armor
-    A({ 2983, 8696, 11305 },  SPEED_BOOST) -- Sprint
-    A({ 5277, 26669 }, DAMAGE_REDUCTION2) -- Evasion
+    A( 2983,  SPEED_BOOST) -- Sprint
+    A( 5277, DAMAGE_REDUCTION2) -- Evasion
     A( 1776, { INCAP, effect = E_INCAP }) -- Gouge
+    A( 74001, DAMAGE_REDUCTION) -- Combat Readiness
     A( 3409, { HEAVY_SLOW, effect = E_SLOW })
     A( 31224 , SPELL_IMMUNITY) -- Cloak of Shadows
     A( 14251 , DAMAGE_DECREASE) -- Riposte (Disarm)
     A( 14278 , DAMAGE_REDUCTION) -- Ghostly Strike
     A( 1330 , { SILENCE, effect = E_SILENCE }) -- Garrote Silence
-    A({ 31234, 31235, 31236 }, TRASH) -- Find Weakness
     A( 45182, DAMAGE_REDUCTION2) -- Cheating Death
     A( 51713, DAMAGE_INCREASE2) -- Shadow Dance
     A( 51722, DAMAGE_DECREASE) -- Dismantle
+    A( 79126, DAMAGE_DECREASE) -- Groggy after Sap
+    A( 16511, TRASH) -- Hemorrhage
+    A( 91021, DAMAGE_VULNERABILITY) -- Find Weakness
+
 
     -- WARRIOR
     A( 355 , TAUNT) -- Taunt
     A( 1161 , TAUNT) -- Challenging Shout
-    A( 18498, { SILENCE, effect = E_SILENCE }) -- Improved Shield Bash
-    A( 20230 , PHYSICAL_IMMUNITY) -- Retaliation
-    A( 1719 , { DAMAGE_INCREASE2, FEAR_IMMUNITY }) -- Recklessness, Fear immunity, Damage Vuln
+    A( 18498, { SILENCE, effect = E_SILENCE }) -- Silence, Gag Order
     A( 871,  DAMAGE_REDUCTION2) -- Shield Wall
-    A( 12292, { DAMAGE_INCREASE, FEAR_IMMUNITY }) -- Death Wish, Fear immunity
+    A( 12292, { DAMAGE_INCREASE, DAMAGE_VULNERABILITY }) -- Death Wish, Fear immunity
     A( 1715, { SLOW, effect = E_SLOW }) -- Hamstring
+    A( 85730, DAMAGE_INCREASE) -- Deadly Calm
+    A( 12328, DAMAGE_INCREASE) -- Sweeping Strikes
+    A({85386, 86624 }, DAMAGE_REDUCTION2) -- Die by the Sword
+    A( 56112, HEALING_REDUCTION) -- Furious Attacks
+    A( 86346, DAMAGE_VULNERABILITY) -- Colossus Smash
     A( 23694, { ROOT, effect = E_ROOT }) -- Improved Hamstring
     A( 12323, { SLOW, effect = E_SLOW }) -- Piercing Howl
     A( 46924, { CROWD_CONTROL_IMMUNITY, DAMAGE_INCREASE }) -- Bladestorm
     A( 18499, { EFFECT_IMMUNITY, FEAR_IMMUNITY }) -- Berserker Rage, (Fear/Incap)
-    A({ 20253, 20614, 20615, 25273, 25274 }, { STUN, effect = E_STUN }) -- Intercept Stun
+    A( 20253, { STUN, effect = E_STUN }) -- Intercept Stun
     A({ 5246, 20511 }, { CROWD_CONTROL, effect = E_FEAR }) -- Intimidating Shout
     A( 676, { DAMAGE_DECREASE, effect = E_DISARM }) -- Disarm
     A( 12809, { STUN, effect = E_STUN }) -- Concussion Blow
     A({ 16488, 16490, 16491 },  TRASH) -- Blood Craze
-    A({ 12294, 21551, 21552, 21553, 25248, 30330, 47485, 47486 },  HEALING_REDUCTION) -- Mortal Strike
+    A( 12294, HEALING_REDUCTION) -- Mortal Strike
     A( 7922, { STUN, effect = E_STUN }) -- Charge Stun
     A({ 30069, 30070 },  TRASH) -- Blood Frenzy
-    A(46968, { STUN, effect = E_STUN })
+    A( 46968, { STUN, effect = E_STUN }) -- Shockwave
+    A( 85388, { STUN, effect = E_STUN }) -- Throwdown
 
     -- DEATHKNIGHT
     A( 47805, { SLOW, effect = E_SLOW }) -- Chains of Ice
