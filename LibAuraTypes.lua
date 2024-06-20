@@ -1532,12 +1532,16 @@ elseif isWrath then
 
     -- DEATHKNIGHT
     A( 47805, { SLOW, effect = E_SLOW }) -- Chains of Ice
-    A( 55233, DAMAGE_DECREASE) -- Vampiric Blood
-    A( 48792, DAMAGE_DECREASE2) -- Icebound Fortitude
-    A( 47476, { STUN, effect = E_STUN }) -- Strangulate
-    A( 49005, DAMAGE_DECREASE) -- Mark of Blood
-    A( 48707, DAMAGE_DECREASE) -- Anti-Magic Shell
-    A( 50461, DAMAGE_DECREASE) -- Anti-Magic Zone
+    A( 55233, DAMAGE_REDUCTION) -- Vampiric Blood
+    A( 47476, { SILENCE, effect = E_SILENCE }) -- Strangulate
+    A( 48792, DAMAGE_REDUCTION2) -- Icebound Fortitude
+    A( 49005, DAMAGE_REDUCTION) -- Mark of Blood
+    A( 48707, DAMAGE_REDUCTION) -- Anti-Magic Shell
+    A( 50461, DAMAGE_REDUCTION) -- Anti-Magic Zone
+    A( 49016, DAMAGE_INCREASE) -- Unholy Frenzy
+    A( 51271, DAMAGE_INCREASE) -- Pillar of Frost
+    A( 49039, { FEAR_IMMUNITY, EFFECT_IMMUNITY }) -- Lichborne
+
 
     -- HUNTER
     -- A( 62305 , CROWD_CONTROL_IMMUNITY) -- Master's Call
@@ -1568,31 +1572,28 @@ elseif isWrath then
 
     -- MAGE
     A( 31589 , { DAMAGE_DECREASE, SLOW, effect = E_SLOW }) -- Slow
-    A({ 18469, 55021 }, { SILENCE, effect = E_SILENCE }) -- Improved Counterspell
-    A({ 118, 12824, 12825, 12826, 28271, 28272, 61305, 61721, 61780 }, { CROWD_CONTROL, effect = E_INCAP }) -- Polymorph
-    A({ 11426, 13031, 13032, 13033, 27134, 33405, 43038, 43039 },  DAMAGE_ABSORB) -- Ice Barrier
-    A({ 543, 8457, 8458, 10223, 10225, 27128, 43010 },  DAMAGE_ABSORB) -- Fire Ward
-    A({ 6143, 8461, 8462, 10177, 28609, 32796, 43012 },  DAMAGE_ABSORB) -- Frost Ward
+    A( 18469, { SILENCE, effect = E_SILENCE }) -- Improved Counterspell
+    A({ 118, 28271, 28272, 61025, 61305, 61721, 61780, 126819, 161353, 161354, 161355, 161372, 277787, 277792 }, { CROWD_CONTROL, effect = E_INCAP }) -- Polymorph
+
+    A( 11426, DAMAGE_ABSORB) -- Ice Barrier
+    A( 543,  DAMAGE_ABSORB) -- Fire Ward
+    A( 6143,  DAMAGE_ABSORB) -- Frost Ward
     A( 12355, { STUN, effect = E_STUN }) -- Impact
-    A( 22959 , TRASH) -- Fire Vulnerability
-    A({ 11113, 13018, 13019, 13020, 13021, 27133, 33933, 42944, 42945, 44920 }, { SLOW, effect = E_SLOW }) -- Blast Wave
-    A({ 120, 8492, 10159, 10160, 10161, 27087, 42930, 42931 }, { SLOW, effect = E_SLOW }) -- Cone of Cold
-    A({ 12484, 12485, 12486 }, { SLOW, effect = E_SLOW }) -- Improved Blizzard
-    A({ 6136, 7321 }, { SLOW, effect = E_SLOW }) -- Frost Armor Chill
-    A({ 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304, 27071, 27072, 38697, 42841, 42842 }, { SLOW, effect = E_SLOW }) -- Frostbolt
-    A( 12494, { FROZEN, effect = E_ROOT }) -- Frostbite
+    A( 22959 , TRASH) -- Critical Mass
+    A( 11113, { HEAVY_SLOW, effect = E_SLOW }) -- Blast Wave
+    A( 120, { SLOW, effect = E_SLOW }) -- Cone of Cold
+    A({ 12484, 12485 }, { SLOW, effect = E_SLOW }) -- Ice Shards (Improved Blizzard)
+    A( 7321, { SLOW, effect = E_SLOW }) -- Frost Armor Chill
+    A( 116, { SLOW, effect = E_SLOW }) -- Frostbolt
     A( 33395, { FROZEN, effect = E_ROOT }) -- Water Elemental's Freeze
     A({ 122, 865, 6131, 10230, 27088, 42917 }, { FROZEN, effect = E_ROOT }) -- Frost Nova
     A( 12042 , DAMAGE_INCREASE2) -- Arcane Power
     A( 45438 , IMMUNITY) -- Ice Block
-    A( 12579 , TRASH) -- Winter's Chill
-    A({ 133, 143, 145, 3140, 8400, 8401, 8402, 10148, 10149, 10150, 10151, 25306, 27070, 38692, 42832, 42833 },  TRASH) -- Fireball dot
     A({ 11366, 12505, 12522, 12523, 12524, 12525, 12526, 18809, 27132, 33938, 42890, 42891 },  TRASH) -- Pyroblast dot
-    A({ 2120, 2121, 8422, 8423, 10215, 10216, 27086, 42925, 42926 },  TRASH) -- Flamestrike dot
+    A( 2120, TRASH) -- Flamestrike dot
     A( 12051 , ATTENTION) -- Evocation
-    A({ 1463, 8494, 8495, 10191, 10192, 10193, 27131, 43019, 43020 },  DAMAGE_ABSORB) -- Mana Shield
-    A({ 31661, 33041, 33042, 33043, 42949, 42950 }, { CROWD_CONTROL, effect = E_DISORIENT }) -- Dragon's Breath
-    A( 54748 , INTERRUPT_IMMUNITY) -- Burning Determination
+    A( 1463, DAMAGE_ABSORB) -- Mana Shield
+    A( 31661, { CROWD_CONTROL, effect = E_DISORIENT }) -- Dragon's Breath
     A( 31643 , SPEED_BOOST) -- Blazing Speed
     A( 12472 , DAMAGE_INCREASE2) -- Icy Veins
     A( 44572, { STUN, effect = E_STUN }) -- Deep Freeze
@@ -1613,15 +1614,18 @@ elseif isWrath then
     -- PALADIN
     A({ 1022, 5599, 10278 },  PHYSICAL_IMMUNITY) -- Blessing of Protection
     A( 642, IMMUNITY) -- Divine Shield
-    A( 498, DAMAGE_REDUCTION2) -- Divine Protection
+    A( 498, DAMAGE_REDUCTION) -- Divine Protection
     A({ 853, 5588, 5589, 10308 }, { STUN, effect = E_STUN }) -- Hammer of Justice
     A( 1044 , SPEED_BOOST) -- Hand of Freedom
     A( 31842 , DAMAGE_INCREASE) -- Divine Illumination
     A( 31884 , DAMAGE_INCREASE2) -- Avenging Wrath
+    A( 85696 , DAMAGE_INCREASE2) -- Zealotry
     A( 20066 , { INCAP, effect = E_INCAP }) -- Repentance
     A( 20170 , { STUN, effect = E_STUN }) -- Seal of Justice stun (from both ranks)
     A( 10326 , { FEAR, effect = E_FEAR }) -- Turn Evil
     A( 6940, DAMAGE_REDUCTION2) -- Hand of Sacrifice
+    A( 86659, DAMAGE_REDUCTION2) -- Guardian of Ancient Kings (Prot)
+    A( 31850, DAMAGE_REDUCTION) -- Ardent Defender
 
 
     -- Racials
