@@ -1588,6 +1588,7 @@ elseif isCata then
     A( 120, { SLOW, effect = E_SLOW }) -- Cone of Cold
     A({ 12484, 12485 }, { SLOW, effect = E_SLOW }) -- Ice Shards (Improved Blizzard)
     A( 7321, { SLOW, effect = E_SLOW }) -- Frost Armor Chill
+    A( 83302, { FROZEN, effect = E_ROOT }) -- Improved Cone of Cold
     A( 116, { SLOW, effect = E_SLOW }) -- Frostbolt
     A( 33395, { FROZEN, effect = E_ROOT }) -- Water Elemental's Freeze
     A({ 122, 865, 6131, 10230, 27088, 42917 }, { FROZEN, effect = E_ROOT }) -- Frost Nova
